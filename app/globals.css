@@ -1,0 +1,257 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f4f1ea;
+  --foreground: #151515;
+  --accent: #2b3a67;
+  --muted: #6c6b68;
+  --border: #d5d2ca;
+  --font-display: "Fraunces", serif;
+  --font-body: "Space Grotesk", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  margin: 0;
+}
+
+a {
+  color: inherit;GitHub Copilot Chat
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+
+.site-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  padding: 30px 5vw 38px;
+}
+
+.site-header {
+  align-items: baseline;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 22px;
+}
+
+.wordmark {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.nav-list {
+  display: flex;
+  gap: 2.15rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list a,
+.hero-actions a {
+  border-bottom: 1px solid transparent;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.nav-list a:hover,
+.hero-actions a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.hero {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 9vh 0 2vh;
+}
+
+.hero-kicker,
+.hero-meta {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.hero-kicker {
+  margin-left: 34%;
+}
+
+.hero-title {
+  color: var(--foreground);
+  font-family: var(--font-display);
+  font-size: 11rem;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.78;
+  margin: 5vh 0 0;
+  max-width: 100%;
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-title span:last-child {
+  color: var(--accent);
+  margin-left: 16%;
+}
+
+.hero-footer {
+  align-items: end;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(220px, 1.3fr) minmax(180px, 0.7fr) auto;
+  margin-left: 16%;
+  margin-top: 9vh;
+}
+
+.hero-intro {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 27rem;
+}
+
+.hero-meta {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+}
+
+.hero-meta div {
+  display: grid;
+  gap: 0.2rem;
+  grid-template-columns: 5.8rem auto;
+}
+
+.hero-meta dt,
+.hero-meta dd {
+  margin: 0;
+}
+
+.hero-meta dt {
+  color: var(--muted);
+}
+
+.hero-meta dd {
+  color: var(--foreground);
+}
+
+.hero-actions {
+  display: grid;
+  gap: 0.7rem;
+  justify-items: start;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .hero-title {
+    font-size: 8.2rem;
+  }
+
+  .hero-footer {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-actions {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-shell {
+    padding: 22px 6vw 28px;
+  }
+
+  .site-header {
+    align-items: flex-start;
+    gap: 1.4rem;
+  }
+
+  .nav-list {
+    flex-wrap: wrap;
+    gap: 0.65rem 1rem;
+    justify-content: flex-end;
+  }
+
+  .nav-list a,
+  .hero-actions a {
+    font-size: 0.66rem;
+  }
+
+  .hero {
+    padding-top: 8vh;
+  }
+
+  .hero-kicker {
+    margin-left: 0;
+    max-width: 12rem;
+  }
+
+  .hero-title {
+    font-size: 4.65rem;
+    letter-spacing: -0.06em;
+    line-height: 0.84;
+    margin-top: 8vh;
+  }
+
+  .hero-title span:last-child {
+    margin-left: 10%;
+  }
+
+  .hero-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.6rem;
+    margin-left: 0;
+    margin-top: 10vh;
+  }
+
+  .hero-intro {
+    max-width: 19rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 1.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
