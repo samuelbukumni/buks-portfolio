@@ -1,10 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import type { FormEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 import DirectionSection from "./direction-section";
 import PlaygroundPreview from "./playground-preview";
 import SelectedProjects from "./selected-projects";
+
+const CONTACT_FORM_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT?.trim() ?? "";
+
+type ContactSubmissionState = "idle" | "sending" | "success" | "error";
 
 type IntroPhase =
   | "arrival"
@@ -21,14 +27,16 @@ const question = "Who exactly did you find?";
 export default function HomepageNarrative() {
   const [introPhase, setIntroPhase] = useState<IntroPhase>("arrival");
   const [typedQuestion, setTypedQuestion] = useState("");
-  const [isMounted, setIsMounted] = useState(false);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [contactSubmissionState, setContactSubmissionState] = useState<ContactSubmissionState>("idle");
   const [hasCompletedJourney, setHasCompletedJourney] = useState(false);
   const [isReturnView, setIsReturnView] = useState(false);
   const endingRef = useRef<HTMLElement>(null);
+  const contactNameRef = useRef<HTMLInputElement>(null);
+  const contactSendingRef = useRef(false);
   const introStartedRef = useRef(false);
 
   useEffect(() => {
-    setIsMounted(true);
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const timers: number[] = [];
     const resolveIntro = () => {
@@ -100,7 +108,7 @@ export default function HomepageNarrative() {
           setHasCompletedJourney(true);
         }
       },
-      { threshold: 0.35 },
+      { threshold: 0.7 },
     );
 
     observer.observe(ending);
@@ -132,28 +140,72 @@ export default function HomepageNarrative() {
   const isResolved = introPhase === "resolved" || isReturnView;
   const displayedQuestion = isReturnView ? "Who exactly did you find?" : typedQuestion;
 
+  const openContactForm = () => {
+    setIsContactFormOpen(true);
+    window.requestAnimationFrame(() => contactNameRef.current?.focus());
+  };
+
+  const submitContactForm = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!CONTACT_FORM_ENDPOINT || contactSendingRef.current || contactSubmissionState === "sending") return;
+
+    const form = event.currentTarget;
+    const emptyField = Array.from(form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(".contact-field input, .contact-field textarea"))
+      .find((field) => !field.value.trim());
+    if (emptyField) {
+      emptyField.setCustomValidity(`Please enter your ${emptyField.name}.`);
+      emptyField.reportValidity();
+      return;
+    }
+
+    const formData = new FormData(form);
+    const payload = {
+      name: String(formData.get("name")).trim(),
+      email: String(formData.get("email")).trim(),
+      message: String(formData.get("message")).trim(),
+      _gotcha: String(formData.get("_gotcha") ?? ""),
+    };
+    contactSendingRef.current = true;
+    setContactSubmissionState("sending");
+
+    try {
+      const response = await fetch(CONTACT_FORM_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json", "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) throw new Error(`Contact endpoint returned ${response.status}`);
+      setContactSubmissionState("success");
+      form.reset();
+    } catch {
+      setContactSubmissionState("error");
+    } finally {
+      contactSendingRef.current = false;
+    }
+  };
+
   return (
     <main className="site-shell">
+      <noscript><style>{`.hero-identity-block,.hero-location,.hero-title,.hero-statement,.hero-portrait,.hero-footer{opacity:1!important;visibility:visible!important;transform:none!important}.hero-question>span[aria-hidden=true]:first-child{display:none}.hero-question-complete{display:inline!important}`}</style></noscript>
       <header className="site-header">
         <Link className="wordmark" href="/" aria-label="Samuel Oluwabukunmi Oguntona home">
           Buks Samuel
         </Link>
         <nav aria-label="Primary navigation">
           <ul className="nav-list">
-            <li><Link href="/" aria-current="page">Index</Link></li>
-            <li><a href="#work">Projects</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#playground">Playground</a></li>
+              <li><a href="#contact">Contact</a></li>
           </ul>
         </nav>
       </header>
 
-      <section className={`hero ${isMounted ? "hero-intro-live" : ""} ${isReturnView ? "hero-return" : ""}`} aria-labelledby="hero-title">
+      <section className={`hero ${isReturnView ? "hero-return" : ""}`} aria-labelledby="hero-title">
         <div className="hero-main">
           <div className="hero-opening" aria-label="Introduction">
             <p className="hero-discovery">{isReturnView ? "You know Samuel now." : "You found Samuel."}</p>
             <p className="hero-question">
               <span aria-hidden="true">{isReturnView ? "Or at least, the version that exists today." : displayedQuestion}</span>
+              <span className="hero-question-complete" aria-hidden="true">{isReturnView ? "Or at least, the version that exists today." : question}</span>
               <span className="sr-only">{isReturnView ? "Or at least, the version that exists today." : question}</span>
               {!isReturnView && introPhase === "caret" && <span className="text-caret" aria-hidden="true">▍</span>}
             </p>
@@ -175,14 +227,18 @@ export default function HomepageNarrative() {
           </div>
         </div>
 
+        <div className={`hero-portrait ${hasReached("identity") ? "is-visible" : ""}`}>
+          <Image src="/images/samuel-portraitx.png" width={1152} height={1536} alt="Samuel Oluwabukunmi Oguntona" priority />
+        </div>
+
         <div className={`hero-footer ${hasReached("direction") ? "is-visible" : ""}`}>
           <div className="hero-focus">
             <span className="hero-label">Technical direction</span>
             <strong>Cloud · Linux · Infrastructure · Systems · AI</strong>
           </div>
           <div className={`hero-actions ${isResolved ? "is-visible" : ""}`}>
-            <a href="#work">View selected work <span aria-hidden="true">↘</span></a>
-            <a href="#playground">Enter explorer <span aria-hidden="true">→</span></a>
+            <a href="#work">View Projects <span aria-hidden="true">↓</span></a>
+            <Link href="/playground">Enter Explorer <span aria-hidden="true">→</span></Link>
           </div>
         </div>
       </section>
@@ -202,9 +258,9 @@ export default function HomepageNarrative() {
           <div>
             <h3>Find Samuel</h3>
             <ul className="social-links" aria-label="Professional links for Samuel">
-              <li><a href="mailto:samuelbukumni@gmail.com">Email</a></li>
-              <li><a href="https://www.linkedin.com/in/oguntona-samuel/" target="_blank" rel="noreferrer">LinkedIn</a></li>
-              <li><a href="https://github.com/samuelbukumni" target="_blank" rel="noreferrer">GitHub</a></li>
+              <li><a href="mailto:samuelbukumni@gmail.com">Email ↗</a></li>
+              <li><a href="https://www.linkedin.com/in/oguntona-samuel/" target="_blank" rel="noreferrer">LinkedIn ↗</a></li>
+              <li><a href="https://github.com/samuelbukumni" target="_blank" rel="noreferrer">GitHub ↗</a></li>
               <li><a href="https://x.com/bukssamuel25" target="_blank" rel="noreferrer">X</a></li>
               <li><a href="https://www.tiktok.com/@bukssamuel" target="_blank" rel="noreferrer">TikTok</a></li>
             </ul>
@@ -212,7 +268,39 @@ export default function HomepageNarrative() {
           <div>
             <h3>Leave a signal</h3>
             <p>For collaborations, ideas, or project conversations, send a note and I&apos;ll respond from the mailbox that is already in use.</p>
-            <a className="signal-link" href="mailto:samuelbukumni@gmail.com?subject=Hello%20Samuel">Leave a signal <span aria-hidden="true">→</span></a>
+            <button className="signal-link" type="button" aria-expanded={isContactFormOpen} aria-controls="contact-form" onClick={openContactForm}>
+              {isContactFormOpen ? "Signal form open ↓" : "Leave a signal →"}
+            </button>
+            {isContactFormOpen && (
+              <form className="contact-form" id="contact-form" onSubmit={submitContactForm}>
+                <label className="contact-field" htmlFor="contact-name">
+                  <span>Name</span>
+                  <input ref={contactNameRef} id="contact-name" name="name" type="text" autoComplete="name" required onChange={(event) => event.currentTarget.setCustomValidity("")} disabled={contactSubmissionState === "sending" || contactSubmissionState === "success"} />
+                </label>
+                <label className="contact-field" htmlFor="contact-email">
+                  <span>Email</span>
+                  <input id="contact-email" name="email" type="email" autoComplete="email" required onChange={(event) => event.currentTarget.setCustomValidity("")} disabled={contactSubmissionState === "sending" || contactSubmissionState === "success"} />
+                </label>
+                <label className="contact-field" htmlFor="contact-message">
+                  <span>Message</span>
+                  <textarea id="contact-message" name="message" rows={3} required onChange={(event) => event.currentTarget.setCustomValidity("")} disabled={contactSubmissionState === "sending" || contactSubmissionState === "success"} />
+                </label>
+                <div className="contact-honeypot" aria-hidden="true">
+                  <label htmlFor="contact-website">Leave this field empty</label>
+                  <input id="contact-website" name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
+                </div>
+                <button className="contact-submit" type="submit" disabled={!CONTACT_FORM_ENDPOINT || contactSubmissionState === "sending" || contactSubmissionState === "success"}>
+                  {contactSubmissionState === "sending" ? "Sending…" : "Send signal →"}
+                </button>
+                <p className={`contact-status contact-status-${contactSubmissionState}`} role="status" aria-live="polite">
+                  {contactSubmissionState === "sending" && "Sending…"}
+                  {contactSubmissionState === "success" && "Signal received. I'll get back to you."}
+                  {contactSubmissionState === "error" && "That didn't go through. You can email me directly instead."}
+                  {!CONTACT_FORM_ENDPOINT && contactSubmissionState === "idle" && "Contact form setup is pending. Please use the email option below."}
+                </p>
+              </form>
+            )}
+            <a className="email-app-link" href="mailto:samuelbukumni@gmail.com">Open email app ↗</a>
           </div>
         </div>
       </section>

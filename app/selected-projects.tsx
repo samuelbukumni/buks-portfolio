@@ -18,7 +18,6 @@ type Project = {
   description: string;
   detail: string;
   stack: string;
-  visualLabel: string;
   textDirection: number;
   layout: "standard" | "alternate";
 };
@@ -32,7 +31,6 @@ const projects: Project[] = [
     description: "A Nigeria-focused escrow-backed marketplace designed to make transactions involving digital products and services safer.",
     detail: "My work spans the product experience and underlying system: buyer and seller workflows, authentication, database design, transaction lifecycle, payments, review flows and deployment.",
     stack: "Next.js / TypeScript / Supabase / PostgreSQL / Vercel",
-    visualLabel: "Visual pending / The Middleman",
     textDirection: -1,
     layout: "standard",
   },
@@ -44,7 +42,6 @@ const projects: Project[] = [
     description: "Smart Autonomous Multifunctional Utility Engine for Learning. A modular personal-assistant experiment built around a Governor and sub-agent architecture.",
     detail: "It explores permission-aware actions, automation and a hybrid local/cloud approach, with orchestration between tools and specialized agents rather than one monolithic system.",
     stack: "Python / Governor + sub-agents / Local + cloud",
-    visualLabel: "Visual pending / S.A.M.U.E.L.",
     textDirection: 1,
     layout: "alternate",
   },
@@ -56,7 +53,6 @@ const projects: Project[] = [
     description: "An experimental multi-agent environment where different AI models can independently reason, critique one another and revise responses.",
     detail: "The orchestrator owns conversation state, and disagreement is allowed rather than forcing consensus. This is an experiment, not a finished commercial product.",
     stack: "Multi-agent orchestration / Model critique / State",
-    visualLabel: "Visual pending / Project SYNAPSE",
     textDirection: -1,
     layout: "standard",
   },
@@ -81,6 +77,32 @@ const getMotion = (stage: HTMLElement, viewportHeight: number): ProjectMotion =>
     visualScale: 0.96 + visualProgress * 0.04,
   };
 };
+
+function ProjectDiagram({ projectIndex }: { projectIndex: number }) {
+  if (projectIndex === 0) {
+    return (
+      <div className="project-diagram project-diagram-middleman" aria-hidden="true">
+        <span>Buyer</span><i>01</i><span>Payment</span><i>02</i><span>Escrow</span><i>03</i><span>Delivery</span><i>04</i><span>Approval</span>
+      </div>
+    );
+  }
+
+  if (projectIndex === 1) {
+    return (
+      <div className="project-diagram project-diagram-samuel" aria-hidden="true">
+        <span className="diagram-root">User</span>
+        <span className="diagram-governor">Governor</span>
+        <div className="diagram-branches"><span>Local tools</span><span>Cloud models</span><span>Permissions</span><span>Memory / context</span><span>Sub-agents</span></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="project-diagram project-diagram-synapse" aria-hidden="true">
+      <span>Prompt</span><b>↓</b><div className="diagram-perspectives"><span>Perspective A</span><span>Perspective B</span><span>Perspective C</span></div><b>↓</b><span>Critique</span><b>↓</b><span>Revision</span><b>↓</b><strong>Result</strong>
+    </div>
+  );
+}
 
 export default function SelectedProjects() {
   const sequenceRef = useRef<HTMLDivElement>(null);
@@ -170,8 +192,8 @@ export default function SelectedProjects() {
                 <p className="project-detail">{project.detail}</p>
                 <p className="project-stack">{project.stack}</p>
               </div>
-              <div className="project-visual" role="img" aria-label={`Visual slot for ${project.title} project assets`}>
-                <span>{project.visualLabel}</span>
+              <div className="project-visual" role="img" aria-label={`Conceptual system diagram for ${project.title}`}>
+                <ProjectDiagram projectIndex={index} />
               </div>
             </div>
           </article>

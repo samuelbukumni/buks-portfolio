@@ -13,8 +13,9 @@ export default function DirectionSection() {
           boundaries, automation and the resources underneath applications.
         </p>
         <p className="direction-support">
-          This is a developing direction shaped by practical building,
-          deployment and experiments with AI systems and orchestration.
+          A developing direction shaped by practical building and deployment,
+          systems experimentation, and hands-on practice through cloud learning
+          and security labs.
         </p>
       </div>
 
