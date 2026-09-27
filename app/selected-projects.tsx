@@ -5,9 +5,12 @@ import { useEffect, useRef } from "react";
 type ProjectMotion = {
   textX: number;
   visualX: number;
-  textOpacity: number;
+  labelOpacity: number;
+  titleOpacity: number;
+  descriptionOpacity: number;
+  detailOpacity: number;
+  stackOpacity: number;
   visualOpacity: number;
-  visualScale: number;
 };
 
 type Project = {
@@ -63,18 +66,25 @@ const clamp = (value: number, minimum = 0, maximum = 1) =>
 
 const getMotion = (stage: HTMLElement, viewportHeight: number): ProjectMotion => {
   const stageTop = stage.getBoundingClientRect().top;
-  const progress = clamp((viewportHeight * 0.76 - stageTop) / (viewportHeight * 0.9));
-  const textProgress = clamp(progress / 0.5);
-  const visualProgress = clamp((progress - 0.16) / 0.58);
-  const project = Number(stage.dataset.projectIndex ?? 0);
-  const direction = projects[project]?.textDirection ?? -1;
-
+  const stageRange = Math.max(stage.offsetHeight - viewportHeight * 0.24, viewportHeight);
+  const progress = clamp((viewportHeight * 0.76 - stageTop) / stageRange);
+  const exitProgress = clamp((progress - 0.65) / 0.2);
+  const sceneOpacity = 1 - exitProgress * 0.82;
+  const labelProgress = clamp(progress / 0.05) * sceneOpacity;
+  const titleProgress = clamp((progress - 0.05) / 0.05) * sceneOpacity;
+  const descriptionProgress = clamp((progress - 0.1) / 0.04) * sceneOpacity;
+  const detailProgress = clamp((progress - 0.14) / 0.03) * sceneOpacity;
+  const stackProgress = clamp((progress - 0.17) / 0.03) * sceneOpacity;
+  const visualProgress = clamp((progress - 0.2) / 0.2) * sceneOpacity;
   return {
-    textX: (1 - textProgress) * 72 * direction,
-    visualX: (1 - visualProgress) * -72 * direction,
-    textOpacity: 0.2 + textProgress * 0.8,
-    visualOpacity: 0.18 + visualProgress * 0.82,
-    visualScale: 0.96 + visualProgress * 0.04,
+    textX: 0,
+    visualX: 0,
+    labelOpacity: labelProgress,
+    titleOpacity: titleProgress,
+    descriptionOpacity: descriptionProgress,
+    detailOpacity: detailProgress,
+    stackOpacity: stackProgress,
+    visualOpacity: visualProgress,
   };
 };
 
@@ -134,12 +144,19 @@ export default function SelectedProjects() {
 
         stage.style.setProperty("--project-text-x", `${motion.textX}px`);
         stage.style.setProperty("--project-visual-x", `${motion.visualX}px`);
-        stage.style.setProperty("--project-text-opacity", motion.textOpacity.toString());
+        stage.style.setProperty("--project-label-opacity", motion.labelOpacity.toString());
+        stage.style.setProperty("--project-label-y", `${(1 - motion.labelOpacity) * 10}px`);
+        stage.style.setProperty("--project-title-opacity", motion.titleOpacity.toString());
+        stage.style.setProperty("--project-title-y", `${(1 - motion.titleOpacity) * 10}px`);
+        stage.style.setProperty("--project-description-opacity", motion.descriptionOpacity.toString());
+        stage.style.setProperty("--project-description-y", `${(1 - motion.descriptionOpacity) * 8}px`);
+        stage.style.setProperty("--project-detail-opacity", motion.detailOpacity.toString());
+        stage.style.setProperty("--project-detail-y", `${(1 - motion.detailOpacity) * 8}px`);
+        stage.style.setProperty("--project-stack-opacity", motion.stackOpacity.toString());
+        stage.style.setProperty("--project-stack-y", `${(1 - motion.stackOpacity) * 8}px`);
         stage.style.setProperty("--project-visual-opacity", motion.visualOpacity.toString());
-        stage.style.setProperty("--project-visual-scale", motion.visualScale.toString());
-        stage.style.setProperty("--project-panel-opacity", (1 - nextProgress * 0.28).toString());
-        stage.style.setProperty("--project-panel-y", `${nextProgress * -12}px`);
-        stage.style.setProperty("--project-panel-scale", (1 - nextProgress * 0.025).toString());
+        stage.style.setProperty("--project-panel-opacity", (1 - nextProgress * 0.14).toString());
+        stage.style.setProperty("--project-panel-y", `${nextProgress * -6}px`);
       });
     };
 

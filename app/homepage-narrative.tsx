@@ -186,7 +186,7 @@ export default function HomepageNarrative() {
 
   return (
     <main className="site-shell">
-      <noscript><style>{`.hero-identity-block,.hero-location,.hero-title,.hero-statement,.hero-portrait,.hero-footer{opacity:1!important;visibility:visible!important;transform:none!important}.hero-question>span[aria-hidden=true]:first-child{display:none}.hero-question-complete{display:inline!important}`}</style></noscript>
+      <noscript><style>{`.hero-identity-block,.hero-location,.hero-title,.hero-statement,.hero-portrait,.hero-footer{opacity:1!important;visibility:visible!important;transform:none!important}.hero-question>span[aria-hidden=true]:first-child{display:none}.hero-question-complete{display:block!important;visibility:visible!important}`}</style></noscript>
       <header className="site-header">
         <Link className="wordmark" href="/" aria-label="Samuel Oluwabukunmi Oguntona home">
           Buks Samuel
@@ -211,7 +211,6 @@ export default function HomepageNarrative() {
             </p>
           </div>
           <div className={`hero-identity-block ${hasReached("identity") ? "is-visible" : ""}`}>
-            <p className="professional-name">Samuel Oluwabukunmi Oguntona</p>
             <p className={`hero-location ${hasReached("context") ? "is-visible" : ""}`}>
               Information Systems · Obafemi Awolowo University · Nigeria
             </p>
@@ -225,21 +224,21 @@ export default function HomepageNarrative() {
           <div className={`hero-statement ${hasReached("resolved") ? "is-visible" : ""}`}>
             <p>I follow technology underneath the surface: from products and software to databases, networks, infrastructure, deployment, and the systems that keep things operating.</p>
           </div>
+
+          <div className={`hero-footer ${hasReached("direction") ? "is-visible" : ""}`}>
+            <div className="hero-focus">
+              <span className="hero-label">Technical direction</span>
+              <strong>Exploring <span className="hero-route-arrow" aria-hidden="true">→</span> Cloud · Linux · Infrastructure · Systems · AI</strong>
+            </div>
+            <div className={`hero-actions ${isResolved ? "is-visible" : ""}`}>
+              <a href="#work">View Projects <span aria-hidden="true">↓</span></a>
+              <Link href="/playground">Enter Explorer <span aria-hidden="true">→</span></Link>
+            </div>
+          </div>
         </div>
 
         <div className={`hero-portrait ${hasReached("identity") ? "is-visible" : ""}`}>
-          <Image src="/images/samuel-portraitx.png" width={1152} height={1536} alt="Samuel Oluwabukunmi Oguntona" priority />
-        </div>
-
-        <div className={`hero-footer ${hasReached("direction") ? "is-visible" : ""}`}>
-          <div className="hero-focus">
-            <span className="hero-label">Technical direction</span>
-            <strong>Cloud · Linux · Infrastructure · Systems · AI</strong>
-          </div>
-          <div className={`hero-actions ${isResolved ? "is-visible" : ""}`}>
-            <a href="#work">View Projects <span aria-hidden="true">↓</span></a>
-            <Link href="/playground">Enter Explorer <span aria-hidden="true">→</span></Link>
-          </div>
+          <Image src="/images/samuel-portraity.png" width={1024} height={1536} alt="Samuel Oluwabukunmi Oguntona" priority />
         </div>
       </section>
 

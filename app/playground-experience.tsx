@@ -62,8 +62,6 @@ type Region = {
   y: string;
 };
 
-type MapRoute = { from: RegionId; to: RegionId; path: string };
-
 const regions: Region[] = [
   {
     id: "cloud",
@@ -123,15 +121,6 @@ const regions: Region[] = [
     x: "85%",
     y: "86%",
   },
-];
-
-const mapRoutes: MapRoute[] = [
-  { from: "cloud", to: "linux", path: "M18 14 C18 28 17 40 17 53" },
-  { from: "cloud", to: "systems", path: "M18 14 C32 21 48 30 64 37" },
-  { from: "linux", to: "systems", path: "M17 53 C31 49 47 42 64 37" },
-  { from: "linux", to: "security", path: "M17 53 C24 59 31 65 38 68" },
-  { from: "systems", to: "security", path: "M64 37 C56 49 47 61 38 68" },
-  { from: "security", to: "ai", path: "M38 68 C51 76 69 84 85 86" },
 ];
 
 const terminalHistory: Record<TerminalCommand, string> = {
@@ -229,62 +218,71 @@ const viewFromHash = (hash: string): ExplorerLocation => {
   return { view, regionShell: regionShell && ["cloud", "linux", "systems", "security", "ai"].includes(view) };
 };
 
-function ExplorerMap({ visitedRegions, onOpen }: { visitedRegions: RegionId[]; onOpen: (view: ExplorerView) => void }) {
-  const [focusedRegion, setFocusedRegion] = useState<RegionId | null>(null);
-  const isRelatedRegion = (regionId: RegionId) => focusedRegion !== null && mapRoutes.some((route) =>
-    (route.from === focusedRegion && route.to === regionId)
-    || (route.to === focusedRegion && route.from === regionId),
-  );
+function ExplorerMap({ onOpen }: { onOpen: (view: ExplorerView) => void }) {
   return (
-    <section className="explorer-map-view" aria-labelledby="explorer-map-title">
-      <div className="explorer-intro">
-        <p className="section-kicker">BUKS TECHNICAL MAP / REV. 01</p>
+    <section className="explorer-map-view atlas-view" aria-labelledby="explorer-map-title">
+      <div className="explorer-intro atlas-intro">
         <h1 id="explorer-map-title" tabIndex={-1}>Explorer</h1>
-        <p>A map of the systems, tools and ideas I&apos;m actively working through.</p>
+        <p>A working index of the systems, tools and ideas I&apos;m learning, testing and building.</p>
       </div>
 
-      <p className="map-stage-label">THE MAP / PRIMARY ROUTES</p>
-      <div className="map-stage">
-        <svg className="map-routes" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          {mapRoutes.map((route) => <path key={`${route.from}-${route.to}`} className={focusedRegion && (route.from === focusedRegion || route.to === focusedRegion) ? "is-active" : ""} d={route.path} />)}
-        </svg>
-        {regions.map((region) => (
-          <button
-            key={region.id}
-            type="button"
-            className={`map-region map-region-${region.id} ${visitedRegions.includes(region.id) ? "is-visited" : ""} ${isRelatedRegion(region.id) ? "is-related" : ""} ${focusedRegion && focusedRegion !== region.id && !isRelatedRegion(region.id) ? "is-dimmed" : ""}`}
-            style={{ left: region.x, top: region.y }}
-            onClick={() => onOpen(region.id)}
-            onMouseEnter={() => setFocusedRegion(region.id)}
-            onMouseLeave={() => setFocusedRegion(null)}
-            onFocus={() => setFocusedRegion(region.id)}
-            onBlur={() => setFocusedRegion(null)}
-            aria-label={`Enter region ${region.number}, ${region.label}, status ${region.status}, ${region.metadata}${region.destination ? `, destination ${region.destination}` : ""}`}
-          >
-            <span className="map-marker" aria-hidden="true" />
-            <span className="map-region-copy">
-              <span className="map-region-number">REGION {region.number}</span>
-              <strong>{region.label}</strong>
-              <span className="map-region-status">STATUS / {region.status}</span>
-              <small className="map-region-meta">{region.metadata}</small>
-              {region.destination && <small className="map-region-destination">{region.destination}</small>}
-            </span>
-          </button>
-        ))}
-      </div>
-      <p className="map-context" aria-live="polite">
-        {focusedRegion ? regions.find((region) => region.id === focusedRegion)?.description : "Select a connected region to enter."}
-      </p>
-
-      <div className="map-meta">
-        <div className="map-legend" aria-label="Map legend">
-          <span><i className="legend-dot legend-dot-explored" /> EXPLORED</span>
-          <span><i className="legend-dot legend-dot-exploring" /> EXPLORING</span>
-          <span><i className="legend-dot legend-dot-uncharted" /> UNCHARTED</span>
-          <span><i className="legend-dot legend-dot-visited" /> VISITED THIS SESSION</span>
-        </div>
-        <p>MAP STILL IN PROGRESS / MORE TERRITORY TO MAP</p>
-      </div>
+      <ol className="atlas-route" aria-label="Technical territories">
+        <li className="atlas-stop atlas-stop-cloud">
+          <span className="atlas-marker" aria-hidden="true"><span>01</span></span>
+          <div className="atlas-content">
+            <button type="button" className="atlas-territory" onClick={() => onOpen("cloud")}>
+              <h2>Cloud &amp; Infrastructure <span aria-hidden="true">↗</span></h2>
+              <p>Deployment, DNS, services and hands-on cloud labs.</p>
+              <small>AWS Skill Builder · Google Skills · Vercel · Supabase</small>
+            </button>
+          </div>
+        </li>
+        <li className="atlas-stop atlas-stop-linux">
+          <span className="atlas-marker" aria-hidden="true"><span>02</span></span>
+          <div className="atlas-content">
+            <button type="button" className="atlas-territory" onClick={() => onOpen("linux")}>
+              <h2>Linux <span aria-hidden="true">↗</span></h2>
+              <p>Linux Mint, processes, networking, filesystem and terminal work.</p>
+              <small>Linux Mint · CLI · services · packages · networking</small>
+            </button>
+            <button type="button" className="atlas-action" onClick={() => onOpen("terminal")}>Enter Terminal <span aria-hidden="true">→</span></button>
+          </div>
+        </li>
+        <li className="atlas-stop atlas-stop-systems">
+          <span className="atlas-marker" aria-hidden="true"><span>03</span></span>
+          <div className="atlas-content">
+            <button type="button" className="atlas-territory" onClick={() => onOpen("systems")}>
+              <h2>Systems <span aria-hidden="true">↗</span></h2>
+              <p>Request lifecycles, service boundaries, transaction flows and architecture.</p>
+              <small>The Middleman · request flow · transactions</small>
+            </button>
+            <button type="button" className="atlas-action" onClick={() => onOpen("systems")}>Open Request Flow <span aria-hidden="true">→</span></button>
+          </div>
+        </li>
+        <li className="atlas-stop atlas-stop-security">
+          <span className="atlas-marker" aria-hidden="true"><span>04</span></span>
+          <div className="atlas-content">
+            <button type="button" className="atlas-territory" onClick={() => onOpen("security")}>
+              <h2>Security <span aria-hidden="true">↗</span></h2>
+              <p>Application security, trust boundaries and defensive hands-on labs.</p>
+              <small>TryHackMe · application security · validation · permissions</small>
+            </button>
+          </div>
+        </li>
+        <li className="atlas-stop atlas-stop-ai">
+          <span className="atlas-marker" aria-hidden="true"><span>05</span></span>
+          <div className="atlas-content">
+            <button type="button" className="atlas-territory" onClick={() => onOpen("ai")}>
+              <h2>AI Systems <span aria-hidden="true">↗</span></h2>
+              <p>Orchestration, permissions, multi-agent reasoning and autonomous systems.</p>
+            </button>
+            <div className="atlas-actions" aria-label="AI Systems destinations">
+              <button type="button" className="atlas-action" onClick={() => onOpen("samuel")}>S.A.M.U.E.L. <span aria-hidden="true">→</span></button>
+              <button type="button" className="atlas-action" onClick={() => onOpen("synapse")}>SYNAPSE <span aria-hidden="true">→</span></button>
+            </div>
+          </div>
+        </li>
+      </ol>
     </section>
   );
 }
@@ -371,7 +369,6 @@ function SamuelRegion() {
 export default function PlaygroundExperience() {
   const [view, setView] = useState<ExplorerView>("map");
   const [regionShell, setRegionShell] = useState(false);
-  const [visitedRegions, setVisitedRegions] = useState<RegionId[]>([]);
   const [command, setCommand] = useState("");
   const [entries, setEntries] = useState<TerminalEntry[]>([
     { type: "output", text: "Explorer terminal // simulated local session. Type 'help' to begin." },
@@ -413,9 +410,6 @@ export default function PlaygroundExperience() {
       }
     }
     previousViewRef.current = view;
-    if (["cloud", "linux", "systems", "security", "ai"].includes(view)) {
-      setVisitedRegions((current) => current.includes(view as RegionId) ? current : [...current, view as RegionId]);
-    }
   }, [view]);
 
   const openView = (nextView: ExplorerView, openRegionShell = false) => {
@@ -586,13 +580,13 @@ export default function PlaygroundExperience() {
   const region = regions.find((candidate) => candidate.id === view);
 
   return (
-    <main className={`playground-shell explorer-shell ${view === "security" && !regionShell ? "is-security" : ""}`}>
+    <main className={`playground-shell explorer-shell ${view === "map" ? "explorer-root" : ""} ${view === "security" && !regionShell ? "is-security" : ""}`}>
       <header className="playground-header explorer-header">
         <Link href="/" className="wordmark">BUKS / EXPLORER</Link>
-        <nav aria-label="Explorer navigation"><Link href="/">HOME</Link><button type="button" onClick={returnToMap}>MAP</button></nav>
+        <nav aria-label="Explorer navigation"><Link href="/">HOME</Link>{view !== "map" && <button type="button" onClick={returnToMap}>MAP</button>}</nav>
       </header>
 
-      {view === "map" && <ExplorerMap visitedRegions={visitedRegions} onOpen={(nextView) => openView(nextView)} />}
+      {view === "map" && <ExplorerMap onOpen={(nextView) => openView(nextView)} />}
       {regionShell && region && <RegionShell region={region} onMap={returnToMap} />}
       {!regionShell && view === "cloud" && region && <RegionShell region={region} onMap={returnToMap}><CloudRegion /></RegionShell>}
       {!regionShell && view === "linux" && region && <RegionShell region={region} onMap={returnToMap}><div className="region-artifact linux-artifact"><div className="linux-meta"><span>HOST / LATITUDE-E5410</span><span>OS / LINUX MINT</span><span>STATE / ACTIVE</span></div><p>My working environment for CLI workflows, system inspection, networking and infrastructure practice.</p><div className="linux-domains"><span>FILESYSTEM</span><span>PROCESSES</span><span>STORAGE</span><span>PERMISSIONS</span><span>NETWORK</span><span>SERVICES</span><span>PACKAGES</span><span>CLI</span></div><button type="button" className="explorer-action" onClick={() => openView("terminal")}>LINUX → TERMINAL</button></div></RegionShell>}

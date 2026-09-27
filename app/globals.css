@@ -110,10 +110,11 @@ a:focus-visible {
 .hero {
   display: grid;
   flex: 1;
-  grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.75fr);
-  grid-template-rows: 1fr auto;
-  column-gap: clamp(48px, 7vw, 120px);
-  padding: clamp(4rem, 8vh, 7rem) 0 2vh;
+  --muted: #5e5952;
+  color: var(--foreground);
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  column-gap: clamp(2rem, 4vw, 5rem);
+  padding: clamp(2.5rem, 6vh, 5rem) 0 0;
 }
 
 .hero-label {
@@ -136,11 +137,11 @@ a:focus-visible {
 .hero-main {
   grid-column: 1;
   grid-row: 1;
-  max-width: 44rem;
+  min-width: 0;
 }
 
 .hero-opening {
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.1rem;
 }
 
 .hero-discovery,
@@ -155,7 +156,19 @@ a:focus-visible {
   transition: opacity 260ms ease, transform 260ms ease;
 }
 
-.hero-question-complete { display: none; }
+/* Reserve the complete question's space throughout typing and hydration. */
+.hero-question {
+  display: grid;
+  max-width: 100%;
+  width: fit-content;
+}
+.hero-question > span[aria-hidden="true"] { grid-area: 1 / 1; }
+.hero-question-complete { visibility: hidden; }
+.hero-question .text-caret {
+  justify-self: end;
+  transform: translateX(100%);
+}
+
 
 .hero-discovery {
   animation: intro-reveal 700ms 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -183,17 +196,17 @@ a:focus-visible {
 }
 
 .hero-portrait {
-  align-self: center;
+  align-self: start;
   grid-column: 2;
   grid-row: 1;
   justify-self: center;
-  max-width: 470px;
+  max-width: 390px;
+  margin-top: clamp(3rem, 6vw, 6rem);
   opacity: 0;
-  overflow: hidden;
   position: relative;
   transform: translateY(0.8rem);
-  transition: opacity 620ms ease, transform 620ms ease;
-  width: min(100%, clamp(340px, 32vw, 470px));
+  transition: opacity 820ms ease, transform 820ms ease;
+  width: 100%;
 }
 
 .hero-portrait.is-visible {
@@ -209,20 +222,11 @@ a:focus-visible {
   width: 100%;
 }
 
-.professional-name {
-  color: var(--foreground);
-  font-family: var(--font-body);
-  font-size: clamp(1.15rem, 2vw, 1.65rem);
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 1.25;
-  margin: 0;
-}
 
 .hero-title {
   color: var(--foreground);
   font-family: var(--font-display);
-  font-size: clamp(5.2rem, 9vw, 8.8rem);
+  font-size: clamp(5.5rem, 11.5vw, 11rem);
   font-weight: 400;
   letter-spacing: -0.07em;
   line-height: 0.78;
@@ -233,34 +237,43 @@ a:focus-visible {
 .hero-title span {
   color: var(--accent);
   display: block;
-  margin-left: 0.34em;
+  margin-left: 0.12em;
 }
 
 .hero-statement {
-  border-left: 1px solid var(--accent-warm);
-  margin: 2.2rem 0 0 12%;
+  margin: 1.5rem 0 0;
   max-width: 28rem;
-  padding-left: 1.2rem;
   transition: opacity 420ms ease, transform 420ms ease;
 }
 
 .hero-statement p {
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 1.05rem;
+  line-height: 1.6;
   margin: 0;
 }
 
 .hero-footer {
-  align-items: end;
-  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--accent);
   display: grid;
-  gap: 2rem;
-  grid-column: 1;
-  grid-row: 2;
-  grid-template-columns: minmax(220px, 1.3fr) auto;
-  margin-top: clamp(4rem, 9vh, 7rem);
-  padding-top: 1rem;
+  gap: 1.1rem;
+  margin: 1rem 0 0 0.25rem;
+  padding-left: 1.25rem;
+  position: relative;
 }
+
+.hero-footer::before {
+  background: var(--accent-warm);
+  border: 3px solid var(--background);
+  border-radius: 50%;
+  content: "";
+  height: 0.7rem;
+  left: -0.38rem;
+  position: absolute;
+  top: 0.1rem;
+  width: 0.7rem;
+}
+
+.hero-route-arrow { color: var(--accent-warm); }
 
 .hero-focus {
   display: grid;
@@ -268,24 +281,30 @@ a:focus-visible {
 }
 
 .hero-focus strong {
-  font-size: 0.86rem;
+  font-family: var(--font-body);
+  font-size: 0.96rem;
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.6;
 }
 
 .hero-label {
   color: var(--muted);
+  text-transform: uppercase;
   margin: 0;
 }
 
 .hero-actions {
-  display: grid;
-  gap: 0.7rem;
-  justify-items: start;
-  white-space: nowrap;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.5rem;
 }
 
 .hero-actions a {
+  align-items: center;
+  border-bottom-color: var(--border);
+  color: var(--accent);
+  font-size: 0.9rem;
+  min-height: 2.75rem;
   display: inline-flex;
   gap: 0.5rem;
 }
@@ -347,7 +366,7 @@ a:focus-visible {
   }
 
   .hero-question > span[aria-hidden="true"]:first-child { display: none; }
-  .hero-question-complete { display: inline; }
+  .hero-question-complete { visibility: visible; }
 }
 
 .hero-return .hero-discovery,
@@ -374,6 +393,7 @@ a:focus-visible {
 
 .selected-projects {
   margin-top: clamp(7rem, 16vh, 13rem);
+  padding-inline: clamp(1.5rem, 3vw, 3rem);
   background: linear-gradient(180deg, transparent, rgba(43, 58, 103, 0.025) 8%, rgba(43, 58, 103, 0.025) 92%, transparent);
 }
 
@@ -419,8 +439,8 @@ a:focus-visible {
 }
 
 .project-stage {
-  min-height: 145svh;
-  margin-top: -70svh;
+  min-height: 500svh;
+  margin-top: -50svh;
   position: relative;
 }
 
@@ -428,15 +448,24 @@ a:focus-visible {
   margin-top: 0;
 }
 
+.project-stage-primary {
+  --project-accent: #c96a3d;
+  --project-wash: rgba(201, 106, 61, 0.045);
+}
+
 .project-stage-standard {
   z-index: 1;
 }
 
 .project-stage-alternate {
+  --project-accent: #6f7d4e;
+  --project-wash: rgba(111, 125, 78, 0.045);
   z-index: 2;
 }
 
 .project-stage-final {
+  --project-accent: #4c4f8f;
+  --project-wash: rgba(76, 79, 143, 0.045);
   z-index: 3;
 }
 
@@ -444,21 +473,21 @@ a:focus-visible {
   align-items: start;
   background: color-mix(in srgb, var(--background) 97%, var(--accent) 3%);
   display: grid;
-  gap: clamp(2.5rem, 7vw, 8rem);
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.92fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
   min-height: min(72svh, 48rem);
   padding: clamp(1.2rem, 2vw, 2rem) 0 clamp(3rem, 7vh, 6rem);
   position: sticky;
   opacity: var(--project-panel-opacity, 1);
   top: 3rem;
-  transform: translate3d(0, var(--project-panel-y, 0px), 0) scale(var(--project-panel-scale, 1));
-  transition: opacity 120ms linear, transform 120ms linear;
+  transform: translate3d(0, var(--project-panel-y, 0px), 0);
+  transition: opacity 240ms ease-out, transform 240ms ease-out;
   will-change: opacity, transform;
   z-index: 1;
 }
 
 .project-stage-alternate .project-panel {
-  grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1fr);
+  grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.05fr);
 }
 
 .project-stage-alternate .project-copy {
@@ -477,15 +506,46 @@ a:focus-visible {
 
 .project-copy {
   display: grid;
-  gap: 1.2rem;
+  gap: 0.85rem;
   max-width: 34rem;
-  opacity: var(--project-text-opacity, 1);
   transform: translate3d(var(--project-text-x, 0px), 0, 0);
-  transition: opacity 80ms linear, transform 80ms linear;
+  transition: transform 240ms ease-out;
   will-change: opacity, transform;
 }
 
+.project-copy .project-number,
+.project-copy .project-status {
+  opacity: var(--project-label-opacity, 0);
+  transform: translateY(var(--project-label-y, 0.75rem));
+  transition: opacity 260ms ease-out, transform 320ms ease-out;
+}
+
+.project-copy h3 {
+  opacity: var(--project-title-opacity, 0);
+  transform: translateY(var(--project-title-y, 0.75rem));
+  transition: opacity 280ms ease-out, transform 340ms ease-out;
+}
+
+.project-copy .project-description {
+  opacity: var(--project-description-opacity, 0);
+  transform: translateY(var(--project-description-y, 0.75rem));
+  transition: opacity 300ms ease-out, transform 360ms ease-out;
+}
+
+.project-copy .project-detail {
+  opacity: var(--project-detail-opacity, 0);
+  transform: translateY(var(--project-detail-y, 0.75rem));
+  transition: opacity 300ms ease-out, transform 360ms ease-out;
+}
+
+.project-copy .project-stack {
+  opacity: var(--project-stack-opacity, 0);
+  transform: translateY(var(--project-stack-y, 0.75rem));
+  transition: opacity 300ms ease-out, transform 360ms ease-out;
+}
+
 .project-number {
+  color: var(--project-accent, var(--accent));
   font-size: clamp(1.1rem, 2vw, 1.5rem);
   letter-spacing: 0;
   line-height: 1;
@@ -493,13 +553,17 @@ a:focus-visible {
 
 .project-heading {
   display: grid;
-  gap: 0.9rem;
+  gap: 0.7rem;
 }
 
 .project-status,
 .project-stack {
   color: var(--muted);
   letter-spacing: 0.06em;
+}
+
+.project-stage .project-status {
+  color: color-mix(in srgb, var(--project-accent, var(--accent)) 78%, var(--muted));
 }
 
 .project-heading h3 {
@@ -521,7 +585,7 @@ a:focus-visible {
 }
 
 .project-heading h3 span {
-  color: var(--accent);
+  color: var(--project-accent, var(--accent));
   display: inline-block;
   font-family: var(--font-body);
   font-size: 0.32em;
@@ -564,9 +628,11 @@ a:focus-visible {
   border-top: 1px solid var(--border);
   padding: clamp(1rem, 2vw, 1.5rem);
   position: relative;
-  opacity: var(--project-visual-opacity, 1);
-  transform: translate3d(var(--project-visual-x, 0px), 0, 0) scale(var(--project-visual-scale, 1));
-  transition: opacity 80ms linear, transform 80ms linear;
+  background: var(--project-wash, transparent);
+  border-color: color-mix(in srgb, var(--project-accent, var(--border)) 34%, var(--border));
+  opacity: var(--project-visual-opacity, 0);
+  transform: translate3d(var(--project-visual-x, 0px), 0, 0);
+  transition: opacity 360ms ease-out, transform 420ms ease-out;
   will-change: opacity, transform;
 }
 
@@ -606,6 +672,11 @@ a:focus-visible {
 .project-diagram-middleman {
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.project-diagram-middleman > span {
+  border-color: color-mix(in srgb, var(--accent) 58%, var(--border));
+  color: color-mix(in srgb, var(--foreground) 78%, var(--muted));
 }
 
 .project-diagram-middleman span:nth-of-type(3) {
@@ -666,6 +737,34 @@ a:focus-visible {
   font-family: var(--font-mono);
   font-size: 0.62rem;
   padding-top: 0.65rem;
+}
+
+.project-stage .project-diagram > span,
+.project-stage .diagram-branches span,
+.project-stage .diagram-root,
+.project-stage .diagram-governor,
+.project-stage .project-diagram-synapse > strong {
+  border-color: color-mix(in srgb, var(--project-accent, var(--accent)) 58%, var(--border));
+}
+
+.project-stage .project-diagram i,
+.project-stage .project-diagram b {
+  color: var(--project-accent, var(--accent));
+}
+
+.project-stage .diagram-governor,
+.project-stage .project-diagram-synapse > strong {
+  background: var(--project-accent, var(--accent));
+}
+
+.project-stage .diagram-perspectives span {
+  border-top-color: color-mix(in srgb, var(--project-accent, var(--border)) 42%, var(--border));
+}
+
+.project-stage-primary .project-diagram-middleman span:nth-of-type(3),
+.project-stage-primary .project-diagram-middleman span:nth-of-type(5) {
+  background: color-mix(in srgb, var(--project-accent) 14%, transparent);
+  border-color: var(--project-accent);
 }
 
 .section-kicker,
@@ -1911,45 +2010,18 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 
-  .hero-main {
-    display: contents;
-  }
+  .hero-main { max-width: 44rem; }
 
-  .hero-opening { grid-row: 1; }
-  .hero-identity-block { grid-row: 2; }
   .hero-portrait {
     grid-column: 1;
-    grid-row: 4;
-    justify-self: start;
-    margin-top: 2.5rem;
-    width: min(18rem, 48vw);
-  }
-
-  .hero-title {
-    grid-row: 3;
-  }
-
-  .hero-statement {
-    grid-row: 5;
-  }
-
-  .hero-footer {
-    grid-row: 6;
-  }
-
-  .hero-title {
-    font-size: clamp(6rem, 17vw, 9rem);
-  }
-
-  .hero-footer {
-    grid-column: 1;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .hero-actions {
-    grid-column: 1 / -1;
     grid-row: 2;
-    grid-template-columns: auto auto;
+    justify-self: end;
+    margin-top: 2rem;
+    width: min(22rem, 65vw);
+  }
+
+  .hero-title {
+    font-size: clamp(6rem, 18vw, 10rem);
   }
 }
 
@@ -1973,8 +2045,7 @@ a:focus-visible {
     justify-content: flex-end;
   }
 
-  .nav-list a,
-  .hero-actions a {
+  .nav-list a {
     font-size: 0.66rem;
   }
 
@@ -1988,15 +2059,15 @@ a:focus-visible {
   }
 
   .hero-location {
-    margin: 0.55rem 0 3rem;
+    margin: 0.55rem 0 2rem;
     max-width: 14rem;
   }
 
   .hero-title {
-    font-size: clamp(4.8rem, 20vw, 7rem);
+    font-size: clamp(3rem, 22vw, 8rem);
     letter-spacing: -0.06em;
     line-height: 0.84;
-    margin-top: 2.6rem;
+    margin-top: 0;
   }
 
   .hero-footer {
@@ -2004,7 +2075,7 @@ a:focus-visible {
     flex-direction: column;
     align-items: flex-start;
     gap: 1.6rem;
-    margin-top: 5rem;
+    margin-top: 1.6rem;
   }
 
   .hero-focus {
@@ -2136,7 +2207,7 @@ a:focus-visible {
 
   .project-visual {
     min-height: 14rem;
-    opacity: 1;
+    opacity: var(--project-visual-opacity, 1);
     transform: none;
     width: 100%;
   }
@@ -2195,6 +2266,12 @@ a:focus-visible {
   }
 
   .project-copy,
+  .project-copy .project-number,
+  .project-copy .project-status,
+  .project-copy h3,
+  .project-copy .project-description,
+  .project-copy .project-detail,
+  .project-copy .project-stack,
   .project-visual,
   .project-panel {
     animation: none !important;
@@ -2839,4 +2916,292 @@ a:focus-visible {
   .explorer-region,
   .terminal-destination,
   .destination-section { animation: none; }
+}
+
+/* Root Explorer: a quiet technical atlas with one continuous route. */
+.explorer-root {
+  --atlas-background: #f3f6f4;
+  --atlas-foreground: #17212b;
+  --atlas-route: #8da7a0;
+  background: var(--atlas-background);
+  color: var(--atlas-foreground);
+}
+
+.explorer-root .explorer-header .wordmark,
+.explorer-root .explorer-header nav a,
+.explorer-root .explorer-header nav button {
+  color: var(--atlas-foreground);
+  font-family: var(--font-body);
+}
+
+.explorer-root .explorer-header nav a:hover,
+.explorer-root .explorer-header nav button:hover {
+  color: #2a7f8e;
+}
+
+.explorer-root .atlas-view {
+  margin: 0 auto;
+  max-width: 78rem;
+  padding: clamp(4.5rem, 10vh, 8rem) 0 5rem;
+}
+
+.explorer-root .atlas-intro {
+  max-width: 38rem;
+}
+
+.explorer-root .atlas-intro h1 {
+  color: var(--atlas-foreground);
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 8vw, 8rem);
+  letter-spacing: -0.07em;
+  line-height: 0.84;
+  margin: 0 0 1.4rem;
+}
+
+.explorer-root .atlas-intro > p {
+  color: #43545a;
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.5;
+  margin: 0;
+  max-width: 32rem;
+}
+
+.atlas-route {
+  list-style: none;
+  margin: clamp(4.5rem, 9vw, 8rem) 0 0;
+  padding: 0;
+  position: relative;
+}
+
+.atlas-route::before {
+  background: color-mix(in srgb, var(--atlas-route) 62%, transparent);
+  content: "";
+  left: 50%;
+  position: absolute;
+  top: 1rem;
+  bottom: 2rem;
+  width: 1px;
+}
+
+.atlas-stop {
+  --atlas-accent: #2a7f8e;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2.5rem minmax(0, 1fr);
+  min-height: clamp(13rem, 20vw, 18rem);
+  position: relative;
+}
+
+.atlas-stop-linux { --atlas-accent: #58745b; }
+.atlas-stop-systems { --atlas-accent: #c9962b; }
+.atlas-stop-security { --atlas-accent: #c76b5c; }
+.atlas-stop-ai { --atlas-accent: #6e5a78; }
+
+.atlas-marker {
+  align-items: center;
+  background: var(--atlas-background);
+  border: 1px solid var(--atlas-accent);
+  border-radius: 50%;
+  color: var(--atlas-accent);
+  display: grid;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  grid-column: 2;
+  height: 2.5rem;
+  justify-content: center;
+  letter-spacing: 0.04em;
+  margin-top: 0.2rem;
+  position: relative;
+  width: 2.5rem;
+  z-index: 1;
+}
+
+.atlas-stop:nth-child(odd) .atlas-content {
+  grid-column: 1;
+  padding-right: clamp(2rem, 5vw, 5rem);
+  text-align: right;
+}
+
+.atlas-stop:nth-child(even) .atlas-content {
+  grid-column: 3;
+  padding-left: clamp(2rem, 5vw, 5rem);
+}
+
+.atlas-territory {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--atlas-accent) 45%, transparent);
+  color: var(--atlas-foreground);
+  cursor: pointer;
+  display: block;
+  font: inherit;
+  padding: 0.7rem 0 0;
+  text-align: inherit;
+  transition: border-color 180ms ease, color 180ms ease, transform 180ms ease;
+  width: 100%;
+}
+
+.atlas-territory h2 {
+  color: var(--atlas-foreground);
+  font-family: var(--font-body);
+  font-size: clamp(1.55rem, 3vw, 2.45rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.atlas-territory h2 span {
+  color: var(--atlas-accent);
+  display: inline-block;
+  font-size: 0.7em;
+  margin-left: 0.25em;
+  transition: transform 180ms ease;
+}
+
+.atlas-territory p {
+  color: #43545a;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.5;
+  margin: 0.75rem 0 0;
+}
+
+.atlas-territory small {
+  color: color-mix(in srgb, var(--atlas-foreground) 70%, transparent);
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.025em;
+  line-height: 1.5;
+  margin-top: 0.9rem;
+}
+
+.atlas-territory:hover,
+.atlas-territory:focus-visible {
+  border-color: var(--atlas-accent);
+  color: var(--atlas-accent);
+}
+
+.atlas-territory:hover h2,
+.atlas-territory:focus-visible h2 {
+  color: var(--atlas-accent);
+}
+
+.atlas-territory:hover h2 span,
+.atlas-territory:focus-visible h2 span {
+  transform: translateX(0.2rem);
+}
+
+.atlas-stop:nth-child(odd) .atlas-territory:hover,
+.atlas-stop:nth-child(odd) .atlas-territory:focus-visible {
+  transform: translateX(-0.25rem);
+}
+
+.atlas-stop:nth-child(even) .atlas-territory:hover,
+.atlas-stop:nth-child(even) .atlas-territory:focus-visible {
+  transform: translateX(0.25rem);
+}
+
+.atlas-stop:focus-within .atlas-marker,
+.atlas-stop:hover .atlas-marker {
+  background: var(--atlas-accent);
+  color: var(--atlas-background);
+}
+
+.atlas-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  justify-content: inherit;
+  margin-top: 0.8rem;
+}
+
+.atlas-action {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--atlas-accent) 65%, transparent);
+  color: var(--atlas-accent);
+  cursor: pointer;
+  font: 500 0.86rem/1.5 var(--font-body);
+  min-height: 2.75rem;
+  padding: 0.45rem 0;
+  text-align: inherit;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.atlas-action span {
+  display: inline-block;
+  margin-left: 0.3rem;
+  transition: transform 180ms ease;
+}
+
+.atlas-action:hover,
+.atlas-action:focus-visible {
+  border-color: var(--atlas-accent);
+  color: var(--atlas-accent);
+}
+
+.atlas-action:hover span,
+.atlas-action:focus-visible span {
+  transform: translateX(0.2rem);
+}
+
+@media (max-width: 700px) {
+  .explorer-root .atlas-view {
+    padding: 4rem 0 3rem;
+  }
+
+  .explorer-root .atlas-intro h1 {
+    font-size: clamp(4.2rem, 18vw, 6.5rem);
+  }
+
+  .atlas-route {
+    margin-top: 4rem;
+  }
+
+  .atlas-route::before {
+    left: 1.25rem;
+    top: 1rem;
+    bottom: 1.5rem;
+  }
+
+  .atlas-stop {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    min-height: 0;
+    padding-bottom: 3.5rem;
+  }
+
+  .atlas-stop:last-child { padding-bottom: 0; }
+
+  .atlas-marker {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .atlas-stop:nth-child(odd) .atlas-content,
+  .atlas-stop:nth-child(even) .atlas-content {
+    grid-column: 2;
+    grid-row: 1;
+    padding-left: 1.5rem;
+    padding-right: 0;
+    text-align: left;
+  }
+
+  .atlas-territory:hover,
+  .atlas-territory:focus-visible {
+    transform: translateX(0.15rem);
+  }
+
+  .atlas-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atlas-territory,
+  .atlas-territory h2 span,
+  .atlas-action {
+    transition: none;
+  }
 }
