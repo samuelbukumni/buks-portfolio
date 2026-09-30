@@ -1,0 +1,52 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+}
+.inner {
+  max-width: 1380px;
+  min-height: 68px;
+  margin: auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.inner nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.3rem, 3vw, 2.5rem);
+}
+.inner nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  font-size: 0.88rem;
+  font-weight: 550;
+}
+.inner nav a[aria-current] {
+  color: var(--indigo);
+  border-color: var(--indigo);
+}
+.signature {
+  white-space: nowrap;
+  color: var(--indigo);
+  font: 500 clamp(1.65rem, 2.5vw, 2rem)/1 var(--font-signature), cursive;
+  letter-spacing: -0.04em;
+  transform: rotate(-3deg);
+  transition: transform 180ms ease;
+}
+.signature:hover {
+  text-decoration: none;
+  transform: rotate(0deg) translateY(-2px);
+}
+@media (max-width: 400px) {
+  .inner { min-height: 60px; }
+  .inner nav { gap: 1.2rem; }
+  .inner nav a { font-size: 0.82rem; }
+  .signature { font-size: 1.55rem; }
+}

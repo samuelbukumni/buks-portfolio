@@ -1,0 +1,75 @@
+.contact {
+  max-width: 1380px;
+  margin: auto;
+  padding: var(--section-space) var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 7vw, 7rem);
+}
+.contact h2 {
+  font: 500 clamp(2.25rem, 4vw, 3.5rem)/1.08 var(--font-display);
+  max-width: 16ch;
+}
+.contact p {
+  max-width: 40ch;
+}
+.email {
+  display: inline-block;
+  font-size: clamp(0.86rem, 1.5vw, 1.1rem);
+  margin-top: 1rem;
+  border-bottom: 1px solid var(--indigo);
+  padding-bottom: 0.5rem;
+  overflow-wrap: anywhere;
+}
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+}
+.socials a {
+  padding: 0.7rem 0;
+}
+.form {
+  align-self: center;
+}
+.form label {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.3rem;
+}
+.form input,
+.form textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--surface);
+  padding: 0.8rem;
+  color: var(--ink);
+}
+.form button {
+  margin-top: 1.3rem;
+}
+.status {
+  font-size: 0.8rem;
+  min-height: 3em;
+  color: var(--muted);
+}
+@media (max-width: 760px) {
+  .contact {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 380px) {
+  .fields {
+    grid-template-columns: 1fr;
+  }
+}

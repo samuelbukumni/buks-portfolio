@@ -1,46 +1,61 @@
+import styles from "./home.module.css";
+const layers = [
+  ["Application", "The product someone uses", "Next.js / product workflows"],
+  [
+    "Runtime + Linux",
+    "The environment that runs it",
+    "Processes / services / permissions",
+  ],
+  ["Networking", "The paths between services", "DNS / HTTPS / connectivity"],
+  [
+    "Cloud + infrastructure",
+    "The resources it depends on",
+    "Deployment / compute / configuration",
+  ],
+  [
+    "Security + reliability",
+    "The boundaries that keep it working",
+    "Access / failures / observability",
+  ],
+];
 export default function DirectionSection() {
   return (
-    <section className="direction-section" id="about" aria-labelledby="direction-title">
-      <div className="direction-intro">
-        <p className="section-kicker">Current direction</p>
-        <h2 id="direction-title">Where is Samuel heading?</h2>
-      </div>
-
-      <div className="direction-body">
-        <p className="direction-lead">
-          Toward the layers that make software actually operate: operating
-          systems, servers, networks, deployment, infrastructure, security
-          boundaries, automation and the resources underneath applications.
+    <section
+      className={styles.systems}
+      id="systems"
+      aria-labelledby="systems-title"
+    >
+      <div>
+        <p className="section-index">07 / Engineering direction</p>
+        <h2 id="systems-title">
+          Under the
+          <br />
+          application.
+        </h2>
+        <p>
+          Shipping software keeps pulling me deeper into the stack. I’m learning
+          how the services underneath it run, connect and fail.
         </p>
-        <p className="direction-support">
-          A developing direction shaped by practical building and deployment,
-          systems experimentation, and hands-on practice through cloud learning
-          and security labs.
+        <p className={styles.systemNote}>
+          Project deployments · Linux Mint
+          <br />
+          AWS &amp; Google hands-on labs
+          <br />
+          Security fundamentals
         </p>
       </div>
-
-      <div className="direction-map" aria-label="Areas Samuel is developing">
-        <article>
-          <h3>Cloud</h3>
-          <p>Infrastructure, deployment, compute, storage, IAM, monitoring and reliability.</p>
-        </article>
-        <article>
-          <h3>Linux</h3>
-          <p>Operating-system fundamentals, processes, permissions, services and system inspection.</p>
-        </article>
-        <article>
-          <h3>Infrastructure</h3>
-          <p>How code becomes running services across environments, networks, databases and dependencies.</p>
-        </article>
-        <article>
-          <h3>Systems</h3>
-          <p>Resources, processes, servers and distributed components, and how those pieces interact.</p>
-        </article>
-        <article>
-          <h3>AI</h3>
-          <p>Orchestration, agents, model interaction, automation and local/cloud trade-offs.</p>
-        </article>
-      </div>
+      <ol className={styles.layers}>
+        {layers.map(([title, description, detail], index) => (
+          <li key={title}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </div>
+            <small>{detail}</small>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }

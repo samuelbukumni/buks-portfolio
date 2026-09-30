@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Fraunces, IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
+import Link from "next/link";
+import { Caveat, Source_Serif_4, IBM_Plex_Mono, Public_Sans } from "next/font/google";
+import SiteHeader from "./site-header";
+import RouteMemory from "./route-memory";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const display = Source_Serif_4({
   variable: "--font-display",
   subsets: ["latin"],
 });
 
-const spaceGrotesk = Space_Grotesk({
+const body = Public_Sans({
   variable: "--font-body",
   subsets: ["latin"],
 });
@@ -19,19 +22,43 @@ const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
 });
 
+const signature = Caveat({
+  variable: "--font-signature",
+  subsets: ["latin"],
+  weight: "500",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Buks Samuel — Tech Explorer",
+  title: {
+    default: "Buks Samuel — Software, Systems & Infrastructure",
+    template: "%s — Buks Samuel",
+  },
   description:
-    "The portfolio of Buks Samuel, an Information Systems student and Tech Explorer based in Nigeria.",
+    "Software projects and systems thinking by Buks Samuel, an Information Systems student at OAU, Nigeria. Building toward cloud infrastructure and AI evaluation research.",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: ReactNode }>) {
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${spaceGrotesk.variable} ${ibmPlexMono.variable}`}
+      className={`${display.variable} ${body.variable} ${ibmPlexMono.variable} ${signature.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
+        <RouteMemory />
+        <SiteHeader />
+        {children}
+        <footer className="site-footer">
+          <span>Buks Samuel</span>
+          <span>Built with intent. Still in progress.</span>
+          <Link href="/#contact">Get in touch →</Link>
+        </footer>
+      </body>
     </html>
   );
 }
