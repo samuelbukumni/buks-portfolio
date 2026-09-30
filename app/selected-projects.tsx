@@ -1,6 +1,7 @@
 import Link from "next/link";
 import MiddlemanArchitecture from "./middleman-architecture";
 import styles from "./projects.module.css";
+
 export default function SelectedProjects() {
   return (
     <div id="work" className={styles.work}>
@@ -10,7 +11,7 @@ export default function SelectedProjects() {
         aria-labelledby="middleman-title"
       >
         <div className={styles.projectTop}>
-          <p className="section-index">02 / Flagship build</p>
+          <p className="section-index">Flagship build</p>
           <span className="technical">In development · Nigeria</span>
         </div>
         <div className={styles.flagshipIntro}>
@@ -39,9 +40,9 @@ export default function SelectedProjects() {
         <MiddlemanArchitecture />
         <div className={styles.scope}>
           <p>
-            <strong>My work across the system</strong>Buyer and seller
-            workflows, authentication, database design, transaction lifecycle,
-            payments, review flows and deployment.
+            <strong>My work across the system</strong>
+            Buyer and seller workflows, authentication, database design,
+            transaction lifecycle, payments, review flows and deployment.
           </p>
           <p>
             <strong>Built with</strong>
@@ -53,44 +54,26 @@ export default function SelectedProjects() {
           </p>
         </div>
       </section>
+
       <section
         className={styles.experiments}
         aria-labelledby="experiments-title"
       >
         <div className={styles.experimentHeader}>
-          <p className="section-index">03 / System experiments</p>
+          <p className="section-index">System experiments</p>
           <h2 id="experiments-title">
             Who decides?
             <br />
             Who checks?
           </h2>
           <p>
-            Two experiments in how intelligent systems
-            <br />
-            coordinate, act and disagree.
+            Two experiments in how intelligent systems coordinate, act and
+            disagree.
           </p>
         </div>
+
+        {/* SAMUEL: Visual on left, Text on right (visual / text) */}
         <article className={styles.samuel} id="project-samuel">
-          <div className={styles.experimentCopy}>
-            <span className="technical">
-              01 / Agent architecture · Experimental
-            </span>
-            <h3>SAMUEL</h3>
-            <p className={styles.expansion}>
-              Smart Autonomous Multifunctional Utility Engine for Learning
-            </p>
-            <p>
-              A personal assistant experiment with a Governor at the centre.
-              Tasks are routed through permissions and specialised agents, with
-              local tools and cloud models doing different jobs.
-            </p>
-            <Link className="text-link" href="/playground#samuel">
-              Try the Governor demonstration →
-            </Link>
-            <p className={styles.stack}>
-              Python / permissions / hybrid local + cloud
-            </p>
-          </div>
           <div
             className={styles.governor}
             role="img"
@@ -109,11 +92,33 @@ export default function SelectedProjects() {
             </div>
             <p>One place to decide what may happen.</p>
           </div>
+          <div className={styles.experimentCopy}>
+            <span className="technical">
+              Agent architecture · Experimental
+            </span>
+            <h3>SAMUEL</h3>
+            <p className={styles.expansion}>
+              Smart Autonomous Multifunctional Utility Engine for Learning
+            </p>
+            <p>
+              A personal assistant experiment with a Governor at the centre.
+              Tasks are routed through permissions and specialised agents, with
+              local tools and cloud models doing different jobs.
+            </p>
+            <Link className="text-link" href="/playground#samuel">
+              Try the Governor demonstration →
+            </Link>
+            <p className={styles.stack}>
+              Python / permissions / hybrid local + cloud
+            </p>
+          </div>
         </article>
+
+        {/* SYNAPSE: Text on left, Visual on right (text / visual) */}
         <article className={styles.synapse} id="project-synapse">
           <div className={styles.experimentCopy}>
             <span className="technical">
-              02 / Multi-agent behaviour · Experimental
+              Multi-agent behaviour · Experimental
             </span>
             <h3>SYNAPSE</h3>
             <p>
@@ -154,15 +159,15 @@ export default function SelectedProjects() {
           </div>
         </article>
       </section>
+
       <section className={styles.lab} aria-labelledby="lab-title">
         <div>
-          <p className="section-index">04 / More from the lab</p>
+          <p className="section-index">More from the lab</p>
           <h2 id="lab-title">Working surfaces</h2>
           <p>Small, inspectable demonstrations from this portfolio.</p>
         </div>
         <div className={styles.labRows}>
           <Link href="/playground#terminal">
-            <span>01</span>
             <div>
               <h3>Portfolio terminal</h3>
               <p>A simulated shell into my work and current focus.</p>
@@ -171,7 +176,6 @@ export default function SelectedProjects() {
             <span aria-hidden="true">→</span>
           </Link>
           <Link href="/playground#systems">
-            <span>02</span>
             <div>
               <h3>Request lifecycle</h3>
               <p>Step through identity, services and data boundaries.</p>

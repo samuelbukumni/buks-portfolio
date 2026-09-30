@@ -381,13 +381,10 @@
 }
 .labRows a {
   display: grid;
-  grid-template-columns: 1.5rem 1fr auto;
+  grid-template-columns: 1fr auto;
   gap: 1rem;
   padding: 1.3rem 0;
   border-bottom: 1px solid var(--border);
-}
-.labRows a > span {
-  font: 0.7rem/1.6 var(--font-mono);
 }
 .labRows h3 {
   font-size: 0.95rem;
@@ -478,6 +475,9 @@
   .samuel,
   .synapse {
     padding: 1.5rem;
+  }
+  .samuel .experimentCopy {
+    order: -1;
   }
   .governor,
   .critique {
