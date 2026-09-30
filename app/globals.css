@@ -21,6 +21,7 @@ body {
   min-height: min(78svh, 52rem);
   font-family: var(--font-body);
   margin: 0;
+  overflow-x: hidden;
 }
 
 a {
@@ -280,11 +281,50 @@ a:focus-visible {
   gap: 0.45rem;
 }
 
-.hero-focus strong {
+.hero-interests {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
   font-family: var(--font-body);
   font-size: 0.96rem;
   font-weight: 500;
   line-height: 1.6;
+}
+
+.hero-interest-item {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(100vw);
+}
+
+.hero-footer.is-visible .hero-interest-item {
+  animation: interest-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--interest-index, 0) * 0.28s);
+}
+
+.hero-return .hero-interest-item {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+@keyframes interest-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(100vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-interest-sep {
+  color: var(--accent-warm);
+  margin: 0 0.35em;
+  user-select: none;
 }
 
 .hero-label {
@@ -363,6 +403,12 @@ a:focus-visible {
     opacity: 1;
     visibility: visible;
     transform: none;
+  }
+
+  .hero-interest-item {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
   }
 
   .hero-question > span[aria-hidden="true"]:first-child { display: none; }

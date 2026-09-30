@@ -228,7 +228,18 @@ export default function HomepageNarrative() {
           <div className={`hero-footer ${hasReached("direction") ? "is-visible" : ""}`}>
             <div className="hero-focus">
               <span className="hero-label">Technical direction</span>
-              <strong>Exploring <span className="hero-route-arrow" aria-hidden="true">→</span> Cloud · Linux · Infrastructure · Systems · AI</strong>
+              <div className="hero-interests" aria-label="Interests">
+                {["Software", "Systems", "Linux", "Cloud", "Security", "AI Research"].map((interest, index) => (
+                  <span
+                    key={interest}
+                    className="hero-interest-item"
+                    style={{ "--interest-index": index } as React.CSSProperties}
+                  >
+                    {interest}
+                    {index < 5 && <span className="hero-interest-sep" aria-hidden="true"> · </span>}
+                  </span>
+                ))}
+              </div>
             </div>
             <div className={`hero-actions ${isResolved ? "is-visible" : ""}`}>
               <a href="#work">View Projects <span aria-hidden="true">↓</span></a>
