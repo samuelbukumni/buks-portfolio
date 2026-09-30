@@ -4,7 +4,7 @@ export default function PlaygroundPreview() {
   return (
     <section className={styles.explorer} aria-labelledby="explorer-title">
       <div className={styles.explorerCopy}>
-        <p className="section-index">08 / Another way in</p>
+        <p className="section-index">Another way in</p>
         <h2 id="explorer-title">
           Less reading.
           <br />

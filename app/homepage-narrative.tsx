@@ -3,6 +3,7 @@ import SelectedProjects from "./selected-projects";
 import DirectionSection from "./direction-section";
 import PlaygroundPreview from "./playground-preview";
 import Contact from "./contact";
+import CredentialsCommunity from "./credentials-community";
 import { buildLog } from "../data/build-log";
 import styles from "./home.module.css";
 import HomeHero from "./home-hero";
@@ -33,11 +34,13 @@ export default function HomepageNarrative() {
           <a href="#research">AI evaluation &amp; safety ↓</a>
         </div>
       </section>
+      <DirectionSection />
       <SelectedProjects />
+      <CredentialsCommunity />
       <section className={styles.log} aria-labelledby="log-title">
         <div className={styles.sectionHeading}>
           <div>
-            <p className="section-index">05 / Working notes</p>
+            <p className="section-index">Working notes</p>
             <h2 id="log-title">Build log</h2>
           </div>
           <p>
@@ -75,7 +78,7 @@ export default function HomepageNarrative() {
         aria-labelledby="research-title"
       >
         <div className={styles.researchIntro}>
-          <p className="section-index">06 / New research direction · 2026</p>
+          <p className="section-index">Research direction · 2026</p>
           <h2 id="research-title">
             When an AI gives an answer,
             <br />
@@ -132,7 +135,6 @@ export default function HomepageNarrative() {
           </p>
         </div>
       </section>
-      <DirectionSection />
       <PlaygroundPreview />
       <Contact />
     </main>

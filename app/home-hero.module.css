@@ -52,17 +52,17 @@
   z-index: 2;
 }
 .copy h1 {
-  max-width: 10ch;
+  max-width: 14ch;
   margin: 0;
-  font: 600 clamp(3.3rem, 7vw, 7rem)/0.99 var(--font-body), sans-serif;
-  letter-spacing: -0.075em;
+  font: 600 clamp(2.8rem, 5.8vw, 5.8rem)/1.02 var(--font-body), sans-serif;
+  letter-spacing: -0.065em;
 }
 .copy p {
-  max-width: 27ch;
+  max-width: 32ch;
   margin: 1.35rem 0 0;
-  font-size: clamp(1.15rem, 2.1vw, 1.65rem);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
   line-height: 1.38;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
 }
 .portrait {
   align-self: end;
@@ -85,11 +85,11 @@
 }
 .interestSection {
   display: grid;
-  grid-template-columns: minmax(170px, 0.36fr) 1fr;
+  grid-template-columns: minmax(170px, 0.32fr) 1fr;
   align-items: center;
-  gap: clamp(1rem, 3vw, 3rem);
+  gap: clamp(1rem, 2.5vw, 2.5rem);
   border-top: 1px solid var(--border);
-  padding: 0.55rem 0;
+  padding: 0.85rem 0;
   position: relative;
   z-index: 2;
 }
@@ -97,57 +97,50 @@
   margin: 0;
   font-size: 0.82rem;
   color: var(--muted);
+  font-weight: 500;
 }
 .interestLane {
-  height: 4.2rem;
   overflow: hidden;
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 .laneRule {
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  background: var(--border);
-  top: 50%;
-  left: 0;
+  display: none;
 }
 .laneEnd {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--indigo);
-  left: 0;
-  top: calc(50% - 2px);
+  display: none;
 }
 .interestLane ol {
   list-style: none;
-  padding: 0 0 0 1.15rem;
+  padding: 0;
   margin: 0;
   width: 100%;
-  position: relative;
-  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
 }
 .interestLane li {
-  position: absolute;
-  top: 50%;
-  left: 1.15rem;
-  transform: translateY(-50%);
-  visibility: hidden;
+  position: relative;
   white-space: nowrap;
-  font: 600 clamp(1.9rem, 4vw, 3.4rem)/1 var(--font-body), sans-serif;
-  letter-spacing: -0.065em;
+  font: 600 clamp(1.15rem, 2.2vw, 1.85rem)/1.2 var(--font-body), sans-serif;
+  letter-spacing: -0.04em;
+  will-change: transform, opacity;
 }
-.interestLane li span { background: var(--paper); padding: 0 0.18em; }
+.interestLane li span {
+  display: inline-block;
+  background: var(--paper);
+  padding: 0.15em 0.4em;
+  border-radius: 2px;
+}
 .interestLane li:nth-child(1) { color: #a94b29; }
 .interestLane li:nth-child(2) { color: var(--indigo); }
 .interestLane li:nth-child(3) { color: #47613a; }
 .interestLane li:nth-child(4) { color: #285c9c; }
 .interestLane li:nth-child(5) { color: #24533b; }
 .interestLane li:nth-child(6) { color: #713b60; }
-.interestLane li:last-child { visibility: visible; }
 .continue {
   justify-self: start;
   min-height: 44px;
@@ -177,17 +170,23 @@
 :global(html[data-home-intro="reveal"]) .interestSection { animation-delay: 250ms; }
 :global(html[data-home-intro="reveal"]) .continue { animation-delay: 700ms; }
 @keyframes appear { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: none; } }
-:global(html[data-home-intro="reveal"]) .interestLane li { visibility: visible; opacity: 0; animation: pass 1.12s ease-in-out calc(300ms + var(--step) * 1.05s) both; }
-:global(html[data-home-intro="reveal"]) .interestLane li:last-child { animation-name: arrive; }
-@keyframes pass {
-  0% { opacity: 0; transform: translate(100vw, -50%); }
-  28% { opacity: 1; transform: translate(0, -50%); }
-  67% { opacity: 1; transform: translate(0, -50%); }
-  100% { opacity: 0; transform: translate(-45vw, -50%); }
+:global(html[data-home-intro="reveal"]) .cursor,
+:global(html[data-home-intro="complete"]) .cursor {
+  display: none !important;
 }
-@keyframes arrive {
-  0% { opacity: 0; transform: translate(100vw, -50%); }
-  30%, 100% { opacity: 1; transform: translate(0, -50%); }
+
+:global(html[data-home-intro="reveal"]) .interestLane li {
+  animation: slideInFromRight 620ms cubic-bezier(0.16, 1, 0.3, 1) calc(150ms + var(--step) * 220ms) both;
+}
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100vw);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @media (max-width: 700px) {
@@ -209,10 +208,11 @@
     align-self: center;
     margin-top: 1rem;
   }
-  .interestSection { display: block; padding: 0.55rem 0 0; }
+  .interestSection { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 0.75rem 0; }
   .interestLabel { font-size: 0.76rem; }
-  .interestLane { height: 3.9rem; }
-  .interestLane li { font-size: clamp(1.9rem, 8vw, 2.7rem); }
+  .interestLane { height: auto; }
+  .interestLane ol { gap: 0.4rem 0.65rem; }
+  .interestLane li { font-size: clamp(1.05rem, 4.5vw, 1.45rem); }
   .continue { margin-top: 0.25rem; }
 }
 @media (max-width: 360px) {
@@ -225,7 +225,7 @@
   .typedQuestion { display: none; }
   .interestLane { height: auto; min-height: 4.2rem; overflow: visible; }
   .interestLane ol { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; padding: 0.65rem 0; height: auto; }
-  .interestLane li { position: static; visibility: visible; transform: none; font-size: 1rem; letter-spacing: -0.02em; }
-  .interestLane li:not(:last-child)::after { content: "·"; color: var(--muted); margin-left: 1rem; }
+  .interestLane li { position: static; visibility: visible; transform: none !important; animation: none !important; opacity: 1 !important; font-size: 1rem; letter-spacing: -0.02em; }
+  :global(html[data-home-intro="reveal"]) .interestLane li { animation: none !important; opacity: 1 !important; transform: none !important; }
   .laneRule, .laneEnd { display: none; }
 }

@@ -22,7 +22,8 @@ type TerminalCommand =
   | "pwd"
   | "echo"
   | "explore"
-  | "coffee";
+  | "coffee"
+  | "curious";
 
 type TerminalEntry = {
   type: "command" | "output" | "error";
@@ -160,6 +161,8 @@ const terminalHistory: Record<TerminalCommand, string> = {
   explore:
     "Open the systems map, terminal or model critique flow to inspect my work.",
   coffee: "command not found. Try malt.",
+  curious:
+    "samuel@portfolio:~$ still curious?\n\nKeep pulling on the threads. The best way to learn a system is to build it, break it, and see what breaks with it.\nEmail: samuelbukumni@gmail.com",
 };
 
 const portfolioFiles: Record<string, string> = {
@@ -735,9 +738,12 @@ export default function PlaygroundExperience() {
     )
       ? terminalHistory[baseCommand as TerminalCommand]
       : undefined;
+    if (normalized === "still curious?" || normalized === "curious") {
+      outputText = "samuel@portfolio:~$ still curious?\n\nKeep pulling on the threads. The best way to learn a system is to build it, break it, and see what breaks with it.\nEmail: samuelbukumni@gmail.com";
+    }
     if (baseCommand === "help")
       outputText +=
-        "\n\nPortfolio files:\nls projects/\nls research/\ncat projects/middleman.md\ncat projects/samuel.md\ncat projects/synapse.md\ncat research/ai-safety.md\ncat now.txt\nsystemctl status samuel\n\nThis is a simulation. No shell commands are executed.";
+        "\n\nPortfolio files:\nls projects/\nls research/\ncat projects/middleman.md\ncat projects/samuel.md\ncat projects/synapse.md\ncat research/ai-safety.md\ncat now.txt\nsystemctl status samuel\ncurious\n\nThis is a simulation. No shell commands are executed.";
     if (baseCommand === "ls" && rest.length) {
       const directory = rest.join(" ").replace(/\/$/, "");
       outputText =
@@ -882,7 +888,7 @@ export default function PlaygroundExperience() {
         <label className="sr-only" htmlFor="playground-command">
           Terminal command
         </label>
-        <span className="prompt-symbol">$</span>
+        <span className="prompt-symbol">samuel@portfolio:~$</span>
         <input
           id="playground-command"
           ref={inputRef}

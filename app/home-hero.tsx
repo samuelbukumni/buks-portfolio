@@ -5,7 +5,7 @@ import { useEffect, useState, type CSSProperties } from "react";
 import styles from "./home-hero.module.css";
 
 const question = "So, what does he actually do?";
-const interests = ["Products", "Systems", "Linux", "Cloud", "Security", "AI Research"];
+const interests = ["Software", "Systems", "Linux", "Cloud", "Security", "AI Research"];
 
 export default function HomeHero() {
   const [typed, setTyped] = useState("");
@@ -71,8 +71,8 @@ export default function HomeHero() {
       </div>
       <div className={styles.main}>
         <div className={styles.copy}>
-          <h1 id="hero-title">I build software.</h1>
-          <p>And I usually end up wanting to know what’s happening underneath it.</p>
+          <h1 id="hero-title">I explore, build and study digital systems.</h1>
+          <p>From software and infrastructure to security, research and AI.</p>
         </div>
         <div className={styles.portrait}>
           <Image

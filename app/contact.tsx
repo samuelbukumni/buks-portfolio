@@ -55,7 +55,7 @@ export default function Contact() {
       aria-labelledby="contact-title"
     >
       <div>
-        <p className="section-index">09 / Get in touch</p>
+        <p className="section-index">Get in touch</p>
         <h2 id="contact-title">Have something worth working on?</h2>
         <p>
           Products, technical work, research conversations, or a question we
