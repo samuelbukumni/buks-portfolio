@@ -9,8 +9,8 @@
   --hero-index-active: #102449;
   --progress: 0%;
   width: 100%;
-  min-height: min(790px, calc(100svh - 68px));
-  padding: clamp(2.6rem, 4.6vw, 4.4rem) var(--gutter) 1.45rem;
+  min-height: min(860px, calc(100svh - 68px));
+  padding: clamp(3.6rem, 6vw, 5.8rem) var(--gutter) 1.7rem;
   position: relative;
   overflow: clip;
   isolation: isolate;
@@ -57,21 +57,21 @@
   z-index: -2;
   left: 48%;
   background:
-    radial-gradient(circle at 62% 42%, rgba(105, 139, 255, 0.13), transparent 31%),
-    radial-gradient(circle at 69% 69%, rgba(246, 154, 65, 0.11), transparent 25%);
+    radial-gradient(circle at 67% 40%, rgba(92, 127, 255, 0.17), transparent 34%),
+    radial-gradient(circle at 72% 70%, rgba(246, 154, 65, 0.14), transparent 28%);
   filter: blur(14px);
 }
 
 .main {
-  min-height: clamp(555px, 64vh, 635px);
+  min-height: clamp(610px, 69vh, 700px);
   position: relative;
 }
 
 .copy {
-  width: min(46vw, 690px);
+  width: min(43vw, 660px);
   position: relative;
   z-index: 6;
-  padding-top: clamp(1rem, 3.4vh, 2.5rem);
+  padding-top: clamp(1.5rem, 4.5vh, 3.2rem);
 }
 
 .opening {
@@ -121,7 +121,7 @@
   max-width: 13.8ch;
   margin: 0;
   color: var(--hero-ink);
-  font: 700 clamp(3.1rem, 5.2vw, 5.25rem)/0.99 var(--font-body), sans-serif;
+  font: 700 clamp(3.2rem, 5vw, 5rem)/0.99 var(--font-body), sans-serif;
   letter-spacing: -0.067em;
   text-wrap: balance;
 }
@@ -147,10 +147,10 @@
 }
 
 .support {
-  max-width: 43ch;
-  margin: 1.35rem 0 0;
+  max-width: 47ch;
+  margin: 1.55rem 0 0;
   color: var(--hero-muted);
-  font: 450 clamp(1rem, 1.42vw, 1.18rem)/1.52 var(--font-mono), monospace;
+  font: 450 clamp(1rem, 1.34vw, 1.14rem)/1.55 var(--font-mono), monospace;
   letter-spacing: -0.018em;
 }
 
@@ -196,12 +196,12 @@
 
 .systemMap {
   position: absolute;
-  right: clamp(0rem, 1.2vw, 1.5rem);
-  top: 1%;
-  width: min(57vw, 830px);
-  height: min(57vw, 585px);
-  max-height: 585px;
-  min-height: 490px;
+  right: clamp(-1rem, 0vw, 0rem);
+  top: -2%;
+  width: min(61vw, 920px);
+  height: min(59vw, 650px);
+  max-height: 650px;
+  min-height: 540px;
 }
 
 .systemLines {
@@ -228,27 +228,64 @@
 
 .systemNode {
   position: absolute;
-  display: grid;
-  grid-template-columns: auto;
-  gap: 0.05rem;
-  min-width: 88px;
+  display: flex;
+  align-items: center;
+  gap: 0.72rem;
+  min-width: 150px;
   padding-left: 0.9rem;
-  color: rgba(58, 79, 110, 0.56);
+  color: rgba(45, 68, 103, 0.62);
   font-family: var(--font-mono), monospace;
   line-height: 1.34;
   transition: color 300ms ease-out, opacity 300ms ease-out, transform 300ms ease-out;
 }
 
+.nodeCopy {
+  display: grid;
+  gap: 0.03rem;
+}
+
 .systemNode strong {
   color: currentColor;
   margin-bottom: 0.18rem;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   letter-spacing: 0.035em;
   text-transform: uppercase;
 }
 
-.systemNode > span:not(.nodeMarker) {
+.nodeCopy > span {
   font-size: 0.69rem;
+}
+
+.nodeIcon {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(65, 97, 146, 0.24);
+  background: rgba(248, 250, 252, 0.46);
+  color: currentColor;
+  backdrop-filter: blur(2px);
+}
+
+.nodeIcon svg,
+.nodeIcon img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.nodeIcon svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nodeIcon svg circle {
+  fill: currentColor;
+  stroke: none;
 }
 
 .nodeMarker {
@@ -275,28 +312,28 @@
 }
 
 .nodeCloud {
-  left: 19%;
-  top: 11%;
+  left: 24%;
+  top: 10%;
 }
 
 .nodeLinux {
-  left: 11%;
-  top: 40%;
+  left: 17%;
+  top: 39%;
 }
 
 .nodeSoftware {
-  left: 16%;
-  top: 72%;
+  left: 21%;
+  top: 70%;
 }
 
 .nodeSecurity {
   right: 0;
-  top: 29%;
+  top: 28%;
 }
 
 .nodeAi {
-  right: 1%;
-  top: 70%;
+  right: 0;
+  top: 69%;
 }
 
 .portrait {
@@ -304,9 +341,9 @@
   --portrait-y: 0px;
   --portrait-r: 0deg;
   position: absolute;
-  right: clamp(5rem, 8vw, 9rem);
-  top: 10%;
-  width: clamp(285px, 25vw, 385px);
+  right: clamp(6.5rem, 10vw, 11rem);
+  top: 8%;
+  width: clamp(300px, 26vw, 405px);
   aspect-ratio: 0.78;
   border: 2px solid transparent;
   background:
@@ -341,7 +378,7 @@
   object-fit: cover;
   object-position: center 2%;
   border-radius: inherit;
-  filter: contrast(1.045) brightness(1.02) saturate(0.98);
+  filter: brightness(1.035) contrast(1.035) saturate(0.94);
 }
 
 .index {
@@ -590,7 +627,7 @@
 
 @media (max-width: 1180px) {
   .copy {
-    width: min(48vw, 620px);
+    width: min(45vw, 620px);
   }
 
   .copy h1 {
@@ -599,13 +636,13 @@
   }
 
   .systemMap {
-    width: 58vw;
-    right: -2.5rem;
+    width: 61vw;
+    right: -3.5rem;
   }
 
   .portrait {
-    right: 3rem;
-    width: clamp(255px, 24vw, 330px);
+    right: 4.5rem;
+    width: clamp(270px, 25vw, 345px);
   }
 }
 
