@@ -16,57 +16,41 @@ const focuses = [
 
 type FocusId = (typeof focuses)[number]["id"];
 
-function FocusEmblem({ focus }: { focus: FocusId }) {
-  if (focus === "software") {
-    return (
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <path d="M25 17 11 32l14 15M39 17l14 15-14 15M36 12 28 52" />
-      </svg>
-    );
-  }
+const focusVisuals: Record<FocusId, { src: string; alt: string; kind?: "tux" }> = {
+  software: {
+    src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Laptop_coding_programs_(Unsplash).jpg",
+    alt: "A real laptop coding workspace",
+  },
+  infrastructure: {
+    src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/UPS_Power_Management_Module,_racks_with_network_cabling_in_NERSC_data_center.jpg",
+    alt: "Real data-center infrastructure and server racks",
+  },
+  linux: {
+    src: "/hero/tux.svg",
+    alt: "Tux, the Linux mascot",
+    kind: "tux",
+  },
+  security: {
+    src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Locked_computer_laptop.jpg",
+    alt: "A real laptop secured with a physical lock",
+  },
+  ai: {
+    src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/GPU_workstation_lid_off.webp",
+    alt: "A real GPU workstation used for compute workloads",
+  },
+};
 
-  if (focus === "infrastructure") {
-    return (
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <rect x="16" y="12" width="32" height="12" rx="2" />
-        <rect x="16" y="27" width="32" height="12" rx="2" />
-        <rect x="16" y="42" width="32" height="10" rx="2" />
-        <path d="M21 18h1M21 33h1M21 47h1M32 24v3M32 39v3" />
-      </svg>
-    );
-  }
-
-  if (focus === "linux") {
-    // Tux artwork is a real Linux mascot asset, not an AI-generated approximation.
-    return (
-      <Image
-        src="/hero/tux.svg"
-        alt=""
-        width={150}
-        height={184}
-        className={styles.tuxMark}
-      />
-    );
-  }
-
-  if (focus === "security") {
-    return (
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <rect x="16" y="28" width="32" height="24" rx="4" />
-        <path d="M23 28v-7a9 9 0 0 1 18 0v7M32 36v8" />
-        <circle cx="32" cy="35" r="2" className={styles.emblemFill} />
-      </svg>
-    );
-  }
-
+function FocusVisual({ focus }: { focus: FocusId }) {
+  const visual = focusVisuals[focus];
   return (
-    <svg viewBox="0 0 64 64" aria-hidden="true">
-      <circle cx="15" cy="32" r="5" />
-      <circle cx="32" cy="15" r="5" />
-      <circle cx="49" cy="27" r="5" />
-      <circle cx="40" cy="49" r="5" />
-      <path d="m19 29 9-10M36 17l9 7M45 31l-4 13M35 46 19 35M20 32h24" />
-    </svg>
+    <img
+      src={visual.src}
+      alt={visual.alt}
+      className={visual.kind === "tux" ? styles.tuxVisual : styles.facePhoto}
+      loading={focus === "linux" ? "eager" : "lazy"}
+      decoding="async"
+      referrerPolicy="no-referrer"
+    />
   );
 }
 
@@ -277,24 +261,20 @@ export default function HomeHero() {
         </div>
 
         <div className={styles.visual}>
-          <div className={styles.cube} aria-hidden="true">
-            <Image
-              src="/hero/hero-cube.png"
-              alt=""
-              fill
-              sizes="(max-width: 700px) 36vw, (max-width: 1280px) 20vw, 270px"
-              className={styles.cubeImage}
-            />
-            <div className={styles.emblems}>
-              {focuses.map((focus, index) => (
-                <span
-                  key={focus.id}
-                  className={styles.emblem}
-                  data-active={activeFocus === index ? "true" : "false"}
-                >
-                  <FocusEmblem focus={focus.id} />
-                </span>
-              ))}
+          <div className={styles.cube} aria-label={`Current focus: ${focuses[activeFocus].label}`}>
+            <div key={activeFocus} className={styles.cubeTurn}>
+              <Image
+                src="/hero/hero-cube.png"
+                alt=""
+                fill
+                sizes="(max-width: 700px) 42vw, (max-width: 1280px) 21vw, 300px"
+                className={styles.cubeImage}
+                priority
+              />
+              <div className={styles.faceWindow}>
+                <FocusVisual focus={focuses[activeFocus].id} />
+              </div>
+              <div className={styles.glassSheen} aria-hidden="true" />
             </div>
           </div>
 
