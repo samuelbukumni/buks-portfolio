@@ -1,8 +1,12 @@
 import Link from "next/link";
-import MiddlemanArchitecture from "./middleman-architecture";
+import Image from "next/image";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import styles from "./projects.module.css";
 
 export default function SelectedProjects() {
+  const hasProductImage = existsSync(join(process.cwd(), "public", "images", "middleman-product.png"));
+
   return (
     <div id="work" className={styles.work}>
       <section
@@ -31,28 +35,44 @@ export default function SelectedProjects() {
               delivering and never getting paid.
             </p>
             <p>
-              I’m building a Nigeria-focused escrow-backed marketplace to give
-              digital products and services a structured path from payment to
-              settlement.
+              I’m building a Nigeria-focused marketplace for digital products
+              and services.
             </p>
           </div>
         </div>
-        <MiddlemanArchitecture />
-        <div className={styles.scope}>
-          <p>
-            <strong>My work across the system</strong>
-            Buyer and seller workflows, authentication, database design,
-            transaction lifecycle, payments, review flows and deployment.
-          </p>
-          <p>
-            <strong>Built with</strong>
-            <span className="technical">
-              Next.js · TypeScript · Supabase
-              <br />
-              PostgreSQL · Vercel
-            </span>
-          </p>
+        <div className={styles.productPreview}>
+          {hasProductImage ? (
+            <Image
+              src="/images/middleman-product.png"
+              alt="The Middleman product interface"
+              fill
+              sizes="(max-width: 1380px) 90vw, 1236px"
+              className={styles.productImage}
+            />
+          ) : (
+            <div className={styles.productPlaceholder}>
+              <p>Middleman product preview</p>
+              <span>Screenshot coming soon</span>
+            </div>
+          )}
         </div>
+        <dl className={styles.productDetails}>
+          <div>
+            <dt>Built with</dt>
+            <dd>Next.js · TypeScript · Supabase · PostgreSQL</dd>
+          </div>
+          <div>
+            <dt>Deployment</dt>
+            <dd>Vercel</dd>
+          </div>
+          <div>
+            <dt>Status</dt>
+            <dd>In development</dd>
+          </div>
+        </dl>
+        <a className={`text-link ${styles.productLink}`} href="https://themiddleman.com.ng" target="_blank" rel="noreferrer">
+          Visit The Middleman ↗
+        </a>
       </section>
 
       <section

@@ -1,3 +1,18 @@
+/* One post-hero heading and link system; the hero keeps its existing styles. */
+.homepage { --section-heading-size: clamp(1.75rem, 3vw, 2.5rem); }
+.homepage section h2 {
+  font: 700 var(--section-heading-size)/1.12 var(--font-body), sans-serif;
+  letter-spacing: -0.035em;
+}
+.homepage section h3 { font-family: var(--font-body), sans-serif; font-weight: 600; }
+.homepage :global(#project-middleman) h2 + p {
+  font: 400 clamp(1.1rem, 1.8vw, 1.4rem)/1.5 var(--font-body), sans-serif;
+}
+.homepage section:not([data-intro]) :global(.text-link) {
+  border-bottom: 0;
+  font-size: 0.95rem;
+}
+
 .now {
   background: var(--indigo);
   color: var(--paper);

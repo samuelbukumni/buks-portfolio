@@ -31,11 +31,11 @@ const signature = Caveat({
 
 export const metadata: Metadata = {
   title: {
-    default: "Buks Samuel — Software, Systems & Infrastructure",
+    default: "Buks Samuel — Tech Explorer",
     template: "%s — Buks Samuel",
   },
   description:
-    "Software projects and systems thinking by Buks Samuel, an Information Systems student at OAU, Nigeria. Building toward cloud infrastructure and AI evaluation research.",
+    "Tech Explorer building and investigating digital systems across software, infrastructure, Linux, security and AI.",
 };
 
 export default function RootLayout({

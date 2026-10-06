@@ -1,40 +1,18 @@
 import Link from "next/link";
 import SelectedProjects from "./selected-projects";
-import DirectionSection from "./direction-section";
 import PlaygroundPreview from "./playground-preview";
 import Contact from "./contact";
 import CredentialsCommunity from "./credentials-community";
 import { buildLog } from "../data/build-log";
 import styles from "./home.module.css";
 import HomeHero from "./home-hero";
+import EvidenceStrip from "./evidence-strip";
 
 export default function HomepageNarrative() {
   return (
-    <main id="main">
-      <script dangerouslySetInnerHTML={{ __html: `try{if(!sessionStorage.getItem('samuel-home-intro-complete')&&scrollY<40&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.dataset.homeIntro='play';setTimeout(function(){if(['play','typing','reveal'].includes(document.documentElement.dataset.homeIntro)){document.documentElement.dataset.homeIntro='complete'}},12000)}}catch(e){}` }} />
+    <main id="main" className={styles.homepage}>
       <HomeHero />
-      <section
-        className={styles.now}
-        aria-label="Current focus, September 2026"
-      >
-        <div className={styles.nowDate}>
-          <span className={styles.dot} /> Now{" "}
-          <time dateTime="2026-09">September 2026</time>
-        </div>
-        <div>
-          <span>Building</span>
-          <a href="#project-middleman">The Middleman ↓</a>
-        </div>
-        <div>
-          <span>Learning</span>
-          <a href="#systems">Cloud, Linux &amp; security ↓</a>
-        </div>
-        <div>
-          <span>Research direction</span>
-          <a href="#research">AI evaluation &amp; safety ↓</a>
-        </div>
-      </section>
-      <DirectionSection />
+      <EvidenceStrip />
       <SelectedProjects />
       <CredentialsCommunity />
       <section className={styles.log} aria-labelledby="log-title">

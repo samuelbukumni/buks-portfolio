@@ -1,29 +1,37 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./home-hero.module.css";
 
 const question = "So, what does he actually do?";
-const interests = ["Software", "Systems", "Linux", "Cloud", "Security", "AI Research"];
 
 export default function HomeHero() {
+  // The server and first client render both start pending. Browser preferences
+  // and session memory are read only after hydration.
+  const [intro, setIntro] = useState<"pending" | "play" | "typing" | "reveal" | "complete">("pending");
   const [typed, setTyped] = useState("");
+  const resetRequested = useRef(false);
+  const finishIntro = useCallback(() => {
+    setTyped(question);
+    setIntro("complete");
+    try { sessionStorage.setItem("samuel-home-intro-complete", "1"); } catch { /* storage can be unavailable */ }
+  }, []);
 
   useEffect(() => {
-    const root = document.documentElement;
-
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("resetIntro") === "1") {
+      // Keep the request through development Strict Mode's effect replay.
+      resetRequested.current = true;
+      try { sessionStorage.removeItem("samuel-home-intro-complete"); } catch { /* storage can be unavailable */ }
+      url.searchParams.delete("resetIntro");
+      window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
+    }
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let remembered = false;
+    try { remembered = sessionStorage.getItem("samuel-home-intro-complete") === "1"; } catch { /* storage can be unavailable */ }
     let timer: number | undefined;
     let index = 0;
-    let finished = false;
-    const finish = () => {
-      if (finished) return;
-      finished = true;
-      window.clearTimeout(timer);
-      setTyped(question);
-      root.dataset.homeIntro = "complete";
-      try { sessionStorage.setItem("samuel-home-intro-complete", "1"); } catch { /* storage can be unavailable */ }
-    };
     const typeNext = () => {
       index += 1;
       setTyped(question.slice(0, index));
@@ -31,75 +39,60 @@ export default function HomeHero() {
         const character = question[index - 1];
         timer = window.setTimeout(typeNext, /[,.?]/.test(character) ? 150 : 39 + (index % 4) * 10);
       } else {
-        timer = window.setTimeout(() => {
-          root.dataset.homeIntro = "reveal";
-          timer = window.setTimeout(finish, 6900);
-        }, 580);
+        timer = window.setTimeout(() => setIntro("reveal"), 580);
       }
     };
-    if (root.dataset.homeIntro === "play") {
+    if (!motion.matches && !remembered && (resetRequested.current || window.scrollY < 40)) {
+      setTyped("");
+      setIntro("play");
       timer = window.setTimeout(() => {
-        root.dataset.homeIntro = "typing";
+        setIntro("typing");
         typeNext();
       }, 720);
+    } else {
+      finishIntro();
     }
-
-    const footer = document.querySelector(".site-footer");
-    const observer = footer && new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) finish();
-    }, { threshold: 0.15 });
-    if (footer && observer) observer.observe(footer);
-    const onScroll = () => {
-      if (window.scrollY > window.innerHeight * 1.1) finish();
+    const onMotionChange = () => {
+      if (motion.matches) {
+        window.clearTimeout(timer);
+        finishIntro();
+      }
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
+    motion.addEventListener("change", onMotionChange);
     return () => {
       window.clearTimeout(timer);
-      observer?.disconnect();
-      window.removeEventListener("scroll", onScroll);
+      motion.removeEventListener("change", onMotionChange);
     };
-  }, []);
+  }, [finishIntro]);
 
   return (
-    <section className={styles.hero} aria-labelledby="hero-title">
-      <div className={styles.opening}>
-        <p className={styles.found}>You found Samuel.</p>
-        <p className={styles.question}>
-          <span className={styles.fullQuestion}>{question}</span>
-          <span className={styles.typedQuestion} aria-hidden="true">{typed}<span className={styles.cursor} /></span>
-        </p>
-      </div>
+    <section className={styles.hero} data-intro={intro} aria-labelledby="hero-title">
       <div className={styles.main}>
         <div className={styles.copy}>
-          <h1 id="hero-title">I explore, build and study digital systems.</h1>
-          <p>From software and infrastructure to security, research and AI.</p>
+          <div className={styles.opening}>
+            <p className={styles.found}>You found Samuel.</p>
+            <p className={styles.question}>
+              <span className={styles.fullQuestion}>{question}</span>
+              <span className={styles.typedQuestion} aria-hidden="true">{typed}<span className={styles.cursor} /></span>
+            </p>
+          </div>
+          <h1 id="hero-title">I build and investigate digital systems.</h1>
+          <p>Software, Infrastructure, Linux, security and AI — different parts of the same curiosity.</p>
         </div>
-        <div className={styles.portrait}>
+        <div className={styles.portrait} onAnimationEnd={() => {
+          if (intro === "reveal") finishIntro();
+        }}>
           <Image
             src="/images/samuel-portrait-cutout.png"
             alt="Samuel smiling in a light shirt"
             width={1024}
             height={1536}
-            sizes="(max-width: 700px) 82vw, 38vw"
+            sizes="(max-width: 700px) 250px, (max-width: 1280px) 25vw, 320px"
             priority
           />
         </div>
       </div>
-      <div className={styles.interestSection}>
-        <p className={styles.interestLabel}>A few things I keep coming back to</p>
-        <div className={styles.interestLane}>
-          <span className={styles.laneRule} aria-hidden="true" />
-          <ol aria-label="Current technical interests">
-            {interests.map((interest, index) => (
-              <li key={interest} style={{ "--step": index } as CSSProperties}>
-                <span>{interest}</span>
-              </li>
-            ))}
-          </ol>
-          <span className={styles.laneEnd} aria-hidden="true" />
-        </div>
-      </div>
-      <a className={styles.continue} href="#work">See what I’ve been building</a>
+
     </section>
   );
 }
