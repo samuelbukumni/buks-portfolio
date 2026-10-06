@@ -27,39 +27,69 @@ const mapItems: Array<{
   id: FocusId;
   title: string;
   lines: [string, string, string];
+  icon: "server" | "linux" | "code" | "lock" | "nodes";
   className: string;
 }> = [
   {
     id: "infrastructure",
     title: "Cloud",
-    lines: ["deploy", "scale", "observe"],
+    lines: ["deploy", "scale", "monitor"],
+    icon: "server",
     className: styles.nodeCloud,
   },
   {
     id: "linux",
     title: "Linux",
     lines: ["configure", "automate", "optimize"],
+    icon: "linux",
     className: styles.nodeLinux,
   },
   {
     id: "software",
     title: "Software",
     lines: ["design", "build", "ship"],
+    icon: "code",
     className: styles.nodeSoftware,
   },
   {
     id: "security",
     title: "Security",
     lines: ["analyze", "harden", "protect"],
+    icon: "lock",
     className: styles.nodeSecurity,
   },
   {
     id: "ai",
     title: "AI",
     lines: ["research", "experiment", "apply"],
+    icon: "nodes",
     className: styles.nodeAi,
   },
 ];
+
+function NodeIcon({ type }: { type: "server" | "linux" | "code" | "lock" | "nodes" }) {
+  if (type === "linux") {
+    return (
+      <span className={styles.nodeIcon} aria-hidden="true">
+        <Image src="/images/linux-tux.svg" alt="" width={42} height={42} />
+      </span>
+    );
+  }
+
+  return (
+    <span className={styles.nodeIcon} aria-hidden="true">
+      <svg viewBox="0 0 48 48">
+        {type === "server" && <>
+          <rect x="9" y="9" width="30" height="8" rx="1" /><rect x="9" y="20" width="30" height="8" rx="1" /><rect x="9" y="31" width="30" height="8" rx="1" />
+          <circle cx="34" cy="13" r="1.3" /><circle cx="34" cy="24" r="1.3" /><circle cx="34" cy="35" r="1.3" />
+        </>}
+        {type === "code" && <><path d="M18 15 9 24l9 9" /><path d="m30 15 9 9-9 9" /><path d="m27 10-6 28" /></>}
+        {type === "lock" && <><rect x="11" y="21" width="26" height="20" rx="2" /><path d="M17 21v-6a7 7 0 0 1 14 0v6" /><circle cx="24" cy="30" r="2" /><path d="M24 32v4" /></>}
+        {type === "nodes" && <><circle cx="24" cy="24" r="4" /><circle cx="11" cy="13" r="3" /><circle cx="37" cy="12" r="3" /><circle cx="10" cy="36" r="3" /><circle cx="38" cy="36" r="3" /><path d="m14 15 7 6M34 14l-7 7M13 34l8-7M35 34l-8-7" /></>}
+      </svg>
+    </span>
+  );
+}
 
 function SystemMap({ activeFocus }: { activeFocus: number }) {
   const activeId = focuses[activeFocus].id;
@@ -93,10 +123,13 @@ function SystemMap({ activeFocus }: { activeFocus: number }) {
           data-active={activeId === item.id ? "true" : "false"}
         >
           <span className={styles.nodeMarker} />
-          <strong>{item.title}</strong>
-          <span>{item.lines[0]}</span>
-          <span>{item.lines[1]}</span>
-          <span>{item.lines[2]}</span>
+          <div className={styles.nodeCopy}>
+            <strong>{item.title}</strong>
+            <span>{item.lines[0]}</span>
+            <span>{item.lines[1]}</span>
+            <span>{item.lines[2]}</span>
+          </div>
+          <NodeIcon type={item.icon} />
         </div>
       ))}
     </div>
