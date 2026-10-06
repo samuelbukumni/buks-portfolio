@@ -29,6 +29,20 @@ const signature = Caveat({
   display: "swap",
 });
 
+const themeBoot = `(() => {
+  try {
+    const stored = localStorage.getItem("buks-theme");
+    const theme =
+      stored === "light" || stored === "dark"
+        ? stored
+        : window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+  } catch {}
+})();`;
+
 export const metadata: Metadata = {
   title: {
     default: "Buks Samuel — Tech Explorer",
@@ -44,8 +58,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${display.variable} ${body.variable} ${ibmPlexMono.variable} ${signature.variable}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBoot }} />
+      </head>
       <body>
         <a className="skip-link" href="#main">
           Skip to content
