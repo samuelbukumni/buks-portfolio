@@ -37,14 +37,15 @@ function FocusEmblem({ focus }: { focus: FocusId }) {
   }
 
   if (focus === "linux") {
+    // Tux artwork is a real Linux mascot asset, not an AI-generated approximation.
     return (
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <ellipse cx="32" cy="36" rx="15" ry="19" />
-        <circle cx="32" cy="21" r="11" />
-        <circle cx="28" cy="19" r="1.5" className={styles.emblemFill} />
-        <circle cx="36" cy="19" r="1.5" className={styles.emblemFill} />
-        <path d="m29 24 3 2 3-2M21 34c-5 4-7 9-7 13M43 34c5 4 7 9 7 13M24 53l-8 3M40 53l8 3" />
-      </svg>
+      <Image
+        src="/hero/tux.svg"
+        alt=""
+        width={150}
+        height={184}
+        className={styles.tuxMark}
+      />
     );
   }
 
