@@ -792,6 +792,12 @@
     transform: none !important;
   }
 
+  @media (max-width: 700px) {
+    .portrait {
+      transform: translateX(-50%) !important;
+    }
+  }
+
   .investigate::after {
     box-shadow: none;
   }
