@@ -1,0 +1,6 @@
+Linux Tux illustration (public/images/linux-tux.svg)
+Source: https://github.com/garrett/Tux/blob/master/tux.svg
+Original illustration: Larry Ewing, created in The GIMP.
+Vector redraw: Garrett LeSage; refinement: IFo Hancroft.
+License: CC0 1.0 / public domain as stated in the source repository.
+The Tux mascot is shown without modifications.
