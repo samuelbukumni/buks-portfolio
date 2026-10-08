@@ -351,6 +351,7 @@ right: 0; top: 70%; flex-direction: row-reverse;
 --portrait-x: 0px;
   --portrait-y: 0px;
   --portrait-r: 0deg;
+  --portrait-anchor: 0%;
   position: absolute;
   left: 38%;
   top: 11%;
@@ -365,7 +366,7 @@ right: 0; top: 70%; flex-direction: row-reverse;
   box-shadow:
     0 28px 78px rgba(58, 83, 152, 0.18),
     0 12px 35px rgba(29, 45, 75, 0.07);
-  transform: translate3d(var(--portrait-x), var(--portrait-y), 0) rotate(var(--portrait-r));
+  transform: translate3d(calc(var(--portrait-anchor) + var(--portrait-x)), var(--portrait-y), 0) rotate(var(--portrait-r));
   transition: transform 250ms ease-out, box-shadow 250ms ease-out;
   will-change: transform;
   z-index: 5;
@@ -539,11 +540,11 @@ right: 0; top: 70%; flex-direction: row-reverse;
 @keyframes appearPortrait {
   from {
     opacity: 0;
-    transform: translate3d(var(--portrait-x), calc(var(--portrait-y) + 14px), 0) rotate(var(--portrait-r));
+    transform: translate3d(calc(var(--portrait-anchor) + var(--portrait-x)), calc(var(--portrait-y) + 14px), 0) rotate(var(--portrait-r));
   }
   to {
     opacity: 1;
-    transform: translate3d(var(--portrait-x), var(--portrait-y), 0) rotate(var(--portrait-r));
+    transform: translate3d(calc(var(--portrait-anchor) + var(--portrait-x)), var(--portrait-y), 0) rotate(var(--portrait-r));
   }
 }
 
@@ -652,6 +653,7 @@ right: 0; top: 70%; flex-direction: row-reverse;
   .systemNode { gap: 0.5rem; }
   .nodeIcon { width: 52px; height: 52px; flex-basis: 52px; }
   .nodeIcon svg, .nodeIcon img { width: 35px; height: 35px; }
+  .nodeCloud { left: 10%; }
 }
 
 /* Tablet: give the illustration its own row instead of squeezing both columns. */
@@ -689,7 +691,7 @@ right: 0; top: 70%; flex-direction: row-reverse;
     left: 50%;
     top: 4%;
     width: clamp(260px, 33vw, 320px);
-    transform: translate3d(calc(-50% + var(--portrait-x)), var(--portrait-y), 0) rotate(var(--portrait-r));
+    --portrait-anchor: -50%;
   }
   .nodeCloud { left: 10%; top: 11%; }
   .nodeLinux { left: 3%; top: 39%; }
@@ -704,6 +706,11 @@ right: 0; top: 70%; flex-direction: row-reverse;
     background: linear-gradient(180deg, #09111c 0%, rgba(9,17,28,0.94) 28%, rgba(9,17,28,0.22) 60%, transparent 90%);
   }
   .index { padding-top: 1.1rem; }
+}
+
+@media (min-width: 701px) and (max-width: 800px) {
+  .nodeCloud, .nodeSoftware { left: 3%; }
+  .nodeLinux { left: 0; }
 }
 
 /* Mobile: all five genuine focus visuals remain visible, with no portrait overlap. */
@@ -846,7 +853,7 @@ right: 0; top: 70%; flex-direction: row-reverse;
     animation: none !important;
     transition: none !important;
   }
-  .portrait { transform: translateX(-50%) !important; }
+  .portrait { transform: translate3d(var(--portrait-anchor), 0, 0) !important; }
   .mapMotion { transform: none !important; }
   .investigate::after { box-shadow: none; }
 }
