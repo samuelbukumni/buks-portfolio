@@ -97,23 +97,30 @@ function SystemMap({ activeFocus }: { activeFocus: number }) {
   return (
     <div className={styles.systemMap} aria-hidden="true">
       <svg className={styles.systemLines} viewBox="0 0 760 560" preserveAspectRatio="none">
-        <path d="M108 126 H248 V88 H414 V172 H540" />
-        <path d="M42 274 H168 V216 H302 V328 H430" />
-        <path d="M76 426 H258 V372 H414 V448 H568" />
-        <path d="M454 108 H610 V240 H722" />
-        <path d="M470 392 H632 V314 H742" />
-        <path d="M286 88 V42 H610" />
-        <path d="M167 216 V164 H70" />
-        <path d="M414 448 V514 H644" />
-        <circle cx="108" cy="126" r="4" />
-        <circle cx="248" cy="88" r="4" />
-        <circle cx="414" cy="172" r="4" />
-        <circle cx="168" cy="216" r="4" />
-        <circle cx="302" cy="328" r="4" />
-        <circle cx="258" cy="372" r="4" />
-        <circle cx="414" cy="448" r="4" />
-        <circle cx="610" cy="240" r="4" />
-        <circle cx="632" cy="314" r="4" />
+        <path d="M88 112 H208 V82 H374 V158 H512" />
+        <path d="M34 274 H162 V224 H286 V314 H414" />
+        <path d="M74 446 H238 V382 H392 V470 H548" />
+        <path d="M466 104 H612 V242 H730" />
+        <path d="M472 408 H636 V334 H744" />
+        <path d="M270 82 V38 H620" />
+        <path d="M162 224 V166 H58" />
+        <path d="M392 470 V522 H642" />
+        <path d="M38 358 H106 V330 H206" />
+        <path d="M536 68 H672 V148 H752" />
+        <path d="M576 548 V492 H708 V456 H754" />
+        <path d="M230 560 V516 H334" />
+        <circle cx="88" cy="112" r="3.5" />
+        <circle cx="208" cy="82" r="3.5" />
+        <circle cx="374" cy="158" r="3.5" />
+        <circle cx="162" cy="224" r="3.5" />
+        <circle cx="286" cy="314" r="3.5" />
+        <circle cx="238" cy="382" r="3.5" />
+        <circle cx="392" cy="470" r="3.5" />
+        <circle cx="612" cy="242" r="3.5" />
+        <circle cx="636" cy="334" r="3.5" />
+        <circle cx="106" cy="330" r="3.5" />
+        <circle cx="672" cy="148" r="3.5" />
+        <circle cx="708" cy="456" r="3.5" />
       </svg>
 
       {mapItems.map((item) => (
@@ -421,19 +428,21 @@ export default function HomeHero() {
         </div>
 
         <div className={styles.visual}>
-          <div ref={mapRef} className={styles.mapMotion}>
-            <SystemMap activeFocus={activeFocus} />
-          </div>
+          <div className={styles.scene}>
+            <div ref={mapRef} className={styles.mapMotion}>
+              <SystemMap activeFocus={activeFocus} />
+            </div>
 
-          <div ref={portraitRef} className={styles.portrait}>
-            <Image
-              src="/images/samuel-portrait-cutout.png"
-              alt="Samuel Oguntona smiling in a light collared shirt"
-              width={1024}
-              height={1536}
-              sizes="(max-width: 700px) 220px, (max-width: 1280px) 28vw, 380px"
-              priority
-            />
+            <div ref={portraitRef} className={styles.portrait}>
+              <Image
+                src="/images/samuel-portrait-cutout.png"
+                alt="Samuel Oguntona smiling in a light collared shirt"
+                width={1024}
+                height={1536}
+                sizes="(max-width: 700px) 230px, (max-width: 1050px) 300px, (max-width: 1450px) 300px, 390px"
+                priority
+              />
+            </div>
           </div>
         </div>
       </div>
