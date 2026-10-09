@@ -460,6 +460,7 @@ export default function HomeHero() {
               className={styles.indexButton}
               data-active={activeFocus === index ? "true" : "false"}
               aria-pressed={activeFocus === index}
+              style={{ left: `${(index / (focuses.length - 1)) * 100}%` }}
               onPointerEnter={() => selectFocus(index)}
               onPointerLeave={scheduleResume}
               onFocus={() => selectFocus(index)}
