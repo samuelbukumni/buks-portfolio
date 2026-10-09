@@ -97,30 +97,16 @@ function SystemMap({ activeFocus }: { activeFocus: number }) {
   return (
     <div className={styles.systemMap} aria-hidden="true">
       <svg className={styles.systemLines} viewBox="0 0 760 560" preserveAspectRatio="none">
-        <path d="M88 112 H208 V82 H374 V158 H512" />
-        <path d="M34 274 H162 V224 H286 V314 H414" />
-        <path d="M74 446 H238 V382 H392 V470 H548" />
-        <path d="M466 104 H612 V242 H730" />
-        <path d="M472 408 H636 V334 H744" />
-        <path d="M270 82 V38 H620" />
-        <path d="M162 224 V166 H58" />
-        <path d="M392 470 V522 H642" />
-        <path d="M38 358 H106 V330 H206" />
-        <path d="M536 68 H672 V148 H752" />
-        <path d="M576 548 V492 H708 V456 H754" />
-        <path d="M230 560 V516 H334" />
-        <circle cx="88" cy="112" r="3.5" />
-        <circle cx="208" cy="82" r="3.5" />
-        <circle cx="374" cy="158" r="3.5" />
-        <circle cx="162" cy="224" r="3.5" />
-        <circle cx="286" cy="314" r="3.5" />
-        <circle cx="238" cy="382" r="3.5" />
-        <circle cx="392" cy="470" r="3.5" />
-        <circle cx="612" cy="242" r="3.5" />
-        <circle cx="636" cy="334" r="3.5" />
-        <circle cx="106" cy="330" r="3.5" />
-        <circle cx="672" cy="148" r="3.5" />
-        <circle cx="708" cy="456" r="3.5" />
+        <path d="M94 103 H230 V129 H272" />
+        <path d="M66 276 H210 V290 H256" />
+        <path d="M105 439 H234 V410 H270" />
+        <path d="M493 202 H631 V179 H696" />
+        <path d="M505 440 H624 V421 H690" />
+        <circle cx="94" cy="103" r="3" />
+        <circle cx="210" cy="290" r="3" />
+        <circle cx="105" cy="439" r="3" />
+        <circle cx="631" cy="179" r="3" />
+        <circle cx="624" cy="421" r="3" />
       </svg>
 
       {mapItems.map((item) => (
