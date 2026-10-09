@@ -8,8 +8,8 @@
   backdrop-filter: blur(12px);
 }
 .inner {
-  max-width: 1380px;
-  min-height: 68px;
+  max-width: none;
+  min-height: 72px;
   margin: auto;
   padding: 0 var(--gutter);
   display: flex;
