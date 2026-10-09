@@ -398,8 +398,11 @@ export default function HomeHero() {
           </div>
 
           <h1 id="hero-title">
-            I build and <span className={styles.investigate}>investigate</span>{" "}
-            digital systems.
+            <span className={styles.headlineLine}>I build and</span>{" "}
+            <span className={styles.headlineLine}>
+              <span className={styles.investigate}>investigate</span>
+            </span>{" "}
+            <span className={styles.headlineLine}>digital systems.</span>
           </h1>
 
           <p className={styles.support}>
@@ -471,6 +474,14 @@ export default function HomeHero() {
 
         <div className={styles.track} aria-hidden="true">
           <span className={styles.trackFill} />
+          {focuses.map((focus, index) => (
+            <span
+              key={focus.id}
+              className={styles.trackNode}
+              data-active={activeFocus === index ? "true" : "false"}
+              style={{ left: `${(index / (focuses.length - 1)) * 100}%` }}
+            />
+          ))}
           <span className={styles.marker} />
         </div>
       </div>
