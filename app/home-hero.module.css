@@ -422,13 +422,14 @@ position: relative;
 }
 
 .indexList {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  align-items: end;
+position: relative;
+  height: 42px;
 }
 
 .indexButton {
-  appearance: none;
+appearance: none;
+  position: absolute;
+  bottom: 0;
   min-width: 0;
   min-height: 42px;
   padding: 0.25rem 0;
@@ -440,11 +441,12 @@ position: relative;
   align-items: baseline;
   justify-content: center;
   gap: 0.65rem;
+  transform: translateX(-50%);
   transition: color 150ms ease-out;
 }
 
-.indexButton:first-child { justify-content: flex-start; }
-.indexButton:last-child { justify-content: flex-end; }
+.indexButton:first-child { justify-content: flex-start; transform: none; }
+.indexButton:last-child { justify-content: flex-end; transform: translateX(-100%); }
 .indexButton span { font-size: 0.68rem; color: #748096; }
 .indexButton strong {
   font-weight: 500;
