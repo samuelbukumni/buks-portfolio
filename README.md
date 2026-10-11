@@ -1,72 +1,44 @@
 # Buks Samuel portfolio
 
-A Next.js 15 / React 19 portfolio built around software, systems, infrastructure and an emerging AI evaluation research direction.
+A focused Next.js 15 / React 19 portfolio for Samuel Oguntona: web products, cloud engineering, and learning in public.
 
-## Run locally
+## Development
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-## Validate
+## Checks
 
 ```bash
 npm run lint
-npm run build
 npx tsc --noEmit
+npm run build
 ```
 
-The production build needs access to Google Fonts on its first run. Source Serif 4, Public Sans and IBM Plex Mono are bundled through `next/font`.
+Public Sans and Caveat are bundled with `next/font`. The first build needs access to Google Fonts.
 
-## Routes and content
+## Pages
 
-- `/`: portrait, current focus, Middleman transaction/architecture inspector, agent experiments, lab index, build log, research, infrastructure map and contact.
-- `/about`: first-person background, Information Systems framing, engineering and research directions.
-- `/playground`: Explorer. Existing hash destinations remain supported, including `#terminal`, `#systems`, `#samuel` and `#synapse`.
+- `/`: a short introduction, portrait, The Middleman, S.A.M.U.E.L., SYNAPSE, an About introduction, and contact details.
+- `/about`: background, tools and interests, a learning/community timeline, an emerging interest in AI evaluation, and a downloadable résumé.
+- A custom 404 provides a way back to Home.
 
-Update the dated log in `data/build-log.ts`. Every entry includes an internal evidence field; add only dated, supported milestones. Current entries are grounded in repository commits `da7fe48`, `962bb78` and `1a4d9b4`.
+The Explorer implementation has been removed. `/playground` and `/explorer` permanently redirect to `/about#learning` so existing links remain useful. The normal navigation contains only Home and About. There is one project jump from the homepage hero and one About link; project experiments have no links to removed demonstrations.
 
-The current focus is explicitly dated September 2026, not generated from the visitor's clock. Update the homepage Now strip and terminal `now.txt` together when priorities change. Terminal content lives in `app/playground-experience.tsx`.
+## Content and pictures
 
-### Content boundaries
+The existing portrait cutout is displayed with normal blending, no brightness filter, and a light background in both themes. The Middleman image is an actual capture of the public waitlist on 11 October 2026, labelled as a waitlist rather than the unreleased marketplace. Refresh `public/images/middleman-waitlist.jpg` when the public product changes.
 
-Project descriptions and the Middleman stack come from existing repository content. This repository does not contain Middleman's implementation, so its diagram is a conceptual map of confirmed responsibilities, not a verified sequence of production requests. No Paystack-specific, idempotency or deployment-metric claims have been added.
+The timeline uses supported course/community information without inventing completion dates or displaying certificate buttons. Project experiments are explicitly labelled as experiments. Update content directly in the page and component files; there are no fabricated project metrics or testimonials.
 
-AI evaluation and safety are presented as a new direction provided in the redesign brief, with open questions rather than completed research claims. CHALK, SkillPrint and Trove are omitted because the repository supplies no verified descriptions, technologies or destinations; the lab index instead links to real portfolio demonstrations.
+The existing public résumé remains at `public/resume/Samuel-Oguntona-Resume-Public.docx`.
 
-## Styling
+## Contact
 
-- `app/globals.css`: palette, shared tokens, reset, global primitives, focus and reduced-motion support.
-- CSS Modules: header, homepage, projects, About and contact.
-- `app/explorer.css`: styles for the existing Explorer implementation, loaded by that experience.
+Direct email and existing social profiles are always available. The contact form is only displayed when `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` is configured. The provider must accept the JSON payload and allow browser CORS. Sending retains validation, loading, success, failure/retry states, and a 20-second timeout. With no provider configured, visitors see contact links instead of a disabled form.
 
-Critical content renders visibly without reveal scripts. Diagrams use HTML/CSS and small React interactions; there is no animation library or visualization dependency.
+## Accessibility and themes
 
-## Navigation and scroll memory
-
-The root layout owns persistent navigation. Mobile uses a disclosure menu with Escape handling and visible focus states.
-
-`app/route-memory.tsx` remembers positions for explicit same-tab switches between Home, About and Explorer during the current SPA session. It restores only after fonts are ready, the page is tall enough, and Explorer has resolved its hash view. User scrolling or keyboard input cancels a pending restoration. Explicit anchor navigation and native back/forward are left to Next.js and the browser. Memory intentionally does not persist across reloads.
-
-## Contact form
-
-Set `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` to the chosen provider's browser-accessible JSON endpoint. The form sends `name`, `email`, `message` and the `_gotcha` honeypot. The provider must support CORS and accept or safely ignore that field.
-
-Without the endpoint, submission is disabled and direct email remains available. Submission preserves validation, loading, success, error and retry states, with a 20-second timeout. Configure the public endpoint before building a deployment.
-
-## Explorer
-
-The terminal is a simulation: no shell execution, filesystem access, cloud operation or live model call occurs. Discoverable commands include `help`, `whoami`, `ls projects/`, `cat projects/middleman.md`, `cat research/ai-safety.md`, `cat now.txt`, `systemctl status samuel` and `clear`.
-
-Governor decisions and the SYNAPSE stepper are deterministic architecture demonstrations.
-
-## Redesign verification
-
-- Passed production build, ESLint, TypeScript and whitespace checks.
-- Checked homepage overflow at 320, 375, 390, 430, 768, 1024, 1280 and 1440px; checked About and the main Explorer interactions at 320px.
-- Inspected desktop and mobile screenshots; exercised the architecture inspector, Governor deny path, SYNAPSE stepper, request flow and terminal project/research commands.
-- Confirmed repeated Home/About scroll restoration, native back/forward, Explorer hash-view restoration and explicit Work anchor positioning in the production build.
-- Confirmed reduced-motion rendering leaves all headings visible, and mobile-menu Escape closes the menu and returns focus.
-- Automated accessibility scans reported no violations on Home, About, the terminal, Explorer map and Security. Diagram pseudo-elements needed manual contrast review; clay/peach is 5.03:1, paper/clay 6.23:1, and indigo/paper 9.78:1.
-- Tested contact loading, payload, success, failure and retry with browser-local mock responses. Live provider delivery remains dependent on configuring the endpoint.
+Semantic headings, a skip link, visible keyboard focus, image descriptions, reduced-motion handling, and a saved light/dark preference are retained. Essential content is server-rendered and does not wait for an animation or JavaScript intro. Layouts collapse to a single column on smaller screens; photographs do not inherit a dark blending effect.

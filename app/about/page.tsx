@@ -1,206 +1,159 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import CredentialsCommunity from "../credentials-community";
 import styles from "./about.module.css";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "I explore and build digital systems, study Information Systems at OAU, and follow the connections between people, infrastructure, security, and AI.",
+    "Meet Samuel Oguntona, an Information Systems student at OAU, founder of The Middleman, and an aspiring cloud engineer.",
 };
 
 export default function AboutPage() {
   return (
     <main id="main" className={styles.about}>
-      <section className={styles.intro}>
+      <section className={styles.intro} aria-labelledby="about-title">
         <div>
-          <p className="section-index">About / Samuel Oluwabukunmi Oguntona</p>
-          <h1>
-            The interface is
+          <p className="section-index">A bit more than the projects</p>
+          <h1 id="about-title">
+            Samuel Oguntona.
             <br />
-            only the beginning.
+            <span>You can call me Buks.</span>
           </h1>
           <p>
-            I’m Samuel — also Buks Samuel. I study Information Systems at
-            Obafemi Awolowo University in Nigeria, and I explore digital systems to understand how their layers fit together.
+            I study Information Systems at Obafemi Awolowo University in
+            Ile-Ife, Nigeria. I build web products and spend a fair amount of
+            time in a Linux terminal.
           </p>
           <p>
-            Software makes more sense to me when I can follow a request from the user interface down to data schema, permissions, operating system, and cloud infrastructure underneath.
+            I like following a problem until I understand it: what the user
+            sees, what the database stores, and what happens when something goes
+            wrong.
           </p>
+          <a
+            className="text-link"
+            href="/resume/Samuel-Oguntona-Resume-Public.docx"
+            download
+          >
+            Download my résumé <span className={styles.fileType}>(.docx)</span>{" "}
+            <span aria-hidden="true">↓</span>
+          </a>
         </div>
         <figure>
-          <Image
-            src="/images/samuel-portraitx.png"
-            width={1024}
-            height={1536}
-            alt="Samuel Oluwabukunmi Oguntona"
-            sizes="(max-width: 700px) 80vw, 30vw"
-            priority
-          />
-          <figcaption>Nigeria · Information Systems · OAU</figcaption>
+          <div className={styles.photo}>
+            <Image
+              src="/images/samuel-portrait-cutout.png"
+              width={1024}
+              height={1536}
+              alt="Samuel Oguntona smiling"
+              sizes="(max-width: 700px) 280px, 340px"
+              priority
+            />
+          </div>
+          <figcaption>
+            Samuel Oluwabukunmi Oguntona <span>OAU · Nigeria</span>
+          </figcaption>
         </figure>
       </section>
-
-      <section className={styles.thinking} aria-labelledby="thinking-title">
-        <p className="section-index">How I think</p>
-        <h2 id="thinking-title">People, processes, and technical systems.</h2>
-        <p>
-          Studying Information Systems connects software development to the social and organizational realities around it. In an escrow marketplace like The Middleman, a order record is a database mutation, but it is also an agreement built on trust between two human participants.
-        </p>
-        <ol aria-label="Connected system concerns">
-          {[
-            "People",
-            "Software",
-            "Data",
-            "Infrastructure",
-            "Security",
-            "AI Systems",
-          ].map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ol>
-      </section>
-
-      <section className={styles.curiosity} aria-labelledby="curiosity-title">
-        <p className="section-index">Curiosity &amp; Broader Interests</p>
-        <h2 id="curiosity-title">Driven by how complex things work.</h2>
-        <div className={styles.curiosityGrid}>
-          <article>
-            <h3>Systems &amp; Security</h3>
-            <p>
-              Linux Mint, CLI workflows, process boundaries, networking protocols, and defensive security labs (TryHackMe).
-            </p>
-          </article>
-          <article>
-            <h3>Space &amp; Science</h3>
-            <p>
-              Fascinated by orbital mechanics, space systems, and physical sciences — large-scale engineering where failures offer clear diagnostic signals.
-            </p>
-          </article>
-          <article>
-            <h3>Music &amp; Sound</h3>
-            <p>
-              An appreciation for rhythm, signals, and composition — finding structural parallels between sound design and systematic engineering.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section className={styles.evidence} aria-labelledby="evidence-title">
+      <section className={styles.story} aria-labelledby="story-title">
         <div>
-          <p className="section-index">What I’m building</p>
-          <h2 id="evidence-title">
-            Three ways into
+          <p className="section-index">What I’m working towards</p>
+          <h2 id="story-title">
+            Building the product.
             <br />
-            the same question.
+            Learning the infrastructure.
           </h2>
         </div>
         <div>
+          <p>
+            The Middleman is my main project: a digital-product marketplace for
+            Nigerian buyers and creators. Building it has meant thinking about
+            more than the page design — accounts, data, payments, and keeping
+            the application running.
+          </p>
+          <p>
+            That’s part of what draws me towards cloud engineering. I’m learning
+            networking, deployment, permissions, and Linux, and using my
+            projects to put those ideas into practice.
+          </p>
+          <p>
+            My everyday tools include Next.js, TypeScript, Supabase, Python,
+            Git, and Linux Mint. I’m still building depth, especially in Python
+            and infrastructure.
+          </p>
+        </div>
+      </section>
+      <section className={styles.interests} aria-labelledby="interests-title">
+        <p className="section-index">Away from the build</p>
+        <h2 id="interests-title">There’s a person behind the terminal.</h2>
+        <div className={styles.interestRows}>
           <article>
-            <h3>The Middleman</h3>
-            <p>
-              A Nigeria-focused escrow-backed marketplace. Working across
-              account workflows, authentication, databases, payments and
-              deployment keeps the product and the system connected.
-            </p>
-            <Link className="text-link" href="/#project-middleman">
-              Inspect the transaction →
-            </Link>
+            <span aria-hidden="true">01</span>
+            <div>
+              <h3>Space &amp; science</h3>
+              <p>
+                Space systems and the questions behind how they work keep me
+                curious.
+              </p>
+            </div>
           </article>
           <article>
-            <h3>SAMUEL &amp; SYNAPSE</h3>
-            <p>
-              Experimental agent architectures: one asks how a Governor can
-              coordinate permission-aware actions; the other asks what happens
-              when independent models critique and revise.
-            </p>
-            <Link className="text-link" href="/#project-samuel">
-              See the experiments →
-            </Link>
+            <span aria-hidden="true">02</span>
+            <div>
+              <h3>Music</h3>
+              <p>
+                I enjoy music, and I like having interests outside the things I
+                build.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span aria-hidden="true">03</span>
+            <div>
+              <h3>Trying things</h3>
+              <p>
+                Small experiments, new tools, and the occasional idea that grows
+                into a whole project.
+              </p>
+            </div>
           </article>
         </div>
       </section>
-
-      <section className={styles.learning}>
-        <p className="section-index">What I’m learning</p>
-        <h2>
-          From deployed code
-          <br />
-          to operating systems.
-        </h2>
-        <p>
-          Cloud and infrastructure are a major engineering direction for me. I
-          use Linux Mint, practise through AWS and Google hands-on labs, and
-          study networking, services, permissions and defensive security,
-          including TryHackMe labs.
-        </p>
-        <Link className="text-link" href="/playground">
-          Open my working map →
-        </Link>
-      </section>
-
-      <section id="research" className={styles.research}>
-        <p className="section-index">Research direction</p>
-        <h2>
-          Build systems.
-          <br />
-          Understand systems.
-          <br />
-          <em>Evaluate systems.</em>
-        </h2>
+      <CredentialsCommunity />
+      <section
+        className={styles.research}
+        id="research"
+        aria-labelledby="research-title"
+      >
+        <div>
+          <p className="section-index">A new interest</p>
+          <h2 id="research-title">
+            How do we know
+            <br />
+            an AI is reliable?
+          </h2>
+        </div>
         <div>
           <p>
-            I’m beginning to investigate AI evaluation, reliability and safety.
-            Building with agents has made me ask how we test their behaviour,
-            notice failure and decide when human oversight is needed.
+            Working on S.A.M.U.E.L. and SYNAPSE has made me curious about how we
+            evaluate AI, handle model disagreement, and decide when a person
+            should stay involved.
           </p>
           <p>
-            SYNAPSE is a starting point for thinking about model disagreement
-            and critique. This is a new research direction, and I’m still
-            building the knowledge and methods to pursue it seriously.
+            I’m at the beginning of this. I’d like to learn from people working
+            on evaluation and safety, and contribute as my skills develop.
           </p>
-          <a className="text-link" href="mailto:samuelbukumni@gmail.com">
-            Start a research conversation ↗
-          </a>
         </div>
       </section>
-
-      <section className={styles.trajectory}>
-        <p className="section-index">Trajectory</p>
-        <h2>A working record.</h2>
-        <ol>
-          <li>
-            <time dateTime="2026-09-26">26 Sep 2026</time>
-            <p>
-              Built this portfolio’s interactive Explorer, including terminal
-              and system demonstrations.
-            </p>
-          </li>
-          <li>
-            <time dateTime="2026-09-27">27 Sep 2026</time>
-            <p>
-              Refined the connected map of cloud, Linux, security and AI
-              experiments.
-            </p>
-          </li>
-          <li>
-            <span>Now</span>
-            <p>
-              Building The Middleman, deepening my infrastructure practice, and
-              beginning a direction in AI evaluation and safety.
-            </p>
-          </li>
-        </ol>
-      </section>
-
       <div className={styles.ending}>
         <p>
-          There’s more to understand.
+          That’s me so far.
           <br />
-          I’d like to build some of it together.
+          <span>There’s more I’d like to build.</span>
         </p>
         <Link className="button" href="/#contact">
-          Get in touch →
+          Let’s talk <span aria-hidden="true">→</span>
         </Link>
       </div>
     </main>

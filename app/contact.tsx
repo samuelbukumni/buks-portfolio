@@ -56,14 +56,17 @@ export default function Contact() {
     >
       <div>
         <p className="section-index">Get in touch</p>
-        <h2 id="contact-title">Have something worth working on?</h2>
+        <h2 id="contact-title">Let’s make something useful.</h2>
         <p>
-          Products, technical work, research conversations, or a question we
-          could figure out together.
+          I’m open to internships, collaborations, and learning from people
+          working in software, cloud, or AI safety. Say hello.
         </p>
         <a className={styles.email} href="mailto:samuelbukumni@gmail.com">
           samuelbukumni@gmail.com ↗
         </a>
+      </div>
+      <div className={styles.connections}>
+        <p className={styles.connectionLabel}>Find me around the internet</p>
         <div className={styles.socials}>
           <a
             href="https://github.com/samuelbukumni"
@@ -91,67 +94,69 @@ export default function Contact() {
           </a>
         </div>
       </div>
-      <form
-        onSubmit={submit}
-        className={styles.form}
-        aria-label="Contact Samuel"
-      >
-        <div className={styles.fields}>
-          <label>
-            Name
-            <input
-              name="name"
-              autoComplete="name"
-              required
-              onChange={(e) => e.currentTarget.setCustomValidity("")}
-              disabled={state === "sending"}
-            />
-          </label>
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              autoComplete="email"
-              required
-              onChange={(e) => e.currentTarget.setCustomValidity("")}
-              disabled={state === "sending"}
-            />
-          </label>
-        </div>
-        <label>
-          What do you have in mind?
-          <textarea
-            name="message"
-            rows={4}
-            required
-            onChange={(e) => e.currentTarget.setCustomValidity("")}
-            disabled={state === "sending"}
-          />
-        </label>
-        <div className="sr-only" aria-hidden="true">
-          <label>
-            Leave empty
-            <input name="_gotcha" tabIndex={-1} autoComplete="off" />
-          </label>
-        </div>
-        <button
-          className="button"
-          type="submit"
-          disabled={!endpoint || state === "sending"}
+      {endpoint ? (
+        <form
+          onSubmit={submit}
+          className={styles.form}
+          aria-label="Contact Samuel"
         >
-          {state === "sending" ? "Sending…" : "Send message →"}
-        </button>
-        <p role="status" className={styles.status}>
-          {state === "success"
-            ? "Message sent. Thanks for getting in touch."
-            : state === "error"
-              ? "Your message did not go through. Please retry or email me directly."
-              : !endpoint
-                ? "The form is not connected yet. Email me directly to get in touch."
-                : ""}
-        </p>
-      </form>
+          <div className={styles.fields}>
+            <label>
+              Name
+              <input
+                name="name"
+                autoComplete="name"
+                required
+                onChange={(e) => e.currentTarget.setCustomValidity("")}
+                disabled={state === "sending"}
+              />
+            </label>
+            <label>
+              Email
+              <input
+                type="email"
+                name="email"
+                autoComplete="email"
+                required
+                onChange={(e) => e.currentTarget.setCustomValidity("")}
+                disabled={state === "sending"}
+              />
+            </label>
+          </div>
+          <label>
+            What do you have in mind?
+            <textarea
+              name="message"
+              rows={4}
+              required
+              onChange={(e) => e.currentTarget.setCustomValidity("")}
+              disabled={state === "sending"}
+            />
+          </label>
+          <div className="sr-only" aria-hidden="true">
+            <label>
+              Leave empty
+              <input name="_gotcha" tabIndex={-1} autoComplete="off" />
+            </label>
+          </div>
+          <button
+            className="button"
+            type="submit"
+            disabled={!endpoint || state === "sending"}
+          >
+            {state === "sending" ? "Sending…" : "Send message →"}
+          </button>
+          <p role="status" className={styles.status}>
+            {state === "success"
+              ? "Message sent. Thanks for getting in touch."
+              : state === "error"
+                ? "Your message did not go through. Please retry or email me directly."
+                : !endpoint
+                  ? "The form is not connected yet. Email me directly to get in touch."
+                  : ""}
+          </p>
+        </form>
+      ) : null}
     </section>
   );
 }

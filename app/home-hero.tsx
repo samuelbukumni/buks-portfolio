@@ -1,98 +1,54 @@
-"use client";
-
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./home-hero.module.css";
 
-const question = "So, what does he actually do?";
-
 export default function HomeHero() {
-  // The server and first client render both start pending. Browser preferences
-  // and session memory are read only after hydration.
-  const [intro, setIntro] = useState<"pending" | "play" | "typing" | "reveal" | "complete">("pending");
-  const [typed, setTyped] = useState("");
-  const resetRequested = useRef(false);
-  const finishIntro = useCallback(() => {
-    setTyped(question);
-    setIntro("complete");
-    try { sessionStorage.setItem("samuel-home-intro-complete", "1"); } catch { /* storage can be unavailable */ }
-  }, []);
-
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    if (url.searchParams.get("resetIntro") === "1") {
-      // Keep the request through development Strict Mode's effect replay.
-      resetRequested.current = true;
-      try { sessionStorage.removeItem("samuel-home-intro-complete"); } catch { /* storage can be unavailable */ }
-      url.searchParams.delete("resetIntro");
-      window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
-    }
-    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let remembered = false;
-    try { remembered = sessionStorage.getItem("samuel-home-intro-complete") === "1"; } catch { /* storage can be unavailable */ }
-    let timer: number | undefined;
-    let index = 0;
-    const typeNext = () => {
-      index += 1;
-      setTyped(question.slice(0, index));
-      if (index < question.length) {
-        const character = question[index - 1];
-        timer = window.setTimeout(typeNext, /[,.?]/.test(character) ? 150 : 39 + (index % 4) * 10);
-      } else {
-        timer = window.setTimeout(() => setIntro("reveal"), 580);
-      }
-    };
-    if (!motion.matches && !remembered && (resetRequested.current || window.scrollY < 40)) {
-      setTyped("");
-      setIntro("play");
-      timer = window.setTimeout(() => {
-        setIntro("typing");
-        typeNext();
-      }, 720);
-    } else {
-      finishIntro();
-    }
-    const onMotionChange = () => {
-      if (motion.matches) {
-        window.clearTimeout(timer);
-        finishIntro();
-      }
-    };
-    motion.addEventListener("change", onMotionChange);
-    return () => {
-      window.clearTimeout(timer);
-      motion.removeEventListener("change", onMotionChange);
-    };
-  }, [finishIntro]);
-
   return (
-    <section className={styles.hero} data-intro={intro} aria-labelledby="hero-title">
-      <div className={styles.main}>
-        <div className={styles.copy}>
-          <div className={styles.opening}>
-            <p className={styles.found}>You found Samuel.</p>
-            <p className={styles.question}>
-              <span className={styles.fullQuestion}>{question}</span>
-              <span className={styles.typedQuestion} aria-hidden="true">{typed}<span className={styles.cursor} /></span>
-            </p>
-          </div>
-          <h1 id="hero-title">I build and investigate digital systems.</h1>
-          <p>Software, Infrastructure, Linux, security and AI — different parts of the same curiosity.</p>
-        </div>
-        <div className={styles.portrait} onAnimationEnd={() => {
-          if (intro === "reveal") finishIntro();
-        }}>
+    <section className={styles.hero} aria-labelledby="hero-title">
+      <div className={styles.copy}>
+        <p className={styles.hello}>Hi, I’m Samuel.</p>
+        <h1 id="hero-title">
+          I build things
+          <br />
+          <span>that run.</span>
+        </h1>
+        <p className={styles.support}>
+          Web products, a little Python, and a lot of curiosity about the
+          systems underneath. Right now, I’m building The Middleman and working
+          towards cloud engineering.
+        </p>
+        <a className="button" href="#work">
+          Take a look at my work <span aria-hidden="true">↘</span>
+        </a>
+        <p className={styles.note}>
+          Usually building. Sometimes figuring out why it broke.
+        </p>
+      </div>
+      <figure className={styles.portrait}>
+        <div className={styles.photo}>
           <Image
             src="/images/samuel-portrait-cutout.png"
-            alt="Samuel smiling in a light shirt"
+            alt="Samuel Oguntona smiling in a collared shirt"
             width={1024}
             height={1536}
-            sizes="(max-width: 700px) 250px, (max-width: 1280px) 25vw, 320px"
+            sizes="(max-width: 700px) 280px, (max-width: 1100px) 35vw, 380px"
             priority
           />
         </div>
+        <figcaption>
+          <span>Samuel Oguntona</span>
+          <span className={styles.handwritten}>Buks, for short.</span>
+        </figcaption>
+      </figure>
+      <div className={styles.interests} aria-label="Current interests">
+        <span>Things that keep me curious</span>
+        <ul>
+          <li>Software</li>
+          <li>Cloud</li>
+          <li>Linux</li>
+          <li>Security</li>
+          <li>AI safety</li>
+        </ul>
       </div>
-
     </section>
   );
 }
