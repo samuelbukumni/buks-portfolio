@@ -62,7 +62,7 @@ export default function Contact() {
           working in software, cloud, or AI safety. Say hello.
         </p>
         <a className={styles.email} href="mailto:samuelbukumni@gmail.com">
-          samuelbukumni@gmail.com ↗
+          samuelbukumni@gmail.com
         </a>
       </div>
       <div className={styles.connections}>
@@ -73,24 +73,24 @@ export default function Contact() {
             target="_blank"
             rel="noreferrer"
           >
-            GitHub ↗
+            GitHub
           </a>
           <a
             href="https://www.linkedin.com/in/oguntona-samuel/"
             target="_blank"
             rel="noreferrer"
           >
-            LinkedIn ↗
+            LinkedIn
           </a>
           <a href="https://x.com/bukssamuel25" target="_blank" rel="noreferrer">
-            X ↗
+            X
           </a>
           <a
             href="https://www.tiktok.com/@bukssamuel"
             target="_blank"
             rel="noreferrer"
           >
-            TikTok ↗
+            TikTok
           </a>
         </div>
       </div>
@@ -144,7 +144,7 @@ export default function Contact() {
             type="submit"
             disabled={!endpoint || state === "sending"}
           >
-            {state === "sending" ? "Sending…" : "Send message →"}
+            {state === "sending" ? "Sending…" : "Send message "}
           </button>
           <p role="status" className={styles.status}>
             {state === "success"

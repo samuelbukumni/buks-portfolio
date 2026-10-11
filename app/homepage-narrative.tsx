@@ -1,3 +1,5 @@
+import Terminal from "./terminal";
+import BuildLog from "./build-log";
 import Link from "next/link";
 import SelectedProjects from "./selected-projects";
 import Contact from "./contact";
@@ -30,10 +32,12 @@ export default function HomepageNarrative() {
             understanding what happened when something breaks.
           </p>
           <Link className="text-link" href="/about">
-            More about me <span aria-hidden="true">→</span>
+            More about me
           </Link>
         </div>
       </section>
+      <Terminal />
+      <BuildLog />
       <Contact />
     </main>
   );

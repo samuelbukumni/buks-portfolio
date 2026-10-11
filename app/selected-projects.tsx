@@ -39,7 +39,7 @@ export default function SelectedProjects() {
       <article className={styles.flagship} id="project-middleman">
         <div className={styles.flagshipCopy}>
           <span className={styles.number}>01 / Digital marketplace</span>
-          <h3>The Middleman</h3>
+          <div className={styles.brand}><span className={styles.marketMark} aria-hidden="true">M</span><h3>The Middleman</h3></div>
           <p className={styles.lead}>
             A place to buy digital products
             <br />
@@ -75,7 +75,7 @@ export default function SelectedProjects() {
             target="_blank"
             rel="noreferrer"
           >
-            Visit The Middleman <span aria-hidden="true">↗</span>
+            Visit The Middleman
           </a>
         </div>
         <figure className={styles.preview}>
@@ -104,6 +104,10 @@ export default function SelectedProjects() {
             id={project.id}
             key={project.id}
           >
+            <div className={`${styles.labVisual} ${project.number === "02" ? styles.assistantVisual : styles.synapseVisual}`} aria-hidden="true">
+              {project.number === "02" ? <><span className={styles.labLogo}>S_</span><div className={styles.shellLines}><span>$ samuel plan</span><span>local tools · cloud models</span><span className={styles.permission}>Permission required before acting</span><span className={styles.cursor}>▍</span></div></> : <><span className={styles.labLogo}>◌</span><div className={styles.modelOrbit}><span>Answer independently</span><span>Compare &amp; critique</span><span>Revise the idea</span></div></>}
+              <small>Concept sketch · In development</small>
+            </div>
             <span className={styles.number}>
               {project.number} / {project.type}
             </span>

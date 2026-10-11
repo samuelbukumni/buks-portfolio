@@ -37,7 +37,7 @@ export default function AboutPage() {
             download
           >
             Download my résumé <span className={styles.fileType}>(.docx)</span>{" "}
-            <span aria-hidden="true">↓</span>
+
           </a>
         </div>
         <figure>
@@ -153,7 +153,7 @@ export default function AboutPage() {
           <span>There’s more I’d like to build.</span>
         </p>
         <Link className="button" href="/#contact">
-          Let’s talk <span aria-hidden="true">→</span>
+          Let’s talk
         </Link>
       </div>
     </main>

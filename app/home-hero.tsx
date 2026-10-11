@@ -1,24 +1,28 @@
 import Image from "next/image";
+import EntryLine from "./entry-line";
+import WorkStrip from "./work-strip";
 import styles from "./home-hero.module.css";
 
 export default function HomeHero() {
   return (
     <section className={styles.hero} aria-labelledby="hero-title">
       <div className={styles.copy}>
-        <p className={styles.hello}>Hi, I’m Samuel.</p>
+        <p className={styles.hello}>You found Samuel.</p>
+        <EntryLine />
         <h1 id="hero-title">
-          I build things
+          I build and
           <br />
-          <span>that run.</span>
+          <span>investigate systems.</span>
         </h1>
         <p className={styles.support}>
-          Web products, a little Python, and a lot of curiosity about the
-          systems underneath. Right now, I’m building The Middleman and working
-          towards cloud engineering.
+          From the interface to the Linux terminal, I like figuring out how
+          things work. I’m building The Middleman, experimenting with AI,
+          and finding my way into cloud engineering.
         </p>
         <a className="button" href="#work">
-          Take a look at my work <span aria-hidden="true">↘</span>
+          Take a look at my work
         </a>
+        <WorkStrip />
         <p className={styles.note}>
           Usually building. Sometimes figuring out why it broke.
         </p>
@@ -36,7 +40,7 @@ export default function HomeHero() {
         </div>
         <figcaption>
           <span>Samuel Oguntona</span>
-          <span className={styles.handwritten}>Buks, for short.</span>
+          <span className={styles.handwritten}>Still figuring things out.</span>
         </figcaption>
       </figure>
       <div className={styles.interests} aria-label="Current interests">

@@ -172,3 +172,16 @@
     font-size: 0.72rem;
   }
 }
+
+.flagship { border-radius:20px; padding:2.5rem; background:var(--surface); border:1px solid var(--border); margin-bottom:1.5rem; }
+.brand { display:flex; align-items:center; gap:1rem; }.brand h3 { margin:.6rem 0; }
+.marketMark { display:grid; place-items:center; width:48px; height:48px; background:#edaa63; color:#241b14; border-radius:12px; font-weight:800; font-size:1.7rem; }
+.experiments { gap:1.5rem; }.experiment { padding:1.25rem; border:1px solid var(--border); border-radius:20px; background:var(--surface); overflow:hidden; }
+.labVisual { height:245px; border-radius:12px; padding:1.6rem; position:relative; overflow:hidden; margin-bottom:1.5rem; display:flex; gap:1.4rem; align-items:center; }
+.assistantVisual { background:#17241c; color:#d4e7c9; }.synapseVisual { background:#d9dcf0; color:#293457; }
+.labVisual::before { content:""; position:absolute; width:230px; height:230px; border:1px solid currentColor; opacity:.13; border-radius:50%; right:-50px; top:-70px; }
+.labLogo { font:700 3.5rem monospace; flex-shrink:0; }.shellLines { display:grid; gap:.85rem; font:.65rem/1.5 monospace; }.permission { border:1px solid #78996b; border-radius:5px; padding:.55rem; }.cursor { animation:blink 1s steps(2,end) infinite; }
+.labVisual > small { position:absolute; bottom:1rem; left:1.6rem; font:.6rem monospace; opacity:.7; }.modelOrbit { display:grid; gap:.55rem; width:100%; }.modelOrbit span { font-size:.65rem; padding:.7rem; border:1px solid #a4adcc; background:#f8f7fc; border-radius:6px; animation:float 5s ease-in-out infinite; }.modelOrbit span:nth-child(2) { animation-delay:-1.6s; margin-left:1rem; }.modelOrbit span:nth-child(3) { animation-delay:-3.2s; }
+.preview { transition:transform .4s; }.flagship:hover .preview { transform:rotate(0) translateY(-5px); }
+@keyframes blink { to { opacity:0; } } @keyframes float { 50% { transform:translateX(-6px) translateY(-4px); } }
+@media(max-width:850px) { .flagship { padding:1.4rem; } } @media(max-width:400px) { .labVisual { padding:1rem; gap:.8rem; }.labLogo { font-size:2.2rem; } }

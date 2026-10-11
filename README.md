@@ -21,7 +21,7 @@ Public Sans and Caveat are bundled with `next/font`. The first build needs acces
 
 ## Pages
 
-- `/`: a short introduction, portrait, The Middleman, S.A.M.U.E.L., SYNAPSE, an About introduction, and contact details.
+- `/`: an animated introduction, moving work strip, portrait, The Middleman, S.A.M.U.E.L., SYNAPSE, an About introduction, an interactive simulated terminal, a dated build log, and contact details.
 - `/about`: background, tools and interests, a learning/community timeline, an emerging interest in AI evaluation, and a downloadable résumé.
 - A custom 404 provides a way back to Home.
 
@@ -41,4 +41,4 @@ Direct email and existing social profiles are always available. The contact form
 
 ## Accessibility and themes
 
-Semantic headings, a skip link, visible keyboard focus, image descriptions, reduced-motion handling, and a saved light/dark preference are retained. Essential content is server-rendered and does not wait for an animation or JavaScript intro. Layouts collapse to a single column on smaller screens; photographs do not inherit a dark blending effect.
+Semantic headings, a skip link, visible keyboard focus, image descriptions, reduced-motion handling, and a saved light/dark preference are retained. Essential content is server-rendered. The opening animation uses CSS; the project strip can be paused and pauses on hover/focus. Reduced motion stops these animations. The terminal is a browser-only simulation and never executes system commands. Layouts collapse to a single column on smaller screens; photographs do not inherit a dark blending effect.
