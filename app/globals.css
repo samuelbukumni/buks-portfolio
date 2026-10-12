@@ -8,3 +8,14 @@ h1,h2,h3 { text-wrap:balance; } p { margin:0 0 1rem; text-wrap:pretty; } img { m
 .site-footer { padding:1.5rem max(var(--gutter),calc((100vw - 1280px)/2 + var(--gutter))); display:flex; flex-wrap:wrap; justify-content:space-between; gap:.5rem 1.5rem; background:#222221; color:#bcbcb4; border-top:1px solid #474740; font-size:.68rem; }.site-footer a { min-height:44px; display:inline-flex; align-items:center; }
 .not-found { max-width:1280px; margin:auto; padding:5rem var(--gutter); min-height:65vh; }.not-found h1 { font-size:clamp(2rem,5vw,3.5rem); letter-spacing:-.04em; }.not-found p { max-width:45ch; color:var(--muted); }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
+
+.colour-sweep { display:inline; background:linear-gradient(100deg,var(--ink) 25%,#416c55 42%,#9a533f 52%,var(--ink) 68%); background-size:250% 100%; background-clip:text; -webkit-background-clip:text; color:transparent; animation:headingColour 9s linear infinite; }
+@keyframes headingColour { 0%,30% { background-position:130% 0; } 75%,100% { background-position:-80% 0; } }
+@media(prefers-reduced-motion:reduce) { .colour-sweep { background:none; color:var(--ink); } }
+
+@media (hover: hover) and (pointer: fine) {
+  html[data-custom-cursor="true"],
+  html[data-custom-cursor="true"] a,
+  html[data-custom-cursor="true"] button,
+  html[data-custom-cursor="true"] [role="button"] { cursor: none; }
+}

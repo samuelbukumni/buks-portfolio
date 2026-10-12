@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Caveat, Manrope, Public_Sans } from "next/font/google";
+import SiteCursor from "./site-cursor";
 import Opening from "./opening";
 import SiteHeader from "./site-header";
 import "./globals.css";
@@ -23,7 +24,7 @@ const openingBoot = `(() => {
   try {
     document.documentElement.dataset.opening =
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      sessionStorage.getItem("samuel-mischief-opening-v1") === "1" ||
+      sessionStorage.getItem("samuel-mystery-opening-v1") === "1" ||
       window.location.hash ? "complete" : "pending";
   } catch {}
 })();`;
@@ -53,6 +54,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main">
           Skip to content
         </a>
+        <SiteCursor />
         <Opening />
         <SiteHeader />
         {children}

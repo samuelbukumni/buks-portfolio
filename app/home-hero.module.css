@@ -5,3 +5,7 @@
 @keyframes copyReveal { from {opacity:0;transform:translateY(16px)} to {opacity:1;transform:translateY(0)} } @keyframes photoReveal { from {opacity:0;transform:translateX(24px)} to {opacity:1;transform:translateX(0)} }
 @media(max-width:950px) { .inner { grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:3%; }.copy h1 { font-size:clamp(3.1rem,6.5vw,4.5rem); }.role { font-size:.95rem; } }
 @media(max-width:700px) { .inner { min-height:0; grid-template-columns:1fr; gap:1.4rem; padding:2rem var(--gutter) 1.4rem; }.hello { font-size:.93rem; margin-bottom:.8rem; }.copy h1 { font-size:clamp(2.8rem,11vw,4.5rem); margin-bottom:1.2rem; }.support { max-width:48ch; font-size:.84rem; }.portrait { height:min(65svh,420px); max-height:none; }.portrait img { max-width:100%; }.bench { padding-top:1.2rem; } }
+
+.inner { grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:3%; }.portrait { width:100%; max-width:500px; height:clamp(470px,74svh,650px); overflow:hidden; justify-self:center; }.portrait img { position:absolute; width:125%; height:auto; max-width:none; aspect-ratio:1030/1536; top:50%; left:50%; transform:translate(-50%,-43%); object-fit:initial; }
+@media(max-width:950px) { .inner { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }.copy h1 { font-size:clamp(3rem,5.8vw,4.3rem); } }
+@media(max-width:700px) { .inner { grid-template-columns:1fr; }.portrait { max-width:380px; height:min(65svh,450px); }.copy h1 { font-size:clamp(2.8rem,11vw,4.5rem); } }

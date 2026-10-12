@@ -20,8 +20,10 @@ The terminal executes no system commands. The optional contact form appears only
 
 `/about` redirects to `/#story`. Former Explorer and Playground URLs redirect to `/#learning`. Navigation uses anchors on the same page. Static-export previews include legacy redirect documents.
 
-## Opening
+## Opening and effects
 
-The opening begins with a dark screen, types “Loading a very serious portfolio,” corrects it to “mostly serious,” and hints at the terminal, then reveals the hero and portrait. It plays once per browser session, includes a Skip introduction control, and skips for reduced motion, direct section links, scrolling, keyboard navigation, or a background tab. Without JavaScript, the overlay automatically disappears and the content remains readable.
+The opening types “Curious who’s behind all this?” on pitch black, then “Look a little closer,” before revealing the hero. It plays once per session, stays skippable and supports reduced motion and direct section links. The portrait is larger, presented as a close crop inside a bounded hero frame; the source photograph is unchanged.
 
-Hero typography uses Manrope in sentence case. The supplied photo stays in a responsive grid column with a bounded height; it no longer extends beyond the desktop hero frame.
+Desktop mouse visitors get a contrast-aware diamond cursor that expands over controls. Touch devices and editable fields keep normal interaction; the native cursor remains the fallback until the custom cursor is ready.
+
+The learning title emerges word by word from one box-style card when it enters view. That title and the build-log heading have a slow colour sweep. Motion becomes static with reduced motion. No achievements, completion dates or project results are invented.

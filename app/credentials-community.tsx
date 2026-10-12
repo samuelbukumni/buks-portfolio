@@ -1,3 +1,4 @@
+import MilestoneBox from "./milestone-box";
 import styles from "./credentials.module.css";
 
 const entries = [
@@ -36,10 +37,7 @@ export default function CredentialsCommunity() {
     >
       <div className={styles.intro}>
         <p className="section-index">Learning &amp; community</p>
-        <h2 id="learning-title">
-          My learning so far.
-        </h2>
-        <p>A few parts of my learning so far, in and outside the classroom.</p>
+        <MilestoneBox />
       </div>
       <ol className={styles.timeline}>
         {entries.map((entry) => (
