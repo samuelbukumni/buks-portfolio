@@ -22,4 +22,6 @@ The terminal executes no system commands. The optional contact form appears only
 
 ## Opening
 
-The opening begins with a dark screen, types a short professional greeting, then reveals the hero and portrait. It plays once per browser session, includes a Skip introduction control, and skips for reduced motion, direct section links, scrolling, keyboard navigation, or a background tab. Without JavaScript, the overlay automatically disappears and the content remains readable.
+The opening begins with a dark screen, types “Loading a very serious portfolio,” corrects it to “mostly serious,” and hints at the terminal, then reveals the hero and portrait. It plays once per browser session, includes a Skip introduction control, and skips for reduced motion, direct section links, scrolling, keyboard navigation, or a background tab. Without JavaScript, the overlay automatically disappears and the content remains readable.
+
+Hero typography uses Manrope in sentence case. The supplied photo stays in a responsive grid column with a bounded height; it no longer extends beyond the desktop hero frame.

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Caveat, Public_Sans } from "next/font/google";
+import { Caveat, Manrope, Public_Sans } from "next/font/google";
 import Opening from "./opening";
 import SiteHeader from "./site-header";
 import "./globals.css";
@@ -9,6 +9,8 @@ const body = Public_Sans({
   variable: "--font-body",
   subsets: ["latin"],
 });
+
+const display = Manrope({ variable: "--font-display", subsets: ["latin"], display: "swap" });
 
 const signature = Caveat({
   variable: "--font-signature",
@@ -21,7 +23,7 @@ const openingBoot = `(() => {
   try {
     document.documentElement.dataset.opening =
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      sessionStorage.getItem("samuel-portrait-opening-v1") === "1" ||
+      sessionStorage.getItem("samuel-mischief-opening-v1") === "1" ||
       window.location.hash ? "complete" : "pending";
   } catch {}
 })();`;
@@ -42,7 +44,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${body.variable} ${signature.variable}`}
+      className={`${body.variable} ${display.variable} ${signature.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: openingBoot }} />
