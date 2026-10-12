@@ -10,7 +10,7 @@ Run `npm ci`, then `npm run dev`. Validate with `npx tsc --noEmit` and `npm run 
 
 The Middleman is in development; its visual is a real public waitlist capture from October 2026. SkillPrint is a concept for adaptive assessment and learner profiles, with a clearly labelled illustrative interface. S.A.M.U.E.L. and SYNAPSE are experiments. No screenshots, claims or milestones imply these concepts are finished products.
 
-The existing real portrait uses normal blending in both themes. The contour backgrounds are local SVG assets. The résumé remains downloadable from the Story section. The learning timeline avoids unsupported completion dates and certificate buttons.
+The existing real portrait uses normal blending in both themes. The paper textures and geometric hero illustration are local SVG assets. The original portrait remains oval and uses no filter or dark blending. The terminal is deliberately black and hacker green in both themes. The résumé remains downloadable from the Story section. The learning timeline avoids unsupported completion dates and certificate buttons.
 
 ## Interaction
 

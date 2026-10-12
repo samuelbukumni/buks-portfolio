@@ -91,5 +91,7 @@
   }
 }
 
-.contact { background:var(--cloud-wash); border:1px solid var(--cloud-border); border-radius:16px; margin-bottom:3rem; }.contact h2 { font-size:clamp(2.2rem,4vw,3.5rem); }.socials a { border-color:var(--cloud-border); }
+.contact { background:var(--contact-ground); color:var(--contact-ink); border:1px solid #5c654e; border-radius:2px; margin-bottom:3rem; }.contact h2 { font-size:clamp(2.2rem,4vw,3.5rem); }.socials a { border-color:#75806a; }
 @media(max-width:1280px) { .contact { border-radius:0; border-left:0; border-right:0; } }
+
+.contact p { color:#d5d8c7; }.contact .email { color:#f4e2b6; border-color:#b5bd96; }.contact .section-index { color:#f4e2b6; }.contact :global(.section-index) { color:#f4e2b6; }.socials a { color:#f5efdf; }.contact :focus-visible { outline-color:#f4e2b6; }

@@ -7,7 +7,7 @@
 }
 .inner {
   max-width: 1280px;
-  min-height: 76px;
+  min-height: 68px;
   margin: auto;
   padding: 0 var(--gutter);
   display: flex;
@@ -107,3 +107,5 @@
 
 .header { background:var(--paper); }.signature { color:var(--ink); }.inner nav a { font-size:.78rem; }.themeToggle { border-radius:8px; }
 @media(max-width:480px) { .inner nav { gap:.75rem; }.signature { font-size:1.45rem; }.actions { gap:.65rem; }.inner nav a { font-size:.7rem; } }
+
+.signature { color:var(--ink); }.themeToggle { border-radius:2px; }.inner nav a { border-bottom-width:1px; }
