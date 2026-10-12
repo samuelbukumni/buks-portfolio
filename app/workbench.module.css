@@ -11,3 +11,5 @@
 
 .workbench { display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr); gap:3rem; align-items:center; }.intro { margin:0; }.terminal { border-radius:5px; box-shadow:8px 8px 0 var(--hero-ground); }.terminal :focus-visible { outline-color:#68ee86; }.output { height:310px; }.scrambleText { color:var(--ink); }.log { padding-top:3rem; }
 @media(max-width:900px) { .workbench { grid-template-columns:1fr; gap:2rem; } }
+
+.workbench { --ink:#f4f4e9; --muted:#b5b7aa; --accent:#68ee86; max-width:none; margin:0; background:#1b1d1a; padding:var(--section-space) max(var(--gutter),calc((100vw - 1280px)/2 + var(--gutter))); }.workbench::before { display:none; }.workbench .intro :global(.section-index) { color:#b5b7aa; }.terminal { box-shadow:none; }.intro h2 { font-size:clamp(2rem,3.2vw,2.8rem); }.log { border:0; }

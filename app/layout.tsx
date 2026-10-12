@@ -17,17 +17,8 @@ const signature = Caveat({
   display: "swap",
 });
 
-const themeBoot = `(() => {
+const openingBoot = `(() => {
   try {
-    const stored = localStorage.getItem("buks-theme");
-    const theme =
-      stored === "light" || stored === "dark"
-        ? stored
-        : window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
-    document.documentElement.dataset.theme = theme;
-    document.documentElement.style.colorScheme = theme;
     document.documentElement.dataset.opening =
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       sessionStorage.getItem("samuel-portrait-opening-v1") === "1" ||
@@ -54,7 +45,7 @@ export default function RootLayout({
       className={`${body.variable} ${signature.variable}`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeBoot }} />
+        <script dangerouslySetInnerHTML={{ __html: openingBoot }} />
       </head>
       <body>
         <a className="skip-link" href="#main">

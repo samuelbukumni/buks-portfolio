@@ -95,3 +95,5 @@
 @media(max-width:1280px) { .contact { border-radius:0; border-left:0; border-right:0; } }
 
 .contact p { color:#d5d8c7; }.contact .email { color:#f4e2b6; border-color:#b5bd96; }.contact .section-index { color:#f4e2b6; }.contact :global(.section-index) { color:#f4e2b6; }.socials a { color:#f5efdf; }.contact :focus-visible { outline-color:#f4e2b6; }
+
+.contact { max-width:none; margin:0; background:#222221; border:0; border-radius:0; padding:var(--section-space) max(var(--gutter),calc((100vw - 1280px)/2 + var(--gutter))); }.contact p { color:#bdbeb2; }.contact .email,.contact :global(.section-index) { color:#f1efe3; }.contact h2 { text-transform:uppercase; font-weight:800; letter-spacing:-.045em; }.contact :focus-visible { outline-color:#fff; }
