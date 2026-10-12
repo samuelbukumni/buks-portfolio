@@ -5,10 +5,10 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/playground",
-        destination: "/about#learning",
+        destination: "/#learning",
         permanent: true,
       },
-      { source: "/explorer", destination: "/about#learning", permanent: true },
+      { source: "/explorer", destination: "/#learning", permanent: true },
     ];
   },
 };

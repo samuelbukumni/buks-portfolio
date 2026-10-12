@@ -59,7 +59,7 @@ export default function RootLayout({
         {children}
         <footer className="site-footer">
           <span>© 2026 Samuel Oguntona</span>
-          <span>Made by Buks. Thanks for stopping by.</span>
+          <span>Thanks for stopping by.</span>
         </footer>
       </body>
     </html>

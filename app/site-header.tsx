@@ -1,14 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "./site-header.module.css";
 
 type Theme = "light" | "dark";
 
 export default function SiteHeader() {
-  const pathname = usePathname();
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
@@ -42,15 +40,9 @@ export default function SiteHeader() {
 
         <div className={styles.actions}>
           <nav aria-label="Primary navigation">
-            <Link href="/" aria-current={pathname === "/" ? "page" : undefined}>
-              Home
-            </Link>
-            <Link
-              href="/about"
-              aria-current={pathname === "/about" ? "page" : undefined}
-            >
-              About
-            </Link>
+            <Link href="/#work">Work</Link>
+            <Link href="/#story">Story</Link>
+            <Link href="/#contact">Contact</Link>
           </nav>
 
           <button

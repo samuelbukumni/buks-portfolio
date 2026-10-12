@@ -3,6 +3,7 @@ import { useState } from "react";
 import styles from "./work-strip.module.css";
 const projects = [
   { mark: "M", name: "The Middleman", detail: "Digital products, with trust.", tone: "market" },
+  { mark: "sp", name: "SkillPrint", detail: "Learning that starts where you are.", tone: "skill" },
   { mark: "S_", name: "S.A.M.U.E.L.", detail: "A personal assistant in progress.", tone: "assistant" },
   { mark: "◌", name: "SYNAPSE", detail: "Different models. Different minds.", tone: "models" },
 ];

@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #f4f1ea;
-  --surface: #faf8f3;
-  --ink: #151515;
-  --indigo: #2b3a67;
-  --indigo-deep: #202d51;
+  --paper: #f1f0e8;
+  --surface: #fafaf5;
+  --ink: #20283a;
+  --indigo: #304b8b;
+  --indigo-deep: #243969;
   --indigo-light: #c9d3ed;
   --indigo-border: #66769b;
-  --muted: #62615f;
-  --border: #d5d2ca;
+  --muted: #586171;
+  --border: #c9cec9;
   --orange: #c96a3d;
   --clay: #8e432b;
   --peach: #f0d5c5;
@@ -35,7 +35,7 @@
   --security-green: #44b77b;
   --gutter: clamp(1.25rem, 4vw, 3rem);
   --section-space: clamp(3rem, 6vw, 5rem);
-  --radius: 4px;
+  --radius: 8px;
   --transition: 180ms ease;
   /* Semantic UI roles; content-specific palette tokens remain available. */
   --background: var(--paper);
@@ -51,13 +51,13 @@ html {
 
 html[data-theme="dark"] {
   color-scheme: dark;
-  --paper: #09111c;
-  --surface: #111b29;
-  --ink: #f2eee6;
-  --muted: #aeb5c0;
-  --border: #2b3543;
-  --indigo: #e7a64d;
-  --indigo-deep: #f0bc74;
+  --paper: #111827;
+  --surface: #1b2537;
+  --ink: #f1f3eb;
+  --muted: #b5bfd0;
+  --border: #394559;
+  --indigo: #abc5ff;
+  --indigo-deep: #c8d8ff;
   --indigo-light: #38465d;
   --indigo-border: #66748a;
   --orange: #e7a64d;
@@ -99,7 +99,9 @@ html {
 body {
   margin: 0;
   color: var(--foreground);
-  background: var(--background);
+  background-color: var(--background);
+  background-image: url("/images/contour-light.svg");
+  background-size: 1100px 820px;
   font-family: var(--font-body), sans-serif;
   font-size: 16px;
   line-height: 1.6;
@@ -249,3 +251,9 @@ img {
   max-width: 45ch;
   color: var(--muted);
 }
+
+html[data-theme="dark"] body { background-image:url("/images/contour-dark.svg"); }
+::selection { background:var(--accent); color:var(--on-accent); }
+.section-index { color:var(--accent); display:flex; align-items:center; gap:.65rem; }
+.section-index::before { content:""; width:18px; height:3px; background:currentColor; }
+main { overflow:clip; }
