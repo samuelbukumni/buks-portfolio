@@ -1,0 +1,12 @@
+{
+  "python.ico": "https://www.python.org/static/favicon.ico",
+  "typescript.png": "https://www.typescriptlang.org/favicon-32x32.png",
+  "nextjs.ico": "https://nextjs.org/favicon.ico",
+  "supabase.ico": "https://supabase.com/favicon/favicon.ico",
+  "git.ico": "https://git-scm.com/favicon.ico",
+  "linux-mint.ico": "https://linuxmint.com/web/img/favicon.ico",
+  "claude.svg": "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cd02a42d9-Vq_H3mgS.svg",
+  "gemini.png": "https://www.gstatic.com/lamda/images/gemini_sparkle_4g_512_lt_f94943af3be039176192d.png",
+  "grok.svg": "https://grok.com/images/favicon.svg",
+  "chatgpt.svg": "https://chatgpt.com/cdn/assets/favicon-l4nq08hd.svg"
+}

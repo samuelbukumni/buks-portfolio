@@ -1,0 +1,6 @@
+.cursor { position:fixed; top:0; left:0; z-index:1000; width:0; height:0; pointer-events:none; opacity:0; color:#fff; mix-blend-mode:difference; }
+.cursor[data-visible="true"] { opacity:1; }
+.symbol { position:absolute; width:18px; height:17px; transform:translate(-50%,-50%); transition:transform .16s ease; overflow:visible; }
+.cursor[data-hover="true"] .symbol { transform:translate(-50%,-50%) scale(1.15); }
+.cursor[data-pressed="true"] .symbol { transform:translate(-50%,-50%) scale(.9); }
+@media (hover:none), (pointer:coarse) { .cursor { display:none; } }

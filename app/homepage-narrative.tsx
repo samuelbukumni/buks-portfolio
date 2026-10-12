@@ -1,120 +1,29 @@
-import Link from "next/link";
+import Image from "next/image";
+import Terminal from "./terminal";
+import BuildLog from "./build-log";
 import SelectedProjects from "./selected-projects";
-import PlaygroundPreview from "./playground-preview";
 import Contact from "./contact";
-import CredentialsCommunity from "./credentials-community";
-import { buildLog } from "../data/build-log";
-import styles from "./home.module.css";
 import HomeHero from "./home-hero";
-import EvidenceStrip from "./evidence-strip";
-
-export default function HomepageNarrative() {
-  return (
-    <main id="main" className={styles.homepage}>
-      <HomeHero />
-      <EvidenceStrip />
-      <SelectedProjects />
-      <CredentialsCommunity />
-      <section className={styles.log} aria-labelledby="log-title">
-        <div className={styles.sectionHeading}>
-          <div>
-            <p className="section-index">Working notes</p>
-            <h2 id="log-title">Build log</h2>
-          </div>
-          <p>
-            A record of things made,
-            <br />
-            revisited and understood.
-          </p>
-        </div>
-        <ol className={styles.logEntries}>
-          {buildLog.map((entry) => (
-            <li key={entry.date + entry.description}>
-              <time dateTime={entry.date}>
-                {new Date(entry.date + "T12:00:00Z").toLocaleDateString(
-                  "en-GB",
-                  {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric",
-                    timeZone: "UTC",
-                  },
-                )}
-              </time>
-              <span className={styles.logType}>{entry.type}</span>
-              <div>
-                <h3>{entry.project}</h3>
-                <p>{entry.description}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-      <section
-        className={styles.research}
-        id="research"
-        aria-labelledby="research-title"
-      >
-        <div className={styles.researchIntro}>
-          <p className="section-index">Research direction · 2026</p>
-          <h2 id="research-title">
-            When an AI gives an answer,
-            <br />
-            <em>what should we trust?</em>
-          </h2>
-          <p>
-            Building with AI has made me increasingly interested in how we know
-            these systems behave as expected.
-          </p>
-          <p>
-            SYNAPSE gives me a place to think about disagreement, critique and
-            revision. I’m beginning to carry those questions into AI evaluation,
-            reliability and safety.
-          </p>
-          <Link className="text-link" href="/about#research">
-            More on this direction →
-          </Link>
-        </div>
-        <div
-          className={styles.questions}
-          role="group"
-          aria-label="Questions guiding my research direction"
-        >
-          <p className={styles.notebookLabel}>
-            Open questions / research notebook
-          </p>
-          <div>
-            <span>01</span>
-            <h3>Does agreement mean reliability?</h3>
-            <p>
-              Several models can arrive at the same wrong answer. What would an
-              evaluation need to catch?
-            </p>
-          </div>
-          <div>
-            <span>02</span>
-            <h3>When does critique help?</h3>
-            <p>
-              How can we distinguish useful revision from one model simply
-              following another?
-            </p>
-          </div>
-          <div>
-            <span>03</span>
-            <h3>Where should an agent stop?</h3>
-            <p>
-              Permissions and human oversight matter before an action reaches a
-              real system.
-            </p>
-          </div>
-          <p className={styles.researchNote}>
-            Questions I’m starting to investigate, not claims of completed
-            research.
-          </p>
-        </div>
-      </section>
-      <PlaygroundPreview />
-      <Contact />
-    </main>
-  );
+import CredentialsCommunity from "./credentials-community";
+import styles from "./home.module.css";
+const technologies = [
+ {name:"Next.js",icon:"nextjs.ico"}, {name:"TypeScript",icon:"typescript.png"},
+ {name:"Supabase",icon:"supabase.ico"}, {name:"Python",icon:"python.ico"},
+ {name:"Git",icon:"git.ico"}, {name:"Linux Mint",icon:"linux-mint.ico"},
+];
+const aiTools = [
+ {name:"Claude",icon:"claude.svg"}, {name:"Gemini",icon:"gemini.png"},
+ {name:"Grok",icon:"grok.svg"}, {name:"ChatGPT",icon:"chatgpt.svg"},
+];
+function ToolList({items,label}:{items:typeof technologies;label:string}) {
+ return <ul className={styles.tools} aria-label={label}>{items.map(tool => <li key={tool.name}><span className={styles.toolIcon}><Image src={`/icons/${tool.icon}`} alt="" width={20} height={20} unoptimized /></span><span>{tool.name}</span></li>)}</ul>;
 }
+export default function HomepageNarrative() { return <main id="main">
+ <HomeHero /><SelectedProjects />
+ <section className={styles.story} id="story" aria-labelledby="story-title">
+  <div><p className="section-index">A little background</p><h2 id="story-title">Behind<br /><span>the work.</span></h2><a className="text-link" href="/resume/Samuel-Oguntona-Resume-Public.docx" download>Download my résumé (.docx)</a></div>
+  <div className={styles.storyCopy}><p className={styles.storyLead}>I’m Samuel Oguntona, an Information Systems student at Obafemi Awolowo University in Ile-Ife, Nigeria.</p><p>Building a product has pulled me into databases, authentication, payments, deployment, and Linux. That’s what draws me towards cloud engineering: knowing how the pieces fit, and being able to follow a problem when they don’t.</p><p>I’m also beginning to explore AI evaluation and safety. Working on assistants and model discussions has made me curious about reliability, disagreement, and where people should stay involved.</p><p>Outside the projects, I enjoy music, space and science, and trying things that are new to me.</p><div className={styles.toolGroup}><h3>Technologies I work with</h3><ToolList items={technologies} label="Technologies I work with" /></div><div className={styles.toolGroup}><h3>AI tools in my workflow</h3><ToolList items={aiTools} label="AI tools I use" /><p className={styles.aiNote}>For ideas, explanations, and a second pass on code. The decisions and responsibility stay with me.</p></div></div>
+ </section>
+ <div className={styles.learning}><CredentialsCommunity /></div>
+ <Terminal /><BuildLog /><Contact />
+ </main>; }

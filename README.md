@@ -1,72 +1,31 @@
-# Buks Samuel portfolio
+# Samuel Oguntona portfolio
 
-A Next.js 15 / React 19 portfolio built around software, systems, infrastructure and an emerging AI evaluation research direction.
+A single-page Next.js portfolio with a fixed charcoal-and-paper section layout, projects, background, learning, a browser-only simulated terminal, a build log, and contact details.
 
-## Run locally
+## Development
 
-```bash
-npm install
-npm run dev
-```
+Run `npm ci`, then `npm run dev`. Validate with `npx tsc --noEmit` and `npm run build`.
 
-## Validate
+## Content
 
-```bash
-npm run lint
-npm run build
-npx tsc --noEmit
-```
+The Middleman is in development; its visual is a real public waitlist capture from October 2026. SkillPrint is a concept for adaptive assessment and learner profiles, presented as written project notes. S.A.M.U.E.L. and SYNAPSE are experiments. No screenshots, claims or milestones imply these concepts are finished products.
 
-The production build needs access to Google Fonts on its first run. Source Serif 4, Public Sans and IBM Plex Mono are bundled through `next/font`.
+The portrait-led charcoal hero uses the user-supplied photograph at `public/images/samuel-oguntona.jpg`, unchanged. The hero uses a proportionate, bounded oval frame with a CSS presentation crop that removes the photograph’s outer cream canvas. No face filtering, recolouring or dark blending is applied. Earlier processed portrait variants and decorative project mockups have been removed. The terminal is deliberately black and hacker green. There is no theme toggle, OS theme switch or saved colour preference. The résumé remains downloadable from the Story section. The learning timeline avoids unsupported completion dates and certificate buttons.
 
-## Routes and content
+## Interaction
 
-- `/`: portrait, current focus, Middleman transaction/architecture inspector, agent experiments, lab index, build log, research, infrastructure map and contact.
-- `/about`: first-person background, Information Systems framing, engineering and research directions.
-- `/playground`: Explorer. Existing hash destinations remain supported, including `#terminal`, `#systems`, `#samuel` and `#synapse`.
+Click or keyboard-activate the moving project strip to pause or resume. Hover and focus keep it moving. Reduced motion stops decorative animations. The terminal heading briefly reverses and rearranges letters while visible, then returns to its original text. It has no flashing, sound or screen-reader announcements, pauses in background tabs and is static with reduced motion.
 
-Update the dated log in `data/build-log.ts`. Every entry includes an internal evidence field; add only dated, supported milestones. Current entries are grounded in repository commits `da7fe48`, `962bb78` and `1a4d9b4`.
+The terminal executes no system commands. The optional contact form appears only with `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`; email and profile links are always available.
 
-The current focus is explicitly dated September 2026, not generated from the visitor's clock. Update the homepage Now strip and terminal `now.txt` together when priorities change. Terminal content lives in `app/playground-experience.tsx`.
+`/about` redirects to `/#story`. Former Explorer and Playground URLs redirect to `/#learning`. Navigation uses anchors on the same page. Static-export previews include legacy redirect documents.
 
-### Content boundaries
+## Opening and effects
 
-Project descriptions and the Middleman stack come from existing repository content. This repository does not contain Middleman's implementation, so its diagram is a conceptual map of confirmed responsibilities, not a verified sequence of production requests. No Paystack-specific, idempotency or deployment-metric claims have been added.
+On pitch black, “This is where the trail leads.” types in, followed by exactly three extra caret blinks, one 260 ms text glitch and the hero reveal. The opening plays once per session, stays skippable, and is bypassed for reduced motion, keyboard navigation and direct section links.
 
-AI evaluation and safety are presented as a new direction provided in the redesign brief, with open questions rather than completed research claims. CHALK, SkillPrint and Trove are omitted because the repository supplies no verified descriptions, technologies or destinations; the lab index instead links to real portfolio demonstrations.
+Mouse visitors get an 18 px Libra-inspired line cursor, with a small hover and press response. Touch devices and editable fields keep native interaction. The native cursor is retained until the custom cursor is ready.
 
-## Styling
+The three concept/experiment project faces sit at small, alternating angles and straighten on hover. Touch devices and reduced motion show upright cards. The original learning heading and timeline are restored; a slow colour sweep remains on the heading and build log. Terminal dots use red, amber and green with different pulse durations and offsets. Reduced motion stops all decorative effects.
 
-- `app/globals.css`: palette, shared tokens, reset, global primitives, focus and reduced-motion support.
-- CSS Modules: header, homepage, projects, About and contact.
-- `app/explorer.css`: styles for the existing Explorer implementation, loaded by that experience.
-
-Critical content renders visibly without reveal scripts. Diagrams use HTML/CSS and small React interactions; there is no animation library or visualization dependency.
-
-## Navigation and scroll memory
-
-The root layout owns persistent navigation. Mobile uses a disclosure menu with Escape handling and visible focus states.
-
-`app/route-memory.tsx` remembers positions for explicit same-tab switches between Home, About and Explorer during the current SPA session. It restores only after fonts are ready, the page is tall enough, and Explorer has resolved its hash view. User scrolling or keyboard input cancels a pending restoration. Explicit anchor navigation and native back/forward are left to Next.js and the browser. Memory intentionally does not persist across reloads.
-
-## Contact form
-
-Set `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` to the chosen provider's browser-accessible JSON endpoint. The form sends `name`, `email`, `message` and the `_gotcha` honeypot. The provider must support CORS and accept or safely ignore that field.
-
-Without the endpoint, submission is disabled and direct email remains available. Submission preserves validation, loading, success, error and retry states, with a 20-second timeout. Configure the public endpoint before building a deployment.
-
-## Explorer
-
-The terminal is a simulation: no shell execution, filesystem access, cloud operation or live model call occurs. Discoverable commands include `help`, `whoami`, `ls projects/`, `cat projects/middleman.md`, `cat research/ai-safety.md`, `cat now.txt`, `systemctl status samuel` and `clear`.
-
-Governor decisions and the SYNAPSE stepper are deterministic architecture demonstrations.
-
-## Redesign verification
-
-- Passed production build, ESLint, TypeScript and whitespace checks.
-- Checked homepage overflow at 320, 375, 390, 430, 768, 1024, 1280 and 1440px; checked About and the main Explorer interactions at 320px.
-- Inspected desktop and mobile screenshots; exercised the architecture inspector, Governor deny path, SYNAPSE stepper, request flow and terminal project/research commands.
-- Confirmed repeated Home/About scroll restoration, native back/forward, Explorer hash-view restoration and explicit Work anchor positioning in the production build.
-- Confirmed reduced-motion rendering leaves all headings visible, and mobile-menu Escape closes the menu and returns focus.
-- Automated accessibility scans reported no violations on Home, About, the terminal, Explorer map and Security. Diagram pseudo-elements needed manual contrast review; clay/peach is 5.03:1, paper/clay 6.23:1, and indigo/paper 9.78:1.
-- Tested contact loading, payload, success, failure and retry with browser-local mock responses. Live provider delivery remains dependent on configuring the endpoint.
+Technology and AI-tool icons are downloaded, unchanged, from the vendors’ official sites. Source URLs are recorded in `public/icons/sources.json`. Icons are hosted locally, have visible text labels and are decorative to screen readers. AI tools are explicitly listed as tools used, not as professional qualifications or endorsements.

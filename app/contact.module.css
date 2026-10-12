@@ -1,38 +1,55 @@
 .contact {
-  max-width: 1380px;
+  max-width: 1280px;
   margin: auto;
   padding: var(--section-space) var(--gutter);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 7vw, 7rem);
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3rem 10%;
+  border-top: 1px solid var(--border);
 }
 .contact h2 {
-  font: 500 clamp(2.25rem, 4vw, 3.5rem)/1.08 var(--font-display);
-  max-width: 16ch;
+  font-size: clamp(2rem, 3.5vw, 2.9rem);
+  line-height: 1.18;
+  letter-spacing: -0.04em;
+  max-width: 17ch;
+  margin: 0 0 1.3rem;
 }
 .contact p {
-  max-width: 40ch;
+  color: var(--muted);
+  max-width: 44ch;
 }
 .email {
-  display: inline-block;
-  font-size: clamp(0.86rem, 1.5vw, 1.1rem);
-  margin-top: 1rem;
-  border-bottom: 1px solid var(--indigo);
-  padding-bottom: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: clamp(0.86rem, 1.5vw, 1.05rem);
+  margin-top: 0.5rem;
+  border-bottom: 1px solid var(--accent);
+  color: var(--accent);
   overflow-wrap: anywhere;
 }
+.connections {
+  align-self: center;
+}
+.connectionLabel {
+  font-size: 0.8rem;
+}
 .socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.4rem;
-  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 2rem;
   font-size: 0.85rem;
 }
 .socials a {
-  padding: 0.7rem 0;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  border-bottom: 1px solid var(--border);
 }
 .form {
-  align-self: center;
+  grid-column: 1/-1;
+  max-width: 650px;
+  width: 100%;
 }
 .form label {
   display: grid;
@@ -50,7 +67,7 @@
   width: 100%;
   min-width: 0;
   border: 1px solid var(--border);
-  border-radius: 0;
+  border-radius: 4px;
   background: var(--surface);
   padding: 0.8rem;
   color: var(--ink);
@@ -60,12 +77,12 @@
 }
 .status {
   font-size: 0.8rem;
-  min-height: 3em;
-  color: var(--muted);
+  min-height: 1.5em;
 }
-@media (max-width: 760px) {
+@media (max-width: 700px) {
   .contact {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 }
 @media (max-width: 380px) {
@@ -73,3 +90,10 @@
     grid-template-columns: 1fr;
   }
 }
+
+.contact { background:var(--contact-ground); color:var(--contact-ink); border:1px solid #5c654e; border-radius:2px; margin-bottom:3rem; }.contact h2 { font-size:clamp(2.2rem,4vw,3.5rem); }.socials a { border-color:#75806a; }
+@media(max-width:1280px) { .contact { border-radius:0; border-left:0; border-right:0; } }
+
+.contact p { color:#d5d8c7; }.contact .email { color:#f4e2b6; border-color:#b5bd96; }.contact .section-index { color:#f4e2b6; }.contact :global(.section-index) { color:#f4e2b6; }.socials a { color:#f5efdf; }.contact :focus-visible { outline-color:#f4e2b6; }
+
+.contact { max-width:none; margin:0; background:#222221; border:0; border-radius:0; padding:var(--section-space) max(var(--gutter),calc((100vw - 1280px)/2 + var(--gutter))); }.contact p { color:#bdbeb2; }.contact .email,.contact :global(.section-index) { color:#f1efe3; }.contact h2 { text-transform:uppercase; font-weight:800; letter-spacing:-.045em; }.contact :focus-visible { outline-color:#fff; }

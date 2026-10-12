@@ -1,26 +1,17 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import Link from "next/link";
-import { Caveat, Source_Serif_4, IBM_Plex_Mono, Public_Sans } from "next/font/google";
+import { Caveat, Manrope, Public_Sans } from "next/font/google";
+import SiteCursor from "./site-cursor";
+import Opening from "./opening";
 import SiteHeader from "./site-header";
-import RouteMemory from "./route-memory";
 import "./globals.css";
-
-const display = Source_Serif_4({
-  variable: "--font-display",
-  subsets: ["latin"],
-});
 
 const body = Public_Sans({
   variable: "--font-body",
   subsets: ["latin"],
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-mono",
-  weight: "400",
-  subsets: ["latin"],
-});
+const display = Manrope({ variable: "--font-display", subsets: ["latin"], display: "swap" });
 
 const signature = Caveat({
   variable: "--font-signature",
@@ -29,13 +20,22 @@ const signature = Caveat({
   display: "swap",
 });
 
+const openingBoot = `(() => {
+  try {
+    document.documentElement.dataset.opening =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      sessionStorage.getItem("samuel-trail-opening-v1") === "1" ||
+      window.location.hash ? "complete" : "pending";
+  } catch {}
+})();`;
+
 export const metadata: Metadata = {
   title: {
-    default: "Buks Samuel — Tech Explorer",
+    default: "Samuel Oguntona — Web products & cloud engineering",
     template: "%s — Buks Samuel",
   },
   description:
-    "Tech Explorer building and investigating digital systems across software, infrastructure, Linux, security and AI.",
+    "Samuel Oguntona, founder of The Middleman and Information Systems student at OAU. Web products, Linux, and a growing focus on cloud engineering.",
 };
 
 export default function RootLayout({
@@ -44,19 +44,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} ${ibmPlexMono.variable} ${signature.variable}`}
+      suppressHydrationWarning
+      className={`${body.variable} ${display.variable} ${signature.variable}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: openingBoot }} />
+      </head>
       <body>
         <a className="skip-link" href="#main">
           Skip to content
         </a>
-        <RouteMemory />
+        <SiteCursor />
+        <Opening />
         <SiteHeader />
         {children}
         <footer className="site-footer">
-          <span>Buks Samuel</span>
-          <span>Built with intent. Still in progress.</span>
-          <Link href="/#contact">Get in touch →</Link>
+          <span>© 2026 Samuel Oguntona</span>
+          <span>Thanks for stopping by.</span>
         </footer>
       </body>
     </html>
