@@ -13,3 +13,9 @@
 @media(max-width:900px) { .workbench { grid-template-columns:1fr; gap:2rem; } }
 
 .workbench { --ink:#f4f4e9; --muted:#b5b7aa; --accent:#68ee86; max-width:none; margin:0; background:#1b1d1a; padding:var(--section-space) max(var(--gutter),calc((100vw - 1280px)/2 + var(--gutter))); }.workbench::before { display:none; }.workbench .intro :global(.section-index) { color:#b5b7aa; }.terminal { box-shadow:none; }.intro h2 { font-size:clamp(2rem,3.2vw,2.8rem); }.log { border:0; }
+
+.lights { display:flex; align-items:center; gap:7px; flex-shrink:0; }
+.lights i { display:block; width:8px; height:8px; border-radius:50%; background:#ec756b; animation:signalBlink 3.7s ease-in-out infinite; }
+.lights i:nth-child(2) { background:#e8bd62; animation-duration:5.1s; animation-delay:-1.8s; }
+.lights i:nth-child(3) { background:#76cc90; animation-duration:4.3s; animation-delay:-.7s; }
+@keyframes signalBlink { 0%,18%,33%,100% { opacity:1; } 24% { opacity:.4; } }

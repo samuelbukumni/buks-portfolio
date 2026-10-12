@@ -24,5 +24,5 @@ export default function SiteCursor() {
   window.addEventListener("pointermove",move,{passive:true});window.addEventListener("pointerdown",press);window.addEventListener("pointerup",release);window.addEventListener("pointerout",leave);window.addEventListener("blur",hide);document.addEventListener("visibilitychange",visibility);fine.addEventListener("change",hide);
   return()=>{cancelAnimationFrame(frame);hide();window.removeEventListener("pointermove",move);window.removeEventListener("pointerdown",press);window.removeEventListener("pointerup",release);window.removeEventListener("pointerout",leave);window.removeEventListener("blur",hide);document.removeEventListener("visibilitychange",visibility);fine.removeEventListener("change",hide);};
  },[]);
- return <div ref={cursor} className={styles.cursor} aria-hidden="true" data-visible="false"><span className={styles.reticle}/><span className={styles.dot}/></div>;
+ return <div ref={cursor} className={styles.cursor} aria-hidden="true" data-visible="false"><svg className={styles.symbol} viewBox="0 0 20 18" focusable="false"><path d="M2 10h4a4 4 0 1 1 8 0h4M2 15h16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg></div>;
 }

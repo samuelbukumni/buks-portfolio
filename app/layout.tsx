@@ -24,7 +24,7 @@ const openingBoot = `(() => {
   try {
     document.documentElement.dataset.opening =
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      sessionStorage.getItem("samuel-mystery-opening-v1") === "1" ||
+      sessionStorage.getItem("samuel-trail-opening-v1") === "1" ||
       window.location.hash ? "complete" : "pending";
   } catch {}
 })();`;

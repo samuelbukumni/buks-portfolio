@@ -38,7 +38,7 @@ export default function Terminal() {
   }
   return <section className={styles.workbench} aria-labelledby="terminal-title">
     <div className={styles.intro}><p className="section-index">03 / The terminal</p><ScrambleHeading /><p>A little shell into my work. It runs in your browser; these are simulated commands.</p></div>
-    <div className={styles.terminal}><div className={styles.bar}><span aria-hidden="true">● ● ●</span><span>buks@portfolio: ~</span><span>local session</span></div>
+    <div className={styles.terminal}><div className={styles.bar}><span className={styles.lights} aria-hidden="true"><i /><i /><i /></span><span>buks@portfolio: ~</span><span>local session</span></div>
       <div className={styles.output} ref={output} role="log" aria-live="polite" aria-relevant="additions">{entries.map((entry,i) => <div key={i}><p className={styles.prompt}>buks ~ $ {entry.command}</p><pre>{entry.output}</pre></div>)}</div>
       <form onSubmit={e => {e.preventDefault();run(input);}} className={styles.command}><label htmlFor="terminal-input">buks ~ $</label><input id="terminal-input" value={input} onChange={e => setInput(e.target.value)} autoComplete="off" spellCheck={false} placeholder="Type help…" onKeyDown={e => {if(e.key === "ArrowUp" || e.key === "ArrowDown") {e.preventDefault();const next = Math.max(0,Math.min(history.length,index + (e.key === "ArrowUp" ? -1 : 1)));setIndex(next);setInput(history[next] ?? "");}}}/><button type="submit">Run</button></form>
       <div className={styles.suggestions}>{["help", "projects", "cat now.txt", "clear"].map(command => <button type="button" key={command} onClick={() => run(command)}>{command}</button>)}</div>

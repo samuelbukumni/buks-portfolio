@@ -10,7 +10,7 @@ Run `npm ci`, then `npm run dev`. Validate with `npx tsc --noEmit` and `npm run 
 
 The Middleman is in development; its visual is a real public waitlist capture from October 2026. SkillPrint is a concept for adaptive assessment and learner profiles, presented as written project notes. S.A.M.U.E.L. and SYNAPSE are experiments. No screenshots, claims or milestones imply these concepts are finished products.
 
-The existing real portrait uses normal blending in both themes. The portrait-led charcoal hero uses the user-supplied photograph at `public/images/samuel-oguntona.jpg`, unchanged. The hero displays the supplied photo at a larger scale and clips only its outer cream canvas to follow the reference composition. No face filtering, recolouring or dark blending is applied. Earlier processed portrait variants and decorative project mockups have been removed. The terminal is deliberately black and hacker green. There is no theme toggle, OS theme switch or saved colour preference. The résumé remains downloadable from the Story section. The learning timeline avoids unsupported completion dates and certificate buttons.
+The portrait-led charcoal hero uses the user-supplied photograph at `public/images/samuel-oguntona.jpg`, unchanged. The hero uses a proportionate, bounded oval frame with a CSS presentation crop that removes the photograph’s outer cream canvas. No face filtering, recolouring or dark blending is applied. Earlier processed portrait variants and decorative project mockups have been removed. The terminal is deliberately black and hacker green. There is no theme toggle, OS theme switch or saved colour preference. The résumé remains downloadable from the Story section. The learning timeline avoids unsupported completion dates and certificate buttons.
 
 ## Interaction
 
@@ -22,8 +22,10 @@ The terminal executes no system commands. The optional contact form appears only
 
 ## Opening and effects
 
-The opening types “Curious who’s behind all this?” on pitch black, then “Look a little closer,” before revealing the hero. It plays once per session, stays skippable and supports reduced motion and direct section links. The portrait is larger, presented as a close crop inside a bounded hero frame; the source photograph is unchanged.
+On pitch black, “This is where the trail leads.” types in, followed by exactly three extra caret blinks, one 260 ms text glitch and the hero reveal. The opening plays once per session, stays skippable, and is bypassed for reduced motion, keyboard navigation and direct section links.
 
-Desktop mouse visitors get a contrast-aware diamond cursor that expands over controls. Touch devices and editable fields keep normal interaction; the native cursor remains the fallback until the custom cursor is ready.
+Mouse visitors get an 18 px Libra-inspired line cursor, with a small hover and press response. Touch devices and editable fields keep native interaction. The native cursor is retained until the custom cursor is ready.
 
-The learning title emerges word by word from one box-style card when it enters view. That title and the build-log heading have a slow colour sweep. Motion becomes static with reduced motion. No achievements, completion dates or project results are invented.
+The three concept/experiment project faces sit at small, alternating angles and straighten on hover. Touch devices and reduced motion show upright cards. The original learning heading and timeline are restored; a slow colour sweep remains on the heading and build log. Terminal dots use red, amber and green with different pulse durations and offsets. Reduced motion stops all decorative effects.
+
+Technology and AI-tool icons are downloaded, unchanged, from the vendors’ official sites. Source URLs are recorded in `public/icons/sources.json`. Icons are hosted locally, have visible text labels and are decorative to screen readers. AI tools are explicitly listed as tools used, not as professional qualifications or endorsements.

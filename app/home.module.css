@@ -1,2 +1,10 @@
 .story { --accent:#eeeade; max-width:none; margin:0; background:#222221; color:#f4f4e9; display:grid; grid-template-columns:1fr 1.2fr; gap:3rem 8%; padding:var(--section-space) max(var(--gutter),calc((100vw - 1280px)/2 + var(--gutter))); }.story h2 { font-size:clamp(2.5rem,4vw,3.5rem); line-height:1.02; letter-spacing:-.045em; text-transform:uppercase; font-weight:800; margin:0 0 1.8rem; }.story :global(.section-index) { color:#aaa99e; }.story a { color:#eeeade; }.storyCopy p { font-size:.88rem; color:#bdbeb2; }.storyCopy .storyLead { color:#f4f4e9; font-size:1.05rem; line-height:1.55; }.tools { display:flex; flex-wrap:wrap; gap:.6rem 1rem; list-style:none; padding:1rem 0 0; margin:0; border-top:1px solid #4c4d43; }.tools li { font-size:.7rem; color:#d4d5c8; }.learning { max-width:1280px; margin:auto; padding:0 var(--gutter); }
 @media(max-width:700px) { .story { grid-template-columns:1fr; gap:2rem; } }
+
+.toolGroup { border-top:1px solid #4c4d43; padding-top:1.25rem; margin-top:1.5rem; }
+.toolGroup h3 { font-size:.75rem; font-weight:550; color:#eeeee4; margin:0 0 .85rem; }
+.toolGroup .tools { border:0; padding:0; gap:.8rem 1.2rem; }
+.tools li { display:inline-flex; align-items:center; gap:.5rem; }
+.toolIcon { display:grid; place-items:center; flex-shrink:0; width:28px; height:28px; padding:4px; border-radius:5px; background:#f4f2ea; }
+.toolIcon img { display:block; width:20px; height:20px; object-fit:contain; }
+.storyCopy .aiNote { font-size:.75rem; line-height:1.6; margin:1rem 0 0; max-width:55ch; }
