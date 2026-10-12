@@ -37,9 +37,7 @@ export default function CredentialsCommunity() {
       <div className={styles.intro}>
         <p className="section-index">Learning &amp; community</p>
         <h2 id="learning-title">
-          Still a student.
-          <br />
-          Always learning.
+          My learning so far.
         </h2>
         <p>A few parts of my learning so far, in and outside the classroom.</p>
       </div>

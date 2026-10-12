@@ -56,7 +56,7 @@ export default function Contact() {
     >
       <div>
         <p className="section-index">Get in touch</p>
-        <h2 id="contact-title">Let’s make something useful.</h2>
+        <h2 id="contact-title">Let’s talk.</h2>
         <p>
           I’m open to internships, collaborations, and learning from people
           working in software, cloud, or AI safety. Say hello.
@@ -66,7 +66,7 @@ export default function Contact() {
         </a>
       </div>
       <div className={styles.connections}>
-        <p className={styles.connectionLabel}>Find me around the internet</p>
+        <p className={styles.connectionLabel}>My profiles</p>
         <div className={styles.socials}>
           <a
             href="https://github.com/samuelbukumni"

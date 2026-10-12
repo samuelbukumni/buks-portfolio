@@ -265,3 +265,5 @@ html[data-theme="dark"] { --hero-ground:#30362c; --hero-line:#59614c; --story-gr
 
 :root { --hero-ground:#dfddd2; --hero-line:#b9b6a8; --story-ground:#252624; --story-ink:#f2eee4; --contact-ground:#232522; }
 html[data-theme="dark"] { --hero-ground:#363832; --hero-line:#626355; --story-ground:#252624; --story-ink:#f2eee4; --contact-ground:#232522; }
+
+body { background-image:none; } html[data-theme="dark"] body { background-image:none; }
