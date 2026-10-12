@@ -41,4 +41,4 @@ Direct email and existing social profiles are always available. The contact form
 
 ## Accessibility and themes
 
-Semantic headings, a skip link, visible keyboard focus, image descriptions, reduced-motion handling, and a saved light/dark preference are retained. Essential content is server-rendered. The opening animation uses CSS; the project strip can be paused and pauses on hover/focus. Reduced motion stops these animations. The terminal is a browser-only simulation and never executes system commands. Layouts collapse to a single column on smaller screens; photographs do not inherit a dark blending effect.
+Semantic headings, a skip link, visible keyboard focus, image descriptions, reduced-motion handling, and a saved light/dark preference are retained. Essential content is server-rendered. The opening animation uses CSS; clicking the project strip toggles its paused state. Hover and focus keep the motion running. Reduced motion stops these animations. The terminal is a browser-only simulation and never executes system commands. Layouts collapse to a single column on smaller screens; photographs do not inherit a dark blending effect.

@@ -1,7 +1,6 @@
 .strip { margin-top:2rem; max-width:530px; min-width:0; }
 .label { display:flex; justify-content:space-between; align-items:center; margin-bottom:.75rem; font-size:.7rem; color:var(--muted); }
-.label button { background:none; border:0; color:var(--accent); font:inherit; cursor:pointer; padding:.3rem; text-decoration:underline; text-underline-offset:3px; }
-.window { overflow:hidden; mask-image:linear-gradient(to right,transparent,#000 4%,#000 94%,transparent); }
+.window { display:block; width:100%; padding:0; border:0; background:transparent; color:inherit; font:inherit; text-align:left; cursor:pointer; overflow:hidden; mask-image:linear-gradient(to right,transparent,#000 4%,#000 94%,transparent); }
 .track { display:flex; width:max-content; animation:drift 26s linear infinite; }
 .group { display:flex; gap:.7rem; padding-right:.7rem; }
 .tile { display:flex; align-items:center; gap:.8rem; width:230px; background:var(--surface); border:1px solid var(--border); padding:.8rem; border-radius:12px; }
@@ -9,6 +8,6 @@
 .tile small { display:block; font-size:.63rem; color:var(--muted); margin-top:.2rem; }
 .mark { display:grid; place-items:center; width:39px; height:39px; flex-shrink:0; border-radius:10px; font-weight:700; font-family:monospace; font-size:1.2rem; }
 .market { background:#edaa63; color:#241b14; }.assistant { background:#2b3a67; color:#faf8f3; }.models { background:#cbd6bc; color:#283428; }
-.strip:hover .track,.strip:focus-within .track,.strip[data-paused="true"] .track { animation-play-state:paused; }
+.strip[data-paused="true"] .track { animation-play-state:paused; }
 @keyframes drift { to { transform:translateX(-50%); } }
-@media(prefers-reduced-motion:reduce) { .track { animation:none; width:100%; }.group { flex-wrap:wrap; }.group[aria-hidden="true"]{display:none}.window{mask-image:none}.tile{width:100%}.label button{display:none} }
+@media(prefers-reduced-motion:reduce) { .track { animation:none; width:100%; }.group { flex-wrap:wrap; }.group[aria-hidden="true"]{display:none}.window{mask-image:none}.tile{width:100%} }
