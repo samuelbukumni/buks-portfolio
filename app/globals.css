@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #f3ece0;
-  --surface: #fbf6ed;
-  --ink: #29271f;
-  --indigo: #9a4429;
-  --indigo-deep: #73311d;
+  --paper: #f4f2ed;
+  --surface: #fcfbf7;
+  --ink: #252522;
+  --indigo: #665239;
+  --indigo-deep: #493b28;
   --indigo-light: #c9d3ed;
   --indigo-border: #66769b;
-  --muted: #665f52;
-  --border: #c6bcaa;
+  --muted: #64645c;
+  --border: #c9c8be;
   --orange: #c96a3d;
   --clay: #8e432b;
   --peach: #f0d5c5;
@@ -51,13 +51,13 @@ html {
 
 html[data-theme="dark"] {
   color-scheme: dark;
-  --paper: #1a1d19;
-  --surface: #252923;
+  --paper: #171817;
+  --surface: #232522;
   --ink: #f4eddf;
   --muted: #bcbcaf;
   --border: #4b5145;
-  --indigo: #edb28b;
-  --indigo-deep: #f3cfac;
+  --indigo: #dbc29a;
+  --indigo-deep: #efdbc0;
   --indigo-light: #38465d;
   --indigo-border: #66748a;
   --orange: #e7a64d;
@@ -262,3 +262,6 @@ main { overflow:clip; }
 html[data-theme="dark"] { --hero-ground:#30362c; --hero-line:#59614c; --story-ground:#2c3328; --story-ink:#e2e7d3; --contact-ground:#303729; --contact-ink:#f5efdf; }
 .button { border-radius:2px; font-size:.82rem; padding:.8rem 1.35rem; }.section-index { font-size:.72rem; }.section-index::before { width:8px; height:8px; border:1px solid currentColor; background:transparent; }
 .site-footer { max-width:1280px; }.site-footer > span { line-height:1.5; }
+
+:root { --hero-ground:#dfddd2; --hero-line:#b9b6a8; --story-ground:#252624; --story-ink:#f2eee4; --contact-ground:#232522; }
+html[data-theme="dark"] { --hero-ground:#363832; --hero-line:#626355; --story-ground:#252624; --story-ink:#f2eee4; --contact-ground:#232522; }

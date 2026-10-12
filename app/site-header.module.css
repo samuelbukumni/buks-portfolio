@@ -109,3 +109,5 @@
 @media(max-width:480px) { .inner nav { gap:.75rem; }.signature { font-size:1.45rem; }.actions { gap:.65rem; }.inner nav a { font-size:.7rem; } }
 
 .signature { color:var(--ink); }.themeToggle { border-radius:2px; }.inner nav a { border-bottom-width:1px; }
+
+.header { background:#202020; color:#f6f3eb; border-color:#41413d; }.signature { color:#f6f3eb; }.themeToggle { color:#f6f3eb; border-color:#68685e; }.themeToggle:hover { background:#353530; }.inner nav a { color:#dddacf; }.header :focus-visible { outline-color:#e5d6b8; }

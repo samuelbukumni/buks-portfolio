@@ -23,3 +23,15 @@
 @media(max-width:750px) { .flagship,.skillProject,.experiment,.experiment:nth-child(2) { grid-template-columns:1fr; gap:1.7rem; padding:2.2rem 0; }.experiment:nth-child(2) .labVisual { order:0; }.experiment:nth-child(2) .labCopy { order:0; }.preview,.skillVisual { padding:1.5rem 1rem 1rem; }.labVisual { min-height:260px; } }
 
 .skillMap i { border-color:#85966b; }.skillProgress span { background:#d6dcc8; }.skillBar { border-color:#d3d9c6; }
+
+.work { padding-top:3.5rem; }.heading h2 { font-size:clamp(2.5rem,4.7vw,4rem); }.flagship { padding-top:2.5rem; }.preview,.skillVisual,.labVisual { box-shadow:none; border-radius:0; }.brand h3 { font-size:clamp(1.8rem,3vw,2.6rem); }.labCopy h3 { font-size:2.4rem; }
+
+.gallery { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:3rem 2rem; }
+.gallery .flagship,.gallery .experiment { display:flex; flex-direction:column; align-items:stretch; gap:1.6rem; border:0; padding:0; margin:0; min-width:0; }
+.gallery .flagshipCopy,.gallery .labCopy { order:1; padding:0 .2rem; }.gallery .preview,.gallery .skillVisual,.gallery .labVisual { order:0; min-height:0; height:380px; margin:0; border:0; }.gallery .experiments { display:contents; }
+.gallery .preview { padding:1.6rem 1.2rem; }.gallery .screenshot { height:255px; }.gallery .screenshot img { width:100%;height:100%;object-fit:cover;object-position:top; }.gallery .preview figcaption { font-size:.6rem; }
+.gallery .skillVisual { display:flex; flex-direction:column; justify-content:center; padding:1.6rem; }.gallery .skillSheet { transform:none; padding:1.3rem; }.gallery .skillQuestion { margin:1.3rem 0; }.gallery .skillMap { flex-direction:row; align-items:center; padding:0; }.gallery .skillMap span { flex:1; margin:0; padding:.65rem .4rem; font-size:.6rem; text-align:center; }.gallery .skillMap i { border:0;border-top:1px solid #85966b; height:0;width:12px;margin:0; }.gallery .skillVisual figcaption { margin:1.2rem 0 0; }
+.gallery .labVisual { padding:2rem; }.gallery .details { margin:.5rem 0; }.gallery .brand h3,.gallery .labCopy h3 { font-size:1.8rem; }.gallery .flagshipCopy .lead { font-size:1.1rem; }.gallery .flagshipCopy p { max-width:none; }.gallery .labCopy { flex:1; }.gallery .labCopy .stack { margin-top:1rem; }
+@media(max-width:750px) { .gallery { grid-template-columns:1fr; gap:2.8rem; }.gallery .preview,.gallery .skillVisual,.gallery .labVisual { height:330px; }.gallery .screenshot { height:220px; }.gallery .skillVisual { padding:1.2rem; }.gallery .labVisual { padding:1.5rem; } }
+
+.gallery .experiment:nth-child(2) .labVisual { order:0; }.gallery .experiment:nth-child(2) .labCopy { order:1; }

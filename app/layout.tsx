@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Caveat, Public_Sans } from "next/font/google";
+import Opening from "./opening";
 import SiteHeader from "./site-header";
 import "./globals.css";
 
@@ -27,6 +28,10 @@ const themeBoot = `(() => {
           : "light";
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
+    document.documentElement.dataset.opening =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      sessionStorage.getItem("samuel-portrait-opening-v1") === "1" ||
+      window.location.hash ? "complete" : "pending";
   } catch {}
 })();`;
 
@@ -55,6 +60,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main">
           Skip to content
         </a>
+        <Opening />
         <SiteHeader />
         {children}
         <footer className="site-footer">

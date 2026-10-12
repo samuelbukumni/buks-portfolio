@@ -1,6 +1,6 @@
 import styles from "./workbench.module.css";
 const entries = [
-  { date: "2026-10-12", label: "One page, more work", text: "Rebuilt the portfolio as one page, added the SkillPrint concept, restored the green terminal, and gave the work a new visual layout." },
+  { date: "2026-10-12", label: "One page, more work", text: "Reworked the portfolio around a portrait-led reference, added a dark-screen introduction, and kept the projects and green terminal together on one page." },
   { date: "2026-10-11", label: "Portfolio", text: "Brought back the terminal and build log. Reworked the hero and gave the projects room to show what they do." },
   { date: "2026-09-27", label: "Systems", text: "Connected the cloud, Linux, security and AI experiments in the portfolio’s earlier Explorer map." },
   { date: "2026-09-26", label: "First build", text: "Built the interactive terminal, request-flow walkthrough and agent architecture demonstrations." },
