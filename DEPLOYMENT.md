@@ -3,7 +3,8 @@
 Production: https://bukssamuel.dev
 
 Cloudflare Worker: `buks-portfolio`. Both the root domain and `www` are attached
-as Worker Custom Domains. `www` permanently redirects to the root domain.
+as Worker Custom Domains. `worker.js` redirects `www` to the root domain,
+preserving the path and query; other requests delegate to the ASSETS binding.
 Do not replace the Cloudflare-managed DNS records with an A record pointing
 at a registrar parking server. Unused subdomains intentionally have no wildcard.
 
