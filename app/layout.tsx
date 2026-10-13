@@ -31,7 +31,7 @@ const openingBoot = `(() => {
 
 export const metadata: Metadata = {
   title: {
-    default: "Samuel Oguntona — Web products & cloud engineering",
+    default: "Samuel Oguntona — Software & Systems",
     template: "%s — Buks Samuel",
   },
   description:

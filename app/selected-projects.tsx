@@ -1,3 +1,4 @@
+import ProjectCard from "./project-card";
 import Image from "next/image";
 import styles from "./projects.module.css";
 const notes = [
@@ -12,6 +13,6 @@ export default function SelectedProjects() {return <section id="work" className=
   <figure className={styles.capture}><Image src="/images/middleman-waitlist.jpg" alt="The Middleman public waitlist page, captured in October 2026" width={1348} height={926} sizes="(max-width:800px) 90vw, 55vw"/><figcaption>The public waitlist · October 2026</figcaption></figure>
   <div className={styles.productCopy}><p className={styles.status}>The main project · In development</p><h3>The Middleman</h3><p className={styles.lead}>Buy a digital product. Keep the transaction protected.</p><p>I’m building a marketplace for Nigerian buyers and creators, with escrow around ready-made digital products.</p><p>My work covers the interface, accounts, database, payments, and deployment. This is where I put what I’m learning into practice.</p><p className={styles.stack}>Next.js · TypeScript · Supabase · Vercel</p><a className="text-link" href="https://www.themiddleman.com.ng" target="_blank" rel="noreferrer">Visit The Middleman</a></div>
  </article>
- <div className={styles.notes}>{notes.map(project => <article key={project.id} id={project.id} className={styles.note}><div className={styles.noteFace}><div className={styles.noteHeader}><span>{project.topic}</span><span>{project.status}</span></div><h3>{project.name}</h3><p className={styles.question}>{project.question}</p></div><div className={styles.noteBody}><p>{project.description}</p><p className={styles.stack}>{project.detail}</p></div></article>)}</div>
+ <div className={styles.notes}>{notes.map(project => <ProjectCard key={project.id} id={project.id}><div className={styles.noteFace}><div className={styles.noteHeader}><span>{project.topic}</span><span>{project.status}</span></div><h3>{project.name}</h3><p className={styles.question}>{project.question}</p></div><div className={styles.noteBody}><p>{project.description}</p><p className={styles.stack}>{project.detail}</p></div></ProjectCard>)}</div>
  </div>
  </section>;}

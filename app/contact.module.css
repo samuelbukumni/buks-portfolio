@@ -32,13 +32,13 @@
   align-self: center;
 }
 .connectionLabel {
-  font-size: 0.8rem;
+  font-size:1rem;
 }
 .socials {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem 2rem;
-  font-size: 0.85rem;
+  font-size:1rem;
 }
 .socials a {
   display: flex;
@@ -54,7 +54,7 @@
 .form label {
   display: grid;
   gap: 0.5rem;
-  font-size: 0.8rem;
+  font-size:1rem;
 }
 .fields {
   display: grid;
@@ -76,7 +76,7 @@
   margin-top: 1.3rem;
 }
 .status {
-  font-size: 0.8rem;
+  font-size:1rem;
   min-height: 1.5em;
 }
 @media (max-width: 700px) {
