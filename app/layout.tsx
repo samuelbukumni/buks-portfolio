@@ -30,6 +30,22 @@ const openingBoot = `(() => {
 })();`;
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bukssamuel.dev"),
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "https://bukssamuel.dev",
+    siteName: "Samuel Oguntona",
+    title: "Samuel Oguntona — Software & Systems",
+    description: "Building software, investigating systems, and learning cloud engineering. Explore my projects and build log.",
+    images: [{ url: "/images/samuel-oguntona.jpg", width: 1030, height: 1536, alt: "Samuel Oguntona" }],
+  },
+  twitter: {
+    card: "summary",
+    title: "Samuel Oguntona — Software & Systems",
+    description: "Building software, investigating systems, and learning cloud engineering.",
+    images: ["/images/samuel-oguntona.jpg"],
+  },
   title: {
     default: "Samuel Oguntona — Software & Systems",
     template: "%s — Buks Samuel",
@@ -49,6 +65,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: openingBoot }} />
+        <noscript><style>{'[data-phase="boot"] { display: none !important; }'}</style></noscript>
       </head>
       <body>
         <a className="skip-link" href="#main">
