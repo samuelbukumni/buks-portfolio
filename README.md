@@ -29,3 +29,9 @@ Mouse visitors get an 18 px Libra-inspired line cursor, with a small hover and p
 The three concept/experiment project faces sit at small, alternating angles and straighten on hover. Touch devices and reduced motion show upright cards. The original learning heading and timeline are restored; a slow colour sweep remains on the heading and build log. Terminal dots use red, amber and green with different pulse durations and offsets. Reduced motion stops all decorative effects.
 
 Technology and AI-tool icons are downloaded, unchanged, from the vendors’ official sites. Source URLs are recorded in `public/icons/sources.json`. Icons are hosted locally, have visible text labels and are decorative to screen readers. AI tools are explicitly listed as tools used, not as professional qualifications or endorsements.
+
+## Search visibility
+
+`https://bukssamuel.dev/` is the canonical homepage and the only URL in the XML sitemap. Legacy section paths redirect to homepage anchors. The canonical hostname has no `noindex` header; the `workers.dev` copies have `X-Robots-Tag: noindex`. Keep public names and profile URLs in `app/seo.ts` consistent with the contact links. Do not add redirected URLs to the sitemap.
+
+Google Search Console: create or select the `bukssamuel.dev` domain property and complete its ownership verification. A URL-prefix property can use an HTML meta token by setting `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` in the Cloudflare production build environment, then rebuilding. Do not commit the token. Submit `https://bukssamuel.dev/sitemap.xml`, inspect `https://bukssamuel.dev/`, and request indexing if eligible. Monitor the Page indexing and Search results reports afterward. A sitemap and request do not guarantee indexing or ranking.
