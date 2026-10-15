@@ -19,3 +19,10 @@
 .lights i:nth-child(2) { background:#e8bd62; animation-duration:5.1s; animation-delay:-1.8s; }
 .lights i:nth-child(3) { background:#76cc90; animation-duration:4.3s; animation-delay:-.7s; }
 @keyframes signalBlink { 0%,18%,33%,100% { opacity:1; } 24% { opacity:.4; } }
+.command label { max-width:45%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.output { overflow-x:auto; scrollbar-gutter:stable; }
+.output pre { max-width:100%; overflow-wrap:anywhere; }
+.shortcutDivider { width:1px; align-self:stretch; background:#315b3a; margin:0 .2rem; }
+.suggestions button { min-height:34px; }
+@media(max-width:700px) { .suggestions { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:thin; }.suggestions button { flex:none; }.command label { max-width:32%; font-size:.82rem; } }
+@media(prefers-reduced-motion:reduce) { .lights i { animation:none; } }
